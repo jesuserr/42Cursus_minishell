@@ -40,7 +40,7 @@ makelibft:
 	
 $(NAME): $(OBJS) $(LIBFT_DIR)libft.a
 	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_DIR)libft.a ${LINK_FLAGS} -o $@
-	@echo ${GREEN}"FdF Compiled!\n"${NC};
+	@echo ${GREEN}"minishell Compiled!\n"${NC};
 -include $(DEPS)
 
 clean:
