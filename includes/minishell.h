@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/06 21:52:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:34:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct s_basic_data
 	char	**env;
 }	t_basic_data;
 
+void	parser(char *line);
+void	p_identify_blocks(char *line);
 void	ft_error(char *error);
 int		exec(t_basic_data *d);
 
