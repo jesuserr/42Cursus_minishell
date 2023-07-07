@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/07 14:49:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:45:32 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,56 @@
 
 void	parser(char *line)
 {
-	p_identify_blocks(line);
+	char	*tline;
+
+	tline = p_identify_blocks(line);
+	p_common_errors(tline);
+	ft_printf("%s\n", tline);
 }
 
-void	p_identify_blocks(char *line)
+void	p_common_errors(char *line)
+{
+	if (ft_strnstr(line, "|||", ft_strlen(line)))
+		ft_error("syntax error near unexpected token '||'");
+	if (ft_strnstr(line, ";;", ft_strlen(line)))
+		ft_error("syntax error near unexpected token ';;'");
+	if (ft_strnstr(line, "&&&", ft_strlen(line)))
+		ft_error("syntax error near unexpected token '&'");
+}
+
+void	p_identify_blocks1(char *tmp, char *tmp1)
+{
+	while (*tmp)
+	{
+		if (*tmp == ';' || *tmp == '|' || *tmp == '&')
+		{
+			*tmp1 = ',';
+			tmp1++;
+			*tmp1 = *tmp;
+			while (*(tmp + 1) == ' ' || *(tmp + 1) == ';'
+				|| *(tmp + 1) == '|' || *(tmp + 1) == '&')
+			{
+				if (*(tmp + 1) == ' ')
+					while (*(tmp + 1) == ' ')
+						tmp++;
+				else
+				{
+					tmp++;
+					tmp1++;
+					*tmp1 = *tmp;
+				}
+			}
+			tmp1++;
+			*tmp1 = ',';
+		}
+		else
+			*tmp1 = *tmp;
+		tmp++;
+		tmp1++;
+	}
+}
+
+char	*p_identify_blocks(char *line)
 {
 	char	*tmp;
 	char	*tmp1;
@@ -35,26 +81,6 @@ void	p_identify_blocks(char *line)
 	tmp1 = ft_calloc(ft_strlen(line) + blocks * 2, sizeof(char));
 	tmp2 = tmp1;
 	tmp = line;
-	while (*tmp)
-	{
-		if (*tmp == ';' || *tmp == '|' || *tmp == '&')
-		{
-			*tmp1 = ',';
-			tmp1++;
-			*tmp1 = *tmp;
-			if (*(tmp + 1) == ';' || *(tmp + 1) == '|' || *(tmp + 1) == '&')
-			{
-				tmp++;
-				tmp1++;
-				*tmp1 = *tmp;
-			}
-			tmp1++;
-			*tmp1 = ',';
-		}
-		else
-			*tmp1 = *tmp;
-		tmp++;
-		tmp1++;
-	}
-	printf("blocks:%s", tmp2);
+	p_identify_blocks1(tmp, tmp1);
+	return (tmp2);
 }

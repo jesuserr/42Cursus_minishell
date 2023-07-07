@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/07 14:34:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:29:54 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_readcmdline(void)
 {
 	char	*line;
-	
+
 	line = 0;
 	while (!line || ft_strncmp(line, "exit", 4))
 	{
@@ -39,7 +39,7 @@ void	ft_startmsg(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_basic_data d;
+	t_basic_data	d;
 
 	d.argc = argc;
 	d.argv = argv;
