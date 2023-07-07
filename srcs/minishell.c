@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/06 21:56:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/07 13:55:55 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,15 @@
 void	ft_readcmdline(void)
 {
 	char	*line;
-
-	line = readline(PROMPT);
-	while (ft_strncmp(line, "exit", 4))
+	
+	line = 0;
+	while (!line || ft_strncmp(line, "exit", 4))
 	{
 		if (line)
-		{
-			if (*line)
-				add_history(line);
 			free(line);
-		}
 		line = readline(PROMPT);
+		if (line && *line)
+			add_history(line);				
 	}
 	if (line)
 		free(line);
