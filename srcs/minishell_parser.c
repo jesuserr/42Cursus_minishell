@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/07 21:45:32 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/07 21:54:16 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ void	p_common_errors(char *line)
 		ft_error("syntax error near unexpected token '&'");
 }
 
+void	p_identify_blocks2(char **tmp, char **tmp1)
+{
+	if (*(*tmp + 1) == ' ')
+		while (*(*tmp + 1) == ' ')
+			(*tmp)++;
+	else
+	{
+		(*tmp)++;
+		(*tmp1)++;
+		**tmp1 = **tmp;
+	}
+}
+
 void	p_identify_blocks1(char *tmp, char *tmp1)
 {
 	while (*tmp)
@@ -43,15 +56,7 @@ void	p_identify_blocks1(char *tmp, char *tmp1)
 			while (*(tmp + 1) == ' ' || *(tmp + 1) == ';'
 				|| *(tmp + 1) == '|' || *(tmp + 1) == '&')
 			{
-				if (*(tmp + 1) == ' ')
-					while (*(tmp + 1) == ' ')
-						tmp++;
-				else
-				{
-					tmp++;
-					tmp1++;
-					*tmp1 = *tmp;
-				}
+				p_identify_blocks2(&tmp, &tmp1);
 			}
 			tmp1++;
 			*tmp1 = ',';
