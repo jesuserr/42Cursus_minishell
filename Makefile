@@ -16,7 +16,8 @@ LIB			= ftprintf
 SRC_FILES	= minishell \
 			  minishell_error \
 			  minishell_parser \
-			  minishell_exec
+			  minishell_parser_blocks \
+			  minishell_exec \
 			  
 SRC_FILESB	= 
 		  
