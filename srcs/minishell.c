@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/08 21:39:44 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:47:33 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_readcmdline(void)
 {
 	char	*line;
-	
+
 	line = 0;
 	while (!line || ft_strncmp(line, "exit", 4))
 	{

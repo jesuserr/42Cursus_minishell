@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/08 20:08:52 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:46:26 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 void	ft_error(char *error)
 {
-	perror(error);
+	char	errortmp[500];
+
+	ft_strlcpy(errortmp, "Minishell: ", 500);
+	ft_strlcat(errortmp, error, 500);
+	ft_printf("%s\n", errortmp);
 }
 
 void	ft_error_handler(int error, char *str)
