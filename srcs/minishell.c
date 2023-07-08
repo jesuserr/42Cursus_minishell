@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/07 14:34:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/08 21:39:44 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void	ft_startmsg(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_basic_data d;
+	t_basic_data	d;
+	//int				error_code;
 
 	d.argc = argc;
 	d.argv = argv;
 	d.env = env;
 	ft_startmsg();
 	ft_readcmdline();
+	//error_code = ft_command_exec(&d);
 	return (0);
 }

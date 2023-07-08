@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/07 14:34:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/08 20:56:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
 
+# define ERROR_XXX		0
+# define ERROR_CMD		1
+
 typedef struct s_basic_data
 {
 	int		fdin;
@@ -34,6 +37,7 @@ typedef struct s_basic_data
 void	parser(char *line);
 void	p_identify_blocks(char *line);
 void	ft_error(char *error);
-int		exec(t_basic_data *d);
+int		ft_command_exec(t_basic_data *d);
+void	ft_error_handler(int error, char *str);
 
 #endif
