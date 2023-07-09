@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 14:50:53 by cescanue          #+#    #+#             */
-/*   Updated: 2023/01/10 15:11:11 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/09 21:49:47 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ size_t	ft_strlen(const char *s)
 {
 	int	count;
 
+	if (!s)
+		return (0);
 	count = 0;
 	while (s[count] != 0)
 		count++;

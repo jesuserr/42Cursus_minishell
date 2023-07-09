@@ -3,16 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/08 21:46:26 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/09 20:56:49 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 void	ft_error(char *error)
+{
+	ft_printf("%s\n", error);
+	exit(0);
+}
+
+void	ft_error_shell(char *error)
 {
 	char	errortmp[500];
 

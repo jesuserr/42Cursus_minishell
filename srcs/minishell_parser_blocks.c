@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 22:16:10 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/08 22:16:42 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/09 21:03:30 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	*p_identify_blocks(char *line)
 		tmp++;
 	}
 	tmp1 = ft_calloc(ft_strlen(line) + blocks * 2, sizeof(char));
+	if (!tmp1)
+		ft_error("Unable to allocate memory in *p_identify_blocks");
 	tmp2 = tmp1;
 	tmp = line;
 	p_identify_blocks1(tmp, tmp1);

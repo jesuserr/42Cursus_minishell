@@ -17,6 +17,7 @@ SRC_FILES	= minishell \
 			  minishell_error \
 			  minishell_parser \
 			  minishell_parser_blocks \
+			  minishell_env \
 			  minishell_exec \
 			  
 SRC_FILESB	= 
