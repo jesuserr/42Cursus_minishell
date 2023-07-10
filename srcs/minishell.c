@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/09 20:51:12 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:54:51 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ void	ft_startmsg(void)
 int	main(int argc, char **argv, char **env)
 {
 	t_basic_data	d;
-	//int				error_code;
+	
 	d.argc = argc;
 	d.argv = argv;
 	d.env = env;
-	ft_startmsg();
-	ft_readcmdline();
-	//error_code = ft_command_exec(&d);
+	//ft_startmsg();
+	//ft_readcmdline();
+	d.int_error_code = 0;
+	d.term_status = 0;
+	ft_command_exec(&d);
+	printf("%d\t%d\n", d.int_error_code, d.term_status);	
 	return (0);
 }

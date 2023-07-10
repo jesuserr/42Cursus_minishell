@@ -6,34 +6,36 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/08 21:41:24 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:32:16 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	free_split(char **str)
+/* Allows to free at the same time a double pointer (typically from ft_split) */
+/* and optionally a single pointer, if provided */
+void	free_split(char **str_1, char *str_2)
 {
 	size_t	i;
 
+	if (str_2)
+		free(str_2);
 	i = 0;
-	while (str[i])
-		free(str[i++]);
-	free(str);
+	while (str_1[i])
+		free(str_1[i++]);
+	free(str_1);
 }
 
-// que pasa si no hay PATH?
-char	*obtain_path(char *cmd, t_basic_data *d)
+/* Checks all paths in PATH and returns the one that contains the command */
+/* Path returned contains path + command, otherwise returns NULL path */
+char	*obtain_path(char *cmd)
 {
 	char	**all_paths;
 	char	*path;
 	char	*temp_path;
 	int		i;
 
-	i = 0;
-	while (ft_strnstr(d->env[i], "PATH=", 5) == NULL)
-		i++;
-	all_paths = ft_split(d->env[i] + 5, ':');
+	all_paths = ft_split(getenv("PATH="), ':');
 	i = 0;
 	while (all_paths[i])
 	{
@@ -41,39 +43,96 @@ char	*obtain_path(char *cmd, t_basic_data *d)
 		path = ft_strjoin(temp_path, cmd);
 		free(temp_path);
 		if (access(path, F_OK | X_OK) == 0)
+		{
+			free_split(all_paths, NULL);
 			return (path);
+		}
 		free(path);
 		i++;
 	}
-	free_split(all_paths);
+	free_split(all_paths, NULL);
 	return (NULL);
 }
 
-// si falla el execve tenemos un problema pues el child
-// ha de comunicarse con el parent
-// no encontré nadie que lo proteja correctamente
-int	ft_command_exec(t_basic_data *d)
+/* Checks if input contains '/' what means that path has been provided by */
+/* user, othervise returns NULL to search path with 'check_env_path' */
+/* If path provided is correct returns same path, if not returns NULL and */
+/* handles the error */
+char	*check_usr_path(t_basic_data *d)
 {
 	char	**args;
 	char	*path;
-	char	*tmp;
-	pid_t	pid;
 
-	args = ft_split(d->argv[1], ' ');
-	path = obtain_path(args[0], d);
+	args = ft_split(d->argv[1], ' ');			// d->argv[1] is temporal
+	if (ft_strchr(args[0], '/') != NULL)
+	{
+		if (!(access(args[0], F_OK | X_OK) == 0))
+		{
+			d->int_error_code = ERROR_NOFILE;
+			d->term_status = 127;
+			ft_error_handler(args[0], d);
+		}
+		else
+		{
+			path = ft_strdup(args[0]);
+			free_split(args, NULL);
+			return (path);
+		}
+	}
+	free_split(args, NULL);
+	return (NULL);
+}
+
+/* If no path has been found returns NULL and handles the error */
+/* If path is correct returns path */
+char	*check_env_path(t_basic_data *d)
+{
+	char	**args;
+	char	*path;
+
+	args = ft_split(d->argv[1], ' ');			// d->argv[1] is temporal
+	path = obtain_path(args[0]);
 	if (!path)
 	{
-		tmp = ft_strdup(args[0]);
-		free_split(args);
-		ft_error_handler(ERROR_CMD, tmp);
+		d->int_error_code = ERROR_CMD;
+		d->term_status = 127;
+		ft_error_handler(args[0], d);
+		free_split(args, NULL);
+		return (NULL);
 	}
-	pid = fork();
-	if (pid == -1)
-		ft_error_handler(ERROR_XXX, NULL);
-	if (pid == 0)
+	free_split(args, NULL);
+	return (path);
+}
+
+/* Main execution function, checks path/command received and if correct */
+/* creates child process for its execution */
+/* Returns error codes (0) OK, (-1) command/path error, (-2) system error */
+/* Provides error info inside struct variables int_error_code & term.status */
+int	ft_command_exec(t_basic_data *d)
+{
+	char	**args;
+	char	*path;	
+
+	path = check_usr_path(d);
+	if (!path && d->term_status == 127)
+		return (-1);
+	if (!path)
+		path = check_env_path(d);
+	if (!path && d->term_status == 127)
+		return (-1);
+	args = ft_split(d->argv[1], ' ');			// d->argv[1] is temporal
+	d->fork_pid = fork();
+	if (d->fork_pid == -1)
+	{
+		free_split(args, path);
+		d->int_error_code = ERROR_XXX;			// how to handle sys errors?
+		ft_error_handler(NULL, d);
+		return (-2);
+	}
+	if (d->fork_pid == 0)
 		execve(path, args, d->env);
-	waitpid(pid, NULL, 0);
-	free_split(args);
-	free(path);
+	waitpid(d->fork_pid, &d->waitpid_status, 0);
+	d->term_status = WEXITSTATUS(d->waitpid_status);
+	free_split(args, path);
 	return (0);
 }
