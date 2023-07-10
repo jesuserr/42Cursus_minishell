@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 22:16:10 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/09 21:03:30 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/10 21:34:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ void	p_identify_blocks1(char *tmp, char *tmp1)
 		p_identify_blocks3(&tmp, &tmp1);
 		if (*tmp == ';' || *tmp == '|' || *tmp == '&')
 		{
-			*tmp1 = ',';
-			tmp1++;
 			*tmp1 = *tmp;
 			while (*(tmp + 1) == ' ' || *(tmp + 1) == ';'
 				|| *(tmp + 1) == '|' || *(tmp + 1) == '&')
@@ -84,7 +82,7 @@ char	*p_identify_blocks(char *line)
 			blocks++;
 		tmp++;
 	}
-	tmp1 = ft_calloc(ft_strlen(line) + blocks * 2, sizeof(char));
+	tmp1 = ft_calloc(ft_strlen(line) + 100 + (blocks * 2), sizeof(char));
 	if (!tmp1)
 		ft_error("Unable to allocate memory in *p_identify_blocks");
 	tmp2 = tmp1;

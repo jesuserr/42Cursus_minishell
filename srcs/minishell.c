@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/10 13:06:34 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/10 20:01:50 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,11 @@ int	main(int argc, char **argv, char **env)
 	d.argc = argc;
 	d.argv = argv;
 	d.env = env;
-	//ft_startmsg();
-	//ft_readcmdline();
+	ft_startmsg();
+	ft_readcmdline();
 	d.int_error_code = 0;
 	d.term_status = 0;
-	ft_command_exec(&d);
+	//ft_command_exec(&d);
 	printf("%d\t%d\n", d.int_error_code, d.term_status);
 	return (0);
 }
