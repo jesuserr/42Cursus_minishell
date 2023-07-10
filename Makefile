@@ -19,6 +19,7 @@ SRC_FILES	= minishell \
 			  minishell_parser_blocks \
 			  minishell_env \
 			  minishell_exec \
+			  minishell_utils
 			  
 SRC_FILESB	= 
 		  

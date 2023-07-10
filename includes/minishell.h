@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/10 12:57:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:07:15 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	ft_error(char *error);
 void	ft_error_shell(char *error);
 int		ft_command_exec(t_basic_data *d);
 void	ft_error_handler(char *str, t_basic_data *d);
+void	free_split(char **str_1, char *str_2);
 
 #endif
