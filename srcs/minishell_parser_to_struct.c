@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_utils.c                                  :+:      :+:    :+:   */
+/*   minishell_parser_to_struct.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/10 13:04:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/12 21:09:36 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/12 21:27:49 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Allows to free at the same time a double pointer (typically from ft_split) */
-/* and optionally a single pointer, if provided */
-void	free_split(char **str_1, char *str_2)
+void	p_t_s_heredoc(char *block, t_token *token)
 {
-	size_t	i;
+	(void) block;
+	(void) token;
+}
 
-	if (str_2)
-		free(str_2);
-	i = 0;
-	while (str_1 && str_1[i])
-		free(str_1[i++]);
-	free(str_1);
+void	p_t_s(char *block)
+{
+	t_token	*token;
+
+	token = ft_calloc(1, sizeof(t_token));
+	if (!token)
+		ft_error("Unable to allocate memory in p_t_s");
+	p_t_s_heredoc(block, token);
+	//from here is temporal
+	printf("->%s\n", block);
+	free (token);
 }

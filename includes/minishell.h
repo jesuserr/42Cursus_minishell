@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/12 19:29:21 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:18:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,19 @@ typedef struct s_exec_data
 	char	*exec_path;
 }	t_exec_data;
 
+typedef struct s_token
+{
+	char	**heredoc;
+	char	**in;
+	char	**out;
+	int		outtype;
+}	t_token;
+
 void	parser(char *line);
 char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline);
 char	*p_strnstr(const char *haystack, const char *needle, size_t len);
+void	p_t_s(char *block);
 int		p_common_errors(char *line);
 void	ft_error(char *error);
 void	ft_error_shell(char *error);
