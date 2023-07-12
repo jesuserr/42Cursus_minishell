@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/10 20:01:50 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/12 19:30:14 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,19 @@ void	ft_startmsg(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_basic_data	d;
+	t_exec_data	d;
 
-	d.argc = argc;
-	d.argv = argv;
-	d.env = env;
-	ft_startmsg();
-	ft_readcmdline();
-	d.int_error_code = 0;
-	d.term_status = 0;
-	//ft_command_exec(&d);
-	printf("%d\t%d\n", d.int_error_code, d.term_status);
+	if (argc == 2)
+	{
+		//ft_startmsg();
+		//ft_readcmdline();
+		d.argv = argv;
+		d.env = env;
+		d.int_error_code = 0;
+		d.term_status = 0;
+		d.exec_path = NULL;
+		printf("Return:%d\t", ft_command_exec(&d));
+		printf("Int.Error:%d\tTerm.Status:%d\n", d.int_error_code, d.term_status);
+	}
 	return (0);
 }

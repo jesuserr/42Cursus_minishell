@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:06:54 by cescanue          #+#    #+#             */
-/*   Updated: 2023/02/19 19:51:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/12 17:58:56 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
 
-# define WRITEOUTPUT 1
+# define WRITEOUTPUT 2
 # define MAX_MEM_VALUE 20480
 # define BDECIMAL "0123456789"
 # define BLHEXADECIMAL "0123456789abcdef"
