@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/12 21:18:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:24:50 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_exec_data
 typedef struct s_token
 {
 	char	**heredoc;
+	int		n_heredoc;
 	char	**in;
 	char	**out;
 	int		outtype;
