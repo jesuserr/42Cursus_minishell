@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 16:07:21 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 19:40:01 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,21 +46,28 @@ typedef struct s_exec_data
 
 typedef struct s_token
 {
+	char	*cmd;
 	char	**heredoc;
 	int		n_heredoc;
+	char	**in_literal;
+	int		n_in_literal;
 	char	**in;
+	int		n_in;
 	char	**out;
-	int		outtype;
+	int		n_out;
+	char	**out_add;
+	int		n_out_add;
 }	t_token;
 
 void	parser(char *line);
+int		p_common_errors(char *line);
 char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline);
 char	*p_strnstr(const char *haystack, const char *needle, size_t len);
-void	p_t_s(char *block);
+t_token	*p_t_s(char *block);
 int		p_t_s_count(char *block);
-void	p_t_s_heredoc(char *block, t_token *token);
-void	p_t_s_pattern(char *block, char *pattern, t_token *token);
+void	p_t_s_cmd(char *block, char **cmd);
+void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***token_str);
 int		p_common_errors(char *line);
 void	ft_error(char *error);
 void	ft_error_shell(char *error);

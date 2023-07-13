@@ -16,9 +16,11 @@ LIB			= ftprintf
 SRC_FILES	= minishell \
 			  minishell_error \
 			  minishell_parser \
+			  minishell_parser_error \
 			  minishell_parser_blocks \
 			  minishell_parser_to_struct \
 			  minishell_parser_to_struck_pattern \
+			  minishell_parser_to_struct_cmd \
 			  minishell_parser_to_struck_utils \
 			  minishell_env \
 			  minishell_exec \
