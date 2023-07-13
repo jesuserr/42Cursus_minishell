@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 20:57:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 13:24:50 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/13 13:51:19 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define ERROR_CMDNOT	(int)1
 # define ERROR_NOFILE	(int)2
 # define ERROR_NOPERM	(int)13
+# define ERROR_MALLOC	(int)254
 # define ERROR_FORK		(int)255
 
 typedef struct s_exec_data
@@ -62,6 +63,7 @@ void	ft_error(char *error);
 void	ft_error_shell(char *error);
 int		ft_command_exec(t_exec_data *d);
 void	ft_error_handler(char *str, t_exec_data *d);
-void	free_split(char **str_1, char *str_2);
+char	**free_split(char **str_1, char *str_2);
+char	**copy_dbl_char_pointer(char **src);
 
 #endif
