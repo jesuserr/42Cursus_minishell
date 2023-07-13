@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 19:40:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:18:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ t_token	*p_t_s(char *block)
 	p_t_s_pattern(block, ">", &token->n_out, &token->out);
 	p_t_s_pattern(block, ">>", &token->n_out_add, &token->out_add);
 	p_t_s_cmd(block, &token->cmd);
+	token->type = p_t_s_type(block);
 	return (token);
 }

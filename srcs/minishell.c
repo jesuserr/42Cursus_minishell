@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 13:21:23 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/13 22:02:48 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 void	ft_readcmdline(void)
 {
 	char	*line;
-
+	t_list	**list_cmds;
+	t_list	*lst;
+	
 	line = 0;
 	while (!line || ft_strncmp(line, "exit", 4))
 	{
@@ -25,7 +27,15 @@ void	ft_readcmdline(void)
 		if (line && *line)
 		{
 			add_history(line);
-			parser(line);
+			list_cmds = parser(line);
+			//para revisar -- Esto es una prueba de si la lista se crear
+			//revisar tema pendientes de las variables de entorno, se tienen que expàindir, incluso si estan pegadas a mas texto, se diferencia por que estan en mayusculas
+			lst = *list_cmds;
+			while(lst)
+			{
+				printf("type:%s\n", ((t_token *)lst->content)->cmd);
+				lst = lst->next;
+			}
 		}
 	}
 	if (line)

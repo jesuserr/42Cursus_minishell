@@ -6,17 +6,18 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 19:24:40 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:43:48 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	parser(char *line)
+t_list	**parser(char *line)
 {
 	char	*tline;
 	char	**cmds;
 	char	**tcmds;
+	t_list	**lst_cmds;
 
 	cmds = 0;
 	tcmds = 0;
@@ -28,10 +29,14 @@ void	parser(char *line)
 		cmds = ft_split(tline, ',');
 		tcmds = cmds;
 	}
+	lst_cmds = ft_calloc(1, sizeof(t_list *));
+	if (!lst_cmds)
+		ft_error("Unable to allocate memory in parser");
 	while (tcmds && *tcmds)
 	{
-		p_t_s(*tcmds);
+		ft_lstadd_back(lst_cmds, ft_lstnew(p_t_s(*tcmds)));
 		tcmds++;
 	}
 	free_split(cmds, tline);
+	return (lst_cmds);
 }

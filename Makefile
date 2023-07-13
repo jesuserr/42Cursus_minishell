@@ -22,7 +22,8 @@ SRC_FILES	= minishell \
 			  minishell_parser_to_struck_pattern \
 			  minishell_parser_to_struct_cmd \
 			  minishell_parser_to_struck_utils \
-			  minishell_env \
+			  minishell_parser_to_struct_type \
+			  minishell_parser_env \
 			  minishell_exec \
 			  minishell_utils
 			  

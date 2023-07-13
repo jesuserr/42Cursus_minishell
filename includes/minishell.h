@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 19:40:01 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:46:13 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,17 @@
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
 
-# define ERROR_XXX		(int)0
-# define ERROR_CMDNOT	(int)1
-# define ERROR_NOFILE	(int)2
-# define ERROR_NOPERM	(int)13
-# define ERROR_MALLOC	(int)254
-# define ERROR_FORK		(int)255
+# define ERROR_XXX			(int)0
+# define ERROR_CMDNOT		(int)1
+# define ERROR_NOFILE		(int)2
+# define ERROR_NOPERM		(int)13
+# define ERROR_MALLOC		(int)254
+# define ERROR_FORK			(int)255
+
+# define T_PIPE				(int) 1
+# define T_SEMICOLON		(int) 2
+# define T_AND				(int) 3
+# define T_OR				(int) 4
 
 typedef struct s_exec_data
 {
@@ -46,6 +51,7 @@ typedef struct s_exec_data
 
 typedef struct s_token
 {
+	int		type;
 	char	*cmd;
 	char	**heredoc;
 	int		n_heredoc;
@@ -59,7 +65,7 @@ typedef struct s_token
 	int		n_out_add;
 }	t_token;
 
-void	parser(char *line);
+t_list	**parser(char *line);
 int		p_common_errors(char *line);
 char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline);
@@ -67,7 +73,8 @@ char	*p_strnstr(const char *haystack, const char *needle, size_t len);
 t_token	*p_t_s(char *block);
 int		p_t_s_count(char *block);
 void	p_t_s_cmd(char *block, char **cmd);
-void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***token_str);
+int		p_t_s_type(char *block);
+void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***t_str);
 int		p_common_errors(char *line);
 void	ft_error(char *error);
 void	ft_error_shell(char *error);

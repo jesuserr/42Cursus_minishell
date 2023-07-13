@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 19:36:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 21:25:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,11 @@ int	p_common_errors(char *line)
 	else if (ft_strnstr(line, "&&&", ft_strlen(line)))
 	{
 		ft_error_shell("syntax error near unexpected token '&'");
+		return (1);
+	}
+	else if (p_t_s_type(line))
+	{
+		ft_error_shell("syntax error near unexpected token at EOL");
 		return (1);
 	}
 	return (p_common_errors1(line) + p_common_errors2(line));
