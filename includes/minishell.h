@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 13:51:19 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/13 16:07:21 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline);
 char	*p_strnstr(const char *haystack, const char *needle, size_t len);
 void	p_t_s(char *block);
+int		p_t_s_count(char *block);
+void	p_t_s_heredoc(char *block, t_token *token);
+void	p_t_s_pattern(char *block, char *pattern, t_token *token);
 int		p_common_errors(char *line);
 void	ft_error(char *error);
 void	ft_error_shell(char *error);

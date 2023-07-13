@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_parser_to_struct.c                       :+:      :+:    :+:   */
+/*   minishell_parser_to_struck_utils.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 16:11:10 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/13 15:01:25 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/13 15:04:23 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	p_t_s(char *block)
+int	p_t_s_count(char *block)
 {
-	t_token	*token;
-	
-	token = ft_calloc(1, sizeof(t_token));
-	if (!token)
-		ft_error("Unable to allocate memory in p_t_s");
-	p_t_s_pattern(block, "<", token);
-	//from here is temporal
-	//printf("->%s\n", block);
-	free (token);
+	int	count;
+
+	count = 0;
+	while (*block != '|' && *block != ';' && *block
+		!= '&' && *block != '>' && *block != '<' && *block)
+	{
+		count++;
+		block++;
+	}
+	return (count);
 }
