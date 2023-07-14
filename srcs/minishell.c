@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 18:38:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:23:11 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_readcmdline(void)
+void	ft_readcmdline(char **env)
 {
 	char	*line;
 	t_list	**list_cmds;
 	t_list	*lst;
-	
+		
 	line = 0;
 	while (!line || ft_strncmp(line, "exit", 4))
 	{
@@ -29,15 +29,27 @@ void	ft_readcmdline(void)
 			add_history(line);
 			list_cmds = parser(line);
 			//para revisar -- Esto es una prueba de si la lista se crear
-			//Tengo un leak de memoria con cadenas complejas like : RM_CMD="$(rm -rf 'ls -t ${FOLDER}/other_folder | awk NR>5')", revisar --> El leak esta en struck_pattern. No gtiene en cuenta las comillas
 			lst = *list_cmds;
 			while(lst)
 			{
+				t_exec_data *t_exec;
 				t_token *t;
+				t_exec = ft_calloc(1, sizeof(t_exec_data));
 				t = ((t_token *)lst->content);
-				printf("type:%s\n", t[0].cmd);
+				t_exec->exec_args = ft_split(t->cmd, ' ');
+				t_exec->argv = 0;
+				t_exec->env = copy_dbl_char_pointer(env);
+				t_exec->int_error_code = 0;
+				t_exec->term_status = 0;
+				t_exec->exec_path = NULL;
+				ft_command_exec(t_exec);
+				free_split(t_exec->env, NULL);
+				free(t_exec);
 				lst = lst->next;
 			}
+			ft_lstclear(list_cmds, p_t_s_free_token);
+			free(*list_cmds);
+			free(list_cmds);
 		}
 	}
 	if (line)
@@ -74,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 	else
 	{
 		ft_startmsg();
-		ft_readcmdline();
+		ft_readcmdline(env);
 	}
 	return (0);
 }

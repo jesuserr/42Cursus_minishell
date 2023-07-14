@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/12 21:22:29 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:49:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ int	exec_fork(t_exec_data *d)
 /* Provides error info inside struct variables int_error_code & term.status */
 int	ft_command_exec(t_exec_data *d)
 {
-	d->exec_args = ft_split(d->argv[1], ' ');
+	//d->exec_args = ft_split(d->argv[1], ' ');
 	d->exec_path = check_usr_path(d);
 	if (!d->exec_path && d->term_status)
 	{

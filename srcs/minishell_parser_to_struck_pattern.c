@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:43:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 14:15:51 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:57:08 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***t_str)
 	if (n)
 	{
 		*token_n = n;
-		*t_str = ft_calloc(n, sizeof(char *));
+		*t_str = ft_calloc(n + 1, sizeof(char *));
 		if (!*t_str)
 			ft_error("Unable to allocate memory in p_t_s_pattern");
 		p_t_s_pattern_fill(block, pattern, *t_str);

@@ -6,11 +6,24 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 14:17:20 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 21:31:41 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	p_t_s_free_token(void *t)
+{
+	t_token	*token;
+
+	token = t;
+	free_split(token->heredoc, token->cmd);
+	free_split(token->in_literal, 0);
+	free_split(token->in, 0);
+	free_split(token->out, 0);
+	free_split(token->out_add, 0);
+	free(token);
+}
 
 t_token	*p_t_s(char *block)
 {
