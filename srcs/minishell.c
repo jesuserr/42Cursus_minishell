@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 10:27:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:40:08 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_readcmdline(void)
 			add_history(line);
 			list_cmds = parser(line);
 			//para revisar -- Esto es una prueba de si la lista se crear
-			//Tengo un leak de memoria con cadenas complejas like : RM_CMD="$(rm -rf 'ls -t ${FOLDER}/other_folder | awk NR>5')", revisar
+			//Tengo un leak de memoria con cadenas complejas like : RM_CMD="$(rm -rf 'ls -t ${FOLDER}/other_folder | awk NR>5')", revisar --> El leak esta en struck_pattern. No gtiene en cuenta las comillas
 			lst = *list_cmds;
 			while(lst)
 			{
