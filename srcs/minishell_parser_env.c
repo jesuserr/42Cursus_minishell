@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 10:02:13 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:11:13 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,28 +98,4 @@ char	*p_replace_env(char *tline)
 		free (tmp);
 	}
 	return (tline);
-}
-
-char	*p_strnstr(const char *haystack, const char *needle, size_t len)
-{
-	size_t	count;
-	size_t	count1;
-
-	if (!*needle)
-		return ((char *) haystack);
-	count = 0;
-	while (haystack[count] && count < len)
-	{
-		if (haystack[count] == '\'')
-			while (haystack[count] && haystack[++count] != '\'')
-				;
-		count1 = 0;
-		while (needle[count1] && haystack[count + count1] == needle[count1]
-			&& count + count1 < len)
-			count1++;
-		if (!needle[count1])
-			return ((char *) &haystack[count]);
-		count++;
-	}
-	return (0);
 }

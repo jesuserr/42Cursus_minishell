@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:43:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 17:30:41 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:15:51 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ int	p_t_s_pattern_count(char *block, char *pattern)
 
 	len = ft_strlen(pattern);
 	count = 0;
-	block = ft_strnstr(block, pattern, ft_strlen(block));
+	block = p2_strnstr(block, pattern, ft_strlen(block));
 	while (block)
 	{
 		block += len;
 		if (*block && *block != pattern[0] && *(block - (len + 1))
 			!= pattern[0])
 			count++;
-		block = ft_strnstr(block, pattern, ft_strlen(block));
+		block = p2_strnstr(block, pattern, ft_strlen(block));
 	}
 	return (count);
 }
@@ -49,7 +49,7 @@ void	p_t_s_pattern_fill(char *block, char *pattern, char **str)
 
 	tstr = str;
 	lenpattern = ft_strlen(pattern);
-	block = ft_strnstr(block, pattern, ft_strlen(block));
+	block = p2_strnstr(block, pattern, ft_strlen(block));
 	while (block)
 	{
 		block += lenpattern;
@@ -61,7 +61,7 @@ void	p_t_s_pattern_fill(char *block, char *pattern, char **str)
 			p_t_s_pattern_fill1(block, tstr);
 			tstr++;
 		}
-		block = ft_strnstr(block, pattern, ft_strlen(block));
+		block = p2_strnstr(block, pattern, ft_strlen(block));
 	}
 }
 
