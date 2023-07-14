@@ -25,7 +25,8 @@ SRC_FILES	= minishell \
 			  minishell_parser_to_struct_type \
 			  minishell_parser_env \
 			  minishell_exec \
-			  minishell_utils
+			  minishell_utils \
+			  minishell_built_ins
 			  
 SRC_FILESB	= 
 		  

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 10:40:08 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:38:33 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ int	main(int argc, char **argv, char **env)
 		d.int_error_code = 0;
 		d.term_status = 0;
 		d.exec_path = NULL;
-		printf("Return:%d\t", ft_command_exec(&d));
+		built_in_exec(&d);
+		//printf("Return:%d\t", ft_command_exec(&d));
 		printf("Int.Error:%d\tTerm.Status:%d\n", d.int_error_code, d.term_status);
 		free_split(d.env, NULL);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 14:10:14 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 18:12:28 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,6 @@ int		ft_command_exec(t_exec_data *d);
 void	ft_error_handler(char *str, t_exec_data *d);
 char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
+int		built_in_exec(t_exec_data *d);
 
 #endif
