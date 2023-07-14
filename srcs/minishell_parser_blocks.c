@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 22:16:10 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/10 21:34:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 10:25:48 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,6 @@ char	*p_identify_blocks(char *line)
 	tmp2 = tmp1;
 	tmp = line;
 	p_identify_blocks1(tmp, tmp1);
+	printf("tmp2:%s\n", tmp);
 	return (tmp2);
 }
