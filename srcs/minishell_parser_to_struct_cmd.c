@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 21:58:04 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/14 08:06:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	p_t_s_cmd_count2(char *block, int *count)
 {
 	char	deli;
 
-	while (*(block++) && *block != '|' && *block != ';'
+	while (*(block) && *block != '|' && *block != ';'
 		&& *block != '&' && *block != '<' && *block != '>')
 	{
 		deli = *block;
@@ -24,10 +24,13 @@ void	p_t_s_cmd_count2(char *block, int *count)
 		{
 			while (*(block++) && *block != deli)
 				(*count)++;
-			(*count) += 2;
+			(*count)++;
 		}
 		else
+		{
+			block++;
 			(*count)++;
+		}
 	}
 }
 
