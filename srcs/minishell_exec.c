@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/14 20:49:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:25:21 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,22 @@ int	exec_fork(t_exec_data *d)
 		return (-2);
 	}
 	if (d->fork_pid == 0)
+	{
+		if (d->pipeout[0] > -1)
+		{
+			close (d->pipeout[0]);
+			dup2 (d->pipeout[1], STDOUT_FILENO);
+		}
+		if (d->pipein[0] > -1)
+		{
+			close (d->pipein[1]);
+			dup2 (d->pipein[0], STDIN_FILENO);
+		}
 		execve(d->exec_path, d->exec_args, d->env);
+	}
 	waitpid(d->fork_pid, &d->waitpid_status, 0);
+	if (d->pipeout[1] > -1)
+		close (d->pipeout[1]);
 	d->term_status = WEXITSTATUS(d->waitpid_status);
 	free_split(d->exec_args, d->exec_path);
 	if (d->term_status)

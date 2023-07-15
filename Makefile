@@ -26,8 +26,9 @@ SRC_FILES	= minishell \
 			  minishell_parser_env \
 			  minishell_exec \
 			  minishell_utils \
-			  minishell_built_ins
-			  
+			  minishell_built_ins \
+			  minishell_executor \
+			  			  
 SRC_FILESB	= 
 		  
 HEADER		=	includes/minishell.h \

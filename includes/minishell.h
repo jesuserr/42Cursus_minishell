@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 21:07:02 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/15 21:19:38 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include "../ft_printf/libft/includes/libft.h"
 # include "../ft_printf/includes/ft_printf.h"
 # include "errno.h"
+# include <fcntl.h>
 
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
@@ -37,8 +38,8 @@
 
 typedef struct s_exec_data
 {
-	int		fdin;
-	int		fdout;	
+	int		pipein[2];
+	int		pipeout[2];	
 	char	**argv;
 	char	**env;
 	int		int_error_code;
@@ -65,6 +66,7 @@ typedef struct s_token
 	int		n_out_add;
 }	t_token;
 
+void	executor(t_list **lst_cmds, char **env);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);
