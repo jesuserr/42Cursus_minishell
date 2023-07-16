@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/16 21:41:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/16 23:07:52 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	executor(t_list **list_cmds, char **env)
 		t_exec->env = copy_dbl_char_pointer(env);
 		t_exec->int_error_code = 0;
 		t_exec->term_status = 0;
-		t_exec->exec_path = NULL;
+		//t_exec->exec_path = NULL;	// Not needed can be deleted
 		t_exec->pipein[0] = -1;
 		t_exec->pipein[1] = -1;
 		t_exec->pipeout[0] = -1;

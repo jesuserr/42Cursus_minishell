@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/16 19:55:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/16 23:10:18 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,9 @@ char	*obtain_path(t_exec_data *d)
 }
 
 /* Opens a child process to execute the command once we are sure that exists */
-/* and that user have execution rights. If the command execution does not */
+/* and that the user has execution rights. If the command execution does not */
 /* finish with 0 value, -1 value is returned to inform main program */
+/* Also duplicates file descriptors if needed, only for the child process  */
 int	exec_fork(t_exec_data *d)
 {
 	d->fork_pid = fork();
@@ -105,21 +106,11 @@ int	exec_fork(t_exec_data *d)
 	}
 	if (d->fork_pid == 0)
 	{
-		if (d->pipeout[0] > -1)
-		{
-			close (d->pipeout[0]);
-			dup2 (d->pipeout[1], STDOUT_FILENO);
-		}
-		if (d->pipein[0] > -1)
-		{
-			close (d->pipein[1]);
-			dup2 (d->pipein[0], STDIN_FILENO);
-		}
+		if (exec_dups(d) == -1)
+			return (-2);
 		execve(d->exec_path, d->exec_args, d->env);
 	}
-	//waitpid(d->fork_pid, &d->waitpid_status, 0);
-	//if (d->pipeout[1] > -1)
-	//	close (d->pipeout[1]);
+	waitpid(d->fork_pid, &d->waitpid_status, 0);
 	d->term_status = WEXITSTATUS(d->waitpid_status);
 	free_split(d->exec_args, d->exec_path);
 	if (d->term_status)
@@ -133,7 +124,7 @@ int	exec_fork(t_exec_data *d)
 /* Provides error info inside struct variables int_error_code & term.status */
 int	ft_command_exec(t_exec_data *d)
 {
-	//d->exec_args = ft_split(d->argv[1], ' ');
+	d->exec_args = ft_split(d->argv[1], ' ');
 	d->exec_path = check_usr_path(d);
 	if (!d->exec_path && d->term_status)
 	{

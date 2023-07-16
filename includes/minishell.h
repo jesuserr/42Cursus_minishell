@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/15 21:19:38 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:24:57 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # define ERROR_CMDNOT		(int)1
 # define ERROR_NOFILE		(int)2
 # define ERROR_NOPERM		(int)13
+# define ERROR_DUP			(int)253
 # define ERROR_MALLOC		(int)254
 # define ERROR_FORK			(int)255
 
@@ -38,8 +39,10 @@
 
 typedef struct s_exec_data
 {
-	int		pipein[2];
-	int		pipeout[2];	
+	int		pipein[2];		// los mantengo pero no se usan dentro de _exec
+	int		pipeout[2];		// los mantengo pero no se usan dentro de _exec
+	int		fd_in;
+	int		fd_out;
 	char	**argv;
 	char	**env;
 	int		int_error_code;
@@ -87,5 +90,6 @@ void	ft_error_handler(char *str, t_exec_data *d);
 char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
 int		built_in_exec(t_exec_data *d);
+int		exec_dups(t_exec_data *d);
 
 #endif

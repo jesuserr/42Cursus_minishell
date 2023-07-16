@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 13:25:15 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/16 22:13:39 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,7 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf("minishell: fork: retry: Resource temporarily unavailable\n");
 	else if (d->int_error_code == ERROR_MALLOC)
 		ft_printf("minishell: malloc: Cannot allocate memory\n");
+	else if (d->int_error_code == ERROR_DUP)
+		ft_printf("minishell: dup: Cannot duplicate file descriptor\n");
 	return ;
 }

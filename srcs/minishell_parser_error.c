@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_error.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/13 21:25:22 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/16 23:10:48 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	error_redi_pattern(char *line, char pattern)
 			if (*line == '|' || *line == ';' || *line == '&'
 				|| *line == '>' || *line == '<' || !*line)
 				return (*line);
-		}	
+		}
 		else
 			line++;
 	}
