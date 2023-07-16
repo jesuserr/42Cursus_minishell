@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/15 21:29:08 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/16 21:41:49 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,18 @@ void	executor(t_list **list_cmds, char **env)
 	int			mypipe[2];
 	t_exec_data	*t_exec;
 	t_token		*t;
-
+	int			count;
+	int			*pipelst;
+	pid_t		*pidlst;
+	int			lstsize;
+	
 	mypipe[0] = -1;
 	mypipe[1] = -1;
+	count = 0;
 	lst = *list_cmds;
+	lstsize = ft_lstsize(lst);
+	pipelst = ft_calloc(ft_lstsize(lst) + 1, sizeof(int));
+	pidlst = ft_calloc(ft_lstsize(lst) + 1, sizeof(pid_t));
 	while (lst)
 	{
 		t_exec = ft_calloc(1, sizeof(t_exec_data));
@@ -53,11 +61,24 @@ void	executor(t_list **list_cmds, char **env)
 			mypipe[1] = -1;
 		}
 		ft_command_exec(t_exec);
+		pidlst[count] = t_exec->fork_pid;
+		pipelst[count] = t_exec->pipeout[1];
 		free_split(t_exec->env, NULL);
 		free(t_exec);
 		lst = lst->next;
+		count++;
+	}
+	count = 0;
+	while (count < lstsize)
+	{
+		waitpid(pidlst[count], NULL, 0);
+		if (pipelst[count] > -1)
+			close (pipelst[count]);
+		count++;
 	}
 	ft_lstclear(list_cmds, p_t_s_free_token);
+	free(pipelst);
+	free(pidlst);
 	free(*list_cmds);
 	free(list_cmds);
 }
