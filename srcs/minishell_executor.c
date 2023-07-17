@@ -6,12 +6,19 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 12:11:43 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:27:09 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+void	executor(t_list **list_cmds)
+{
+	t_list	*lst;
+	lst = *list_cmds;
+}
+
+/*
 void	executor(t_list **list_cmds)
 {
 	t_list		*lst;
@@ -82,3 +89,4 @@ void	executor(t_list **list_cmds)
 	free(*list_cmds);
 	free(list_cmds);
 }
+*/

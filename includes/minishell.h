@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 12:10:04 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:22:47 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ typedef struct s_global_data
 
 typedef struct s_exec_data
 {
-	int		pipein[2];		// los mantengo pero no se usan dentro de _exec
-	int		pipeout[2];		// los mantengo pero no se usan dentro de _exec
 	int		fd_in;
 	int		fd_out;
 	char	**argv;
