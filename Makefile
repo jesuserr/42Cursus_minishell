@@ -25,7 +25,7 @@ SRC_FILES	= minishell \
 			  minishell_parser_to_struct_type \
 			  minishell_parser_env \
 			  minishell_exec \
-			  minishell_exec_extra \
+			  minishell_exec_fds \
 			  minishell_utils \
 			  minishell_built_ins \
 			  minishell_executor \

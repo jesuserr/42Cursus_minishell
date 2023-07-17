@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 15:07:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:07:37 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_exec_data
 {
 	int		fd_in;
 	int		fd_out;
+	int		saved_fd_in;
+	int		saved_fd_out;
 	char	**argv;
 	char	**env;
 	int		int_error_code;
@@ -107,5 +109,6 @@ char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
 int		built_in_exec(t_exec_data *d);
 int		exec_dups(t_exec_data *d);
+int		restore_fds(t_exec_data *d);
 
 #endif

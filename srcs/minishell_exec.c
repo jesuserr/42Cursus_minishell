@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/17 12:15:02 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 18:22:18 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,15 @@ char	*obtain_path(t_exec_data *d)
 	return (NULL);
 }
 
+/* First of all duplicates one or both file descriptors if needed */
 /* Opens a child process to execute the command once we are sure that exists */
 /* and that the user has execution rights. If the command execution does not */
 /* finish with 0 value, -1 value is returned to inform main program */
-/* Also duplicates file descriptors if needed, only for the child process  */
+/* File descriptors are restored before exiting the function */
 int	exec_fork(t_exec_data *d)
 {
+	if (exec_dups(d) == -1)
+		return (-2);
 	d->fork_pid = fork();
 	if (d->fork_pid == -1)
 	{
@@ -105,12 +108,10 @@ int	exec_fork(t_exec_data *d)
 		return (-2);
 	}
 	if (d->fork_pid == 0)
-	{
-		if (exec_dups(d) == -1)
-			return (-2);
 		execve(d->exec_path, d->exec_args, d->env);
-	}
 	waitpid(d->fork_pid, &d->waitpid_status, 0);
+	if (restore_fds(d) == -1)
+		return (-2);
 	d->term_status = WEXITSTATUS(d->waitpid_status);
 	free_split(d->exec_args, d->exec_path);
 	if (d->term_status)
