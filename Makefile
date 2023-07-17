@@ -32,6 +32,8 @@ SRC_FILES	= minishell \
 			  minishell_get_next_line \
 			  minishell_heredoc \
 			  minishell_executor_in \
+			  minishell_executor_out \
+			  minishell_executor_cmds \
 			  			  
 SRC_FILESB	= 
 		  

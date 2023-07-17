@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 15:04:29 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:37:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_token	*p_t_s(char *block)
 	token->fd_to_close = ft_calloc(100, sizeof(int));
 	if (!token || !token->fd_to_close)
 		ft_error("Unable to allocate memory in p_t_s");
+	token->cmdout = 1;
 	p_t_s_pattern(block, "<", &token->n_in, &token->in);
 	p_t_s_pattern(block, "<<", &token->n_heredoc, &token->heredoc);
 	p_t_s_pattern(block, "<<<", &token->n_in_literal, &token->in_literal);

@@ -6,13 +6,13 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:36:42 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 15:07:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:38:47 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_executor_add_fdin(int fd, t_token *t)
+void	ft_executor_add_fd(int fd, t_token *t)
 {
 	int	count;
 
@@ -38,7 +38,7 @@ void	ft_executor_in_literal(t_list *lst)
 		{
 			pipe(p);
 			token->cmdin = p[0];
-			ft_executor_add_fdin(token->cmdin, token);
+			ft_executor_add_fd(token->cmdin, token);
 			write(p[1], token->in_literal[count],
 				strlen(token->in_literal[count]));
 			close (p[1]);
@@ -61,7 +61,7 @@ int	ft_executor_in_file(t_list *lst)
 		{
 			token->cmdin = open(token->in[count], O_RDONLY, 0444);
 			if (token->cmdin > 0)
-				ft_executor_add_fdin(token->cmdin, token);
+				ft_executor_add_fd(token->cmdin, token);
 			else
 			{
 				token->cmdin = 0;
@@ -88,7 +88,7 @@ void	ft_executor_heredoc(t_list *lst)
 		while (++count < token->n_heredoc)
 		{
 			token->cmdin = ft_heredoc(token->heredoc[count]);
-			ft_executor_add_fdin(token->cmdin, token);
+			ft_executor_add_fd(token->cmdin, token);
 		}
 		lst = lst->next;
 	}

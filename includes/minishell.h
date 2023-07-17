@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 18:07:37 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/17 21:07:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_token
 	int		type;
 	char	*cmd;
 	int		cmdin;
+	int		cmdout;
 	char	**heredoc;
 	int		n_heredoc;
 	char	**in_literal;
@@ -87,7 +88,11 @@ void	ft_executor(t_list **lst_cmds);
 void	ft_executor_heredoc(t_list *lst);
 void	ft_executor_in_literal(t_list *lst);
 int		ft_executor_in_file(t_list *lst);
+int		ft_executor_out_file(t_list *lst);
+int		ft_executor_out_file_add(t_list *lst);
 void	ft_executor_close_fds(t_token *t);
+void	ft_executor_add_fd(int fd, t_token *t);
+void	ft_executor_cmds(t_list *lst);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);

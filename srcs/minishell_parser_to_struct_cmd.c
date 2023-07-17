@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 08:06:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 20:30:53 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,14 @@ void	p_t_s_cmd(char *block, char **cmd)
 {
 	char	*blockcmd;
 	int		len;
+	char	*tstr;
 
 	len = p_t_s_cmd_count(block, &blockcmd) + 1;
 	*cmd = ft_calloc(len, sizeof(char));
 	if (!*cmd)
 		ft_error("Unable to allocate memory in p_t_s_cmd");
 	ft_strlcpy(*cmd, blockcmd, len);
+	tstr = ft_strtrim(*cmd, " ");
+	free(*cmd);
+	*cmd = tstr;
 }
