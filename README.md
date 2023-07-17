@@ -11,6 +11,7 @@ LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 - Temas a comentar
 - Uso de structura global, para temas especificos como env o msg de sistema
+- ft_split que tenga en cuenta las " y '
 - Unificar gestion de errores
 - Crear copia de ENV y todo lo necesario para su gestion
 - Gestion de multiples FD y que hacer con los que son meramente transitorios, ejemplo: varios FDIN y solo se usa el ultimo
