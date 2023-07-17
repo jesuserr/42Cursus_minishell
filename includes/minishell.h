@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 12:22:47 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 15:07:56 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_token
 {
 	int		type;
 	char	*cmd;
+	int		cmdin;
 	char	**heredoc;
 	int		n_heredoc;
 	char	**in_literal;
@@ -73,13 +74,18 @@ typedef struct s_token
 	int		n_out;
 	char	**out_add;
 	int		n_out_add;
+	int		*fd_to_close;
 }	t_token;
 
 t_global_data	g_data;
 
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
-void	executor(t_list **lst_cmds);
+void	ft_executor(t_list **lst_cmds);
+void	ft_executor_heredoc(t_list *lst);
+void	ft_executor_in_literal(t_list *lst);
+int		ft_executor_in_file(t_list *lst);
+void	ft_executor_close_fds(t_token *t);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);

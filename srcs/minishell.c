@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 12:17:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/17 14:10:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_readcmdline()
 		if (line && *line && ft_strncmp(line, "exit", 4) != 0)
 		{
 			add_history(line);
-			executor(parser(line));
+			ft_executor(parser(line));
 		}
 	}
 	if (line)
