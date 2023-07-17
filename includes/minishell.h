@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/16 22:24:57 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:10:04 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define T_SEMICOLON		(int) 2
 # define T_AND				(int) 3
 # define T_OR				(int) 4
+
+# define MAX_FDS 4096
+# define BUFFER_SIZE 1024
+
+typedef struct s_global_data
+{
+	char	**env;
+}	t_global_data;
 
 typedef struct s_exec_data
 {
@@ -69,7 +77,11 @@ typedef struct s_token
 	int		n_out_add;
 }	t_token;
 
-void	executor(t_list **lst_cmds, char **env);
+t_global_data	g_data;
+
+int		ft_heredoc(char *sep);
+char	*get_next_line(int fd);
+void	executor(t_list **lst_cmds);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);

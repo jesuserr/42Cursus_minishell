@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/16 23:16:17 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:11:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_readcmdline(char **env)
+void	ft_readcmdline()
 {
 	char	*line;
 
@@ -25,7 +25,7 @@ void	ft_readcmdline(char **env)
 		if (line && *line && ft_strncmp(line, "exit", 4) != 0)
 		{
 			add_history(line);
-			executor(parser(line), env);
+			executor(parser(line));
 		}
 	}
 	if (line)
@@ -34,12 +34,20 @@ void	ft_readcmdline(char **env)
 
 void	ft_startmsg(void)
 {
-	ft_printf(STARTMSG);
+	printf(STARTMSG);
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_exec_data	d;
+
+	g_data.env = copy_dbl_char_pointer(env);
+	if (!g_data.env)
+	{
+		d.int_error_code = ERROR_MALLOC;
+		ft_error_handler(NULL, &d);
+		return (-2);
+	}
 
 	if (argc == 2)
 	{
@@ -55,6 +63,7 @@ int	main(int argc, char **argv, char **env)
 		d.term_status = 0;
 		d.fd_in = -1;
 		d.fd_out = -1;
+		//d.fd_in = ft_heredoc("dd");
 		//d.fd_in = open("input", O_RDONLY, 0444);
 		//d.fd_out = open("output", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		//built_in_exec(&d);
@@ -65,7 +74,7 @@ int	main(int argc, char **argv, char **env)
 	else
 	{
 		ft_startmsg();
-		ft_readcmdline(env);
+		ft_readcmdline();
 	}
 	return (0);
 }

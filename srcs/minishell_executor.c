@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/16 23:07:52 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/17 12:11:43 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	executor(t_list **list_cmds, char **env)
+void	executor(t_list **list_cmds)
 {
 	t_list		*lst;
 	int			mypipe[2];
@@ -36,7 +36,7 @@ void	executor(t_list **list_cmds, char **env)
 		t = ((t_token *)lst->content);
 		t_exec->exec_args = ft_split(t->cmd, ' ');
 		t_exec->argv = 0;
-		t_exec->env = copy_dbl_char_pointer(env);
+		t_exec->env = g_data.env;
 		t_exec->int_error_code = 0;
 		t_exec->term_status = 0;
 		//t_exec->exec_path = NULL;	// Not needed can be deleted

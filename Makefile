@@ -29,6 +29,8 @@ SRC_FILES	= minishell \
 			  minishell_utils \
 			  minishell_built_ins \
 			  minishell_executor \
+			  minishell_get_next_line \
+			  minishell_heredoc \
 			  			  
 SRC_FILESB	= 
 		  
