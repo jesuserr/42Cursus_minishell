@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:06:16 by cescanue          #+#    #+#             */
-/*   Updated: 2023/02/17 11:14:35 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:43:39 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ void	ft_print(const char **str, t_info *info, va_list *ap)
 		ft_putstr((char *)*str, ft_strlen(*str), info);
 }
 
-int	ft_printf(char const *str, ...)
+int	ft_printf(int fd, char const *str, ...)
 {
 	t_info	info;
 	va_list	ap;
 
 	ft_initinfo(&info);
+	info.WRITEOUTPUT = fd;
 	info.cprinted = 0;
 	va_start (ap, str);
 	ft_print(&str, &info, &ap);

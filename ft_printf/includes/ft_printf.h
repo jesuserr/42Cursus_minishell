@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:06:54 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/12 17:58:56 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:42:25 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include <stdarg.h>
 # include "../libft/includes/libft.h"
 
-# define WRITEOUTPUT 2
+//# define WRITEOUTPUT 2
 # define MAX_MEM_VALUE 20480
 # define BDECIMAL "0123456789"
 # define BLHEXADECIMAL "0123456789abcdef"
@@ -41,9 +41,10 @@ typedef struct info
 	int	cprinted;
 	int	sizevalue;
 	int	ovalue;
+	int	WRITEOUTPUT;
 }	t_info;
 
-int		ft_printf(char const *str, ...);
+int		ft_printf(int fd, char const *str, ...);
 void	ft_print(const char **str, t_info *info, va_list *ap);
 void	ft_printvalue(char *value, t_info *info);
 void	ft_initinfo(t_info *info);

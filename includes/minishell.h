@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 12:51:08 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:57:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
 
-# define ERROR_XXX			(int)0
-# define ERROR_CMDNOT		(int)1
-# define ERROR_NOFILE		(int)2
-# define ERROR_NOPERM		(int)13
-# define ERROR_DUP			(int)253
-# define ERROR_MALLOC		(int)254
-# define ERROR_FORK			(int)255
+# define ERROR_XXX			0
+# define ERROR_CMDNOT		1
+# define ERROR_NOFILE		2
+# define ERROR_NOPERM		13
+# define ERROR_DUP			253
+# define ERROR_MALLOC		254
+# define ERROR_FORK			255
 
-# define T_PIPE				(int) 1
-# define T_SEMICOLON		(int) 2
-# define T_AND				(int) 3
-# define T_OR				(int) 4
+# define T_PIPE				 1
+# define T_SEMICOLON		 2
+# define T_AND				 3
+# define T_OR				 4
 
 # define MAX_FDS 4096
 # define BUFFER_SIZE 1024

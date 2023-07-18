@@ -50,7 +50,7 @@ OBJF		=	.cache_exists
 all:		make_libs $(NAME)
 
 make_libs:
-			@make -C $(FT_PRINTF)
+			@make --no-print-directory -C $(FT_PRINTF)
 
 $(NAME):	$(OBJ) ft_printf/libftprintf.a
 			@$(CC) $(CFLAGSE) $(INCLUDE) $(OBJ) -o $(NAME)
@@ -73,8 +73,8 @@ $(NAMEB):	$(OBJB)
 
 clean:
 			@$(RM) -rf $(OBJ_DIR)
-			@make clean -C $(FT_PRINTF)
-			@make clean -C $(LIBFT)
+			@make clean --no-print-directory -C $(FT_PRINTF)
+			@make clean --no-print-directory -C $(LIBFT)
 			
 fclean:		clean
 			@$(RM) -f $(NAME)

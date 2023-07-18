@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 19:42:37 by cescanue          #+#    #+#             */
-/*   Updated: 2023/02/12 19:24:24 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 17:44:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_initinfo(t_info *info)
 
 int	ft_putstr(char *str, int size, t_info *info)
 {
-	if (write (WRITEOUTPUT, str, size) < 0)
+	if (write (info->WRITEOUTPUT, str, size) < 0)
 		info->cprinted = -1;
 	else
 		info->cprinted += size;
