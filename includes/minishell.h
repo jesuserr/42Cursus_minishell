@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 17:57:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:36:00 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255
 
-# define T_PIPE				 1
-# define T_SEMICOLON		 2
-# define T_AND				 3
-# define T_OR				 4
+# define T_PIPE				1
+# define T_SEMICOLON		2
+# define T_AND				3
+# define T_OR				4
 
-# define MAX_FDS 4096
-# define BUFFER_SIZE 1024
+# define MAX_FDS 			4096
+# define BUFFER_SIZE 		1024
 
 typedef struct s_global_data
 {
@@ -123,5 +123,7 @@ int		built_in_exec(t_exec_data *d);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
+/*	minishell_split_with_quotes.c	*/
+char	**ft_split_quotes(char const *s, char c);
 
 #endif

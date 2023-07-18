@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 19:26:34 by cescanue          #+#    #+#             */
-/*   Updated: 2023/01/16 20:02:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:42:09 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_myitoa(long int nb, char *number, int *index)
 	{
 		ft_putchar('-', number, index);
 		nb = -nb;
-	}	
+	}
 	if (nb <= 9)
 		ft_putchar(nb + 48, number, index);
 	else if (nb > 9)

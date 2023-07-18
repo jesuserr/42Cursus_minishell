@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:06:54 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 17:42:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:44:00 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct info
 	int	cprinted;
 	int	sizevalue;
 	int	ovalue;
-	int	WRITEOUTPUT;
+	int	writeoutput;
 }	t_info;
 
 int		ft_printf(int fd, char const *str, ...);

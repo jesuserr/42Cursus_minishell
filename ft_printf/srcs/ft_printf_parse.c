@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 20:02:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/02/06 10:50:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:42:46 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	ft_parseprecision(const char **str, t_info *info)
 			return ;
 		}
 		while (**str >= '0' && **str <= '9')
-		{	
-		info->precision *= 10;
-		info->precision += **str - '0';
-		(*str)++;
+		{
+			info->precision *= 10;
+			info->precision += **str - '0';
+			(*str)++;
 		}
 	}
 }

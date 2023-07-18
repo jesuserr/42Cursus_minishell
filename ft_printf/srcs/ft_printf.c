@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 20:06:16 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 17:43:39 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:45:05 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	ft_printf(int fd, char const *str, ...)
 	va_list	ap;
 
 	ft_initinfo(&info);
-	info.WRITEOUTPUT = fd;
+	info.writeoutput = fd;
 	info.cprinted = 0;
 	va_start (ap, str);
 	ft_print(&str, &info, &ap);

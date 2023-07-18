@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 19:42:37 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 17:44:22 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 23:44:42 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_initinfo(t_info *info)
 
 int	ft_putstr(char *str, int size, t_info *info)
 {
-	if (write (info->WRITEOUTPUT, str, size) < 0)
+	if (write (info->writeoutput, str, size) < 0)
 		info->cprinted = -1;
 	else
 		info->cprinted += size;
