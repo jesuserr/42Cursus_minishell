@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 22:07:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/17 18:39:57 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:22:10 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	exec_dups(t_exec_data *d)
 	return (0);
 }
 
-/* Duplicates STDIN and keeps a copy of the original value in order to restore */
-/* it later */
+/* Duplicates STDIN and keeps a copy of the original value in order to */
+/* restore it later */
 int	fd_in_dup(t_exec_data *d)
 {
 	if (d->fd_in > 2)
@@ -46,8 +46,8 @@ int	fd_in_dup(t_exec_data *d)
 	return (0);
 }
 
-/* Duplicates STDOUT and keeps a copy of the original value in order to restore */
-/* it later */
+/* Duplicates STDOUT and keeps a copy of the original value in order to */
+/* restore it later */
 int	fd_out_dup(t_exec_data *d)
 {
 	if (d->fd_out > 2)
