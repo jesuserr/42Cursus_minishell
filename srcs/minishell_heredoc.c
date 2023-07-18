@@ -24,7 +24,7 @@ int	ft_heredoc(char *sep)
 	while (!ft_strnstr(str, sep, ft_strlen(str))
 		|| (ft_strlen(str) - 1) != ft_strlen(sep))
 	{
-		write(p[1], str, strlen(str));
+		write(p[1], str, ft_strlen(str));
 		if (str)
 			free(str);
 		printf("heredoc> ");

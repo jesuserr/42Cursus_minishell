@@ -36,7 +36,7 @@ void	ft_executor_in_literal(t_token	*token)
 		token->cmdin = p[0];
 		ft_executor_add_fd(token->cmdin, token);
 		write(p[1], token->in_literal[count],
-			strlen(token->in_literal[count]));
+			ft_strlen(token->in_literal[count]));
 		close (p[1]);
 	}
 }

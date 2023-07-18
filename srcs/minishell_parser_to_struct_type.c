@@ -25,13 +25,13 @@ int	p_t_s_type(char *block)
 	while (tblock != block && (*block == '|'
 			|| *block == ';' || *block == '&' || *block == ' '))
 		block--;
-	if (strnstr(block, "||", ft_strlen(block)))
+	if (ft_strnstr(block, "||", ft_strlen(block)))
 		type = T_OR;
-	else if (strnstr(block, "&&", ft_strlen(block)))
+	else if (ft_strnstr(block, "&&", ft_strlen(block)))
 		type = T_AND;
-	else if (strnstr(block, ";", ft_strlen(block)))
+	else if (ft_strnstr(block, ";", ft_strlen(block)))
 		type = T_SEMICOLON;
-	else if (strnstr(block, "|", ft_strlen(block)))
+	else if (ft_strnstr(block, "|", ft_strlen(block)))
 		type = T_PIPE;
 	return (type);
 }
