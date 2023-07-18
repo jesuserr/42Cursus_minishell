@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 20:37:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:45:49 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,35 @@ void	p_t_s_free_token(void *t)
 	free(token);
 }
 
+void	p_t_s_lastinout(char *block, t_token *token)
+{
+	char	*start;
+
+	start = block;
+	while (*block)
+		block++;
+	while (block != start && *block != '<')
+		block--;
+	while (*block == '<' && block != start)
+	{
+		token->last_in++;
+		block--;
+	}
+	if (*block == '<')
+		token->last_in++;
+	while (*block)
+		block++;
+	while (block != start && *block != '>')
+		block--;
+	while (*block == '>' && block != start)
+	{
+		token->last_out++;
+		block--;
+	}
+	if (*block == '>')
+		token->last_out++;
+}
+
 t_token	*p_t_s(char *block)
 {
 	t_token	*token;
@@ -42,6 +71,7 @@ t_token	*p_t_s(char *block)
 	p_t_s_pattern(block, ">", &token->n_out, &token->out);
 	p_t_s_pattern(block, ">>", &token->n_out_add, &token->out_add);
 	p_t_s_cmd(block, &token->cmd);
+	p_t_s_lastinout(block, token);
 	token->type = p_t_s_type(block);
 	return (token);
 }

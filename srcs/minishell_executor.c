@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 21:08:18 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:32:18 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,72 @@ void	ft_executor_free(t_list **list_cmds)
 	free(list_cmds);
 }
 
+int	ft_executor_in_order(t_token *token)
+{
+	if (token->last_in)
+	{
+		if (token->last_in == 1)
+		{
+			ft_executor_heredoc(token);
+			ft_executor_in_literal(token);
+			if (!ft_executor_in_file(token))
+				return (0);
+		}
+		else if (token->last_in == 2)
+		{
+			ft_executor_in_literal(token);
+			if (!ft_executor_in_file(token))
+				return (0);
+			ft_executor_heredoc(token);
+		}
+		else if (token->last_in == 3)
+		{
+			if (!ft_executor_in_file(token))
+				return (0);
+			ft_executor_heredoc(token);
+			ft_executor_in_literal(token);
+		}
+	}
+	return (1);
+}
+
+int	ft_executor_out_order(t_token *token)
+{
+	if (token->last_out)
+	{
+		if (token->last_out == 1)
+		{
+			if (!ft_executor_out_file_add(token)
+				|| !ft_executor_out_file(token))
+				return (0);
+		}
+		else if (token->last_out == 2)
+		{
+			if (!ft_executor_out_file(token)
+				|| !ft_executor_out_file_add(token))
+				return (0);
+		}
+	}
+	return (1);
+}
+
 void	ft_executor(t_list **list_cmds)
 {
 	t_list	*lst;
+	t_token	*token;
 
 	lst = *list_cmds;
-	ft_executor_heredoc(lst);
-	ft_executor_in_literal(lst);
-	if (!ft_executor_in_file(lst) || !ft_executor_out_file(lst)
-		|| !ft_executor_out_file_add(lst))
+	while (lst)
 	{
-		ft_executor_free(list_cmds);
-		return ;
+		token = lst->content;
+		if (!ft_executor_in_order(token) || !ft_executor_out_order(token))
+		{
+			ft_executor_free(list_cmds);
+			return ;
+		}
+		lst = lst->next;
 	}
+	lst = *list_cmds;
 	ft_executor_cmds(lst);
 	ft_executor_free(list_cmds);
 }

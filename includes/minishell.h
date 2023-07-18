@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:51:12 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 21:07:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/18 11:56:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ typedef struct s_token
 	char	**out_add;
 	int		n_out_add;
 	int		*fd_to_close;
+	int		last_in;
+	int		last_out;
 }	t_token;
 
 t_global_data	g_data;
@@ -85,11 +87,11 @@ t_global_data	g_data;
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
 void	ft_executor(t_list **lst_cmds);
-void	ft_executor_heredoc(t_list *lst);
-void	ft_executor_in_literal(t_list *lst);
-int		ft_executor_in_file(t_list *lst);
-int		ft_executor_out_file(t_list *lst);
-int		ft_executor_out_file_add(t_list *lst);
+void	ft_executor_heredoc(t_token *token);
+void	ft_executor_in_literal(t_token *token);
+int		ft_executor_in_file(t_token *token);
+int		ft_executor_out_file(t_token *t);
+int		ft_executor_out_file_add(t_token *t);
 void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
 void	ft_executor_cmds(t_list *lst);
