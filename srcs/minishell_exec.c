@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/18 11:36:58 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/18 12:51:29 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/18 12:52:03 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ int	exec_fork(t_exec_data *d)
 int	ft_command_exec(t_exec_data *d)
 {
 	//d->exec_args = ft_split(d->argv[1], ' ');
+	if (check_empty_string(d->exec_args[0]) == -1)
+		return (-1);
 	d->exec_path = check_usr_path(d);
 	if (!d->exec_path && d->term_status)
 	{

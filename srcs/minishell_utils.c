@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 13:04:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/13 13:33:16 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/18 12:05:49 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,18 @@ char	**copy_dbl_char_pointer(char **src)
 	}
 	dst[i] = NULL;
 	return (dst);
+}
+
+/* Verifies if a string is just made of blanks/tabs/feeds */
+int	check_empty_string(char *str)
+{
+	if (!str)
+		return (-1);
+	while (*str != '\0')
+	{
+		if (*str != ' ' && !(*str >= '\t' && *str <= '\r'))
+			return (0);
+		str++;
+	}
+	return (-1);
 }
