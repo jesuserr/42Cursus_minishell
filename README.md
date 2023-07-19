@@ -12,7 +12,8 @@ LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 *	minishell_parser_env
 *	minishell_exec
 *	minishell_executor_check_cmds
-*	minishell_executor_cms
+*	minishell_executor_cmd
+- Tenemos que buscar la forma de controlar de imprimier \n en caso que el ultimo programa no lo haga, se pude hacer duplicado del fd del STDOUT
 
 - Notas cescanue 17/07
 
