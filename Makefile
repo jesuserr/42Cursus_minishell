@@ -34,7 +34,8 @@ SRC_FILES	= minishell \
 			  minishell_executor_in \
 			  minishell_executor_out \
 			  minishell_executor_cmds \
-			  minishell_split_with_quotes
+			  minishell_executor_check_cmds \
+			  minishell_split_with_quotes \
 			  			  
 SRC_FILESB	= 
 		  

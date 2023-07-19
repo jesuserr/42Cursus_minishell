@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 12:59:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/19 11:59:11 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	ft_executor_cmds(t_list *lst)
 	{
 		token = lst->content;
 		d = ft_calloc(1, sizeof(t_exec_data));
-		d->exec_args = ft_split(token->cmd, ' ');
+		d->exec_args = ft_split_quotes(token->cmd, ' ');
+		ft_strtrim_quotes(d->exec_args);
 		d->env = g_data.env;
 		d->int_error_code = 0;
 		d->term_status = 0;

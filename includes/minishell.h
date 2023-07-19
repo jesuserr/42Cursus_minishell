@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 23:36:00 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:28:46 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		ft_executor_out_file_add(t_token *t);
 void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
 void	ft_executor_cmds(t_list *lst);
+int		ft_executor_check_cmds(t_list *lst);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);
@@ -110,6 +111,8 @@ void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***t_str);
 int		p_common_errors(char *line);
 /*	minishell_exec.c	*/
 int		ft_command_exec(t_exec_data *d);
+char	*check_usr_path(t_exec_data *d);
+char	*obtain_path(t_exec_data *d);
 /*	minishell_error.c	*/
 void	ft_error(char *error);
 void	ft_error_shell(char *error);
@@ -125,5 +128,6 @@ int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
 /*	minishell_split_with_quotes.c	*/
 char	**ft_split_quotes(char const *s, char c);
+void	ft_strtrim_quotes(char **strs);
 
 #endif

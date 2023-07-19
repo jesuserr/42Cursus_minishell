@@ -7,6 +7,13 @@ Para compilar en MacOS
 COMP_FLAGS = -I/Users/$(USER)/.brew/opt/readline/include  
 LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
+- Notas cescanue 19/07
+- ENV, en cuando tengamos nuestra copia de variables de sistema, se tienen que modificar los siguientes ficheros/funciones
+*	minishell_parser_env
+*	minishell_exec
+*	minishell_executor_check_cmds
+*	minishell_executor_cms
+
 - Notas cescanue 17/07
 
 - Temas a comentar

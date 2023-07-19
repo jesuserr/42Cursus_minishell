@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_split_with_quotes.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/18 23:30:42 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/19 12:53:41 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,26 @@ char	**ft_split_quotes(char const *s, char c)
 	}
 	final[i] = NULL;
 	return (final);
+}
+
+void	ft_strtrim_quotes(char **strs)
+{
+	char	*tmp;
+
+	while (*strs)
+	{
+		tmp = ft_strtrim(*strs, "\"");
+		free(*strs);
+		*strs = tmp;
+		tmp = ft_strtrim(*strs, "'");
+		free(*strs);
+		*strs = tmp;
+		tmp = ft_strtrim(*strs, "\"");
+		free(*strs);
+		*strs = tmp;
+		tmp = ft_strtrim(*strs, "'");
+		free(*strs);
+		*strs = tmp;
+		strs++;
+	}
 }
