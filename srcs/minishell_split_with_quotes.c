@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_split_with_quotes.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/19 12:53:41 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/20 12:27:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	get_string(char const **string, size_t *string_len, char c)
 	}
 }
 
+/* Modified version of ft_split function, if the delimiter 'c' is between */
+/* double or single quotes, is not taken into account and no split is done  */
 char	**ft_split_quotes(char const *s, char c)
 {
 	char		**final;
