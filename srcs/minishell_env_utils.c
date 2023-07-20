@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/20 19:39:54 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:02:15 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*get_env_var(t_exec_data *d, char *name)
 	char	**split_name;
 	char	*result;
 
-	if (!name)
+	if (!name || name[0] == '=')
 		return (NULL);
 	split_name = ft_split(name, '=');
 	name_equal = ft_strjoin(split_name[0], "=");
