@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/20 12:29:24 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/21 12:44:00 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,7 @@ char	**ft_split_quotes(char const *s, char c);
 void	ft_strtrim_quotes(char **strs);
 /*	minishell_env_utils.c	*/
 char	*get_env_var(t_exec_data *d, char *name);
+char	**add_var_to_env(char ***src, char *line);
+char	**del_var_from_env(char ***src, char *line);
 
 #endif
