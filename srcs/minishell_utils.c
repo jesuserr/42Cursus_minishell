@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 13:04:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/18 12:05:49 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:39:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,15 @@ int	check_empty_string(char *str)
 		str++;
 	}
 	return (-1);
+}
+
+/* Counts the number of lines of a double char pointer */
+int	count_dbl_char_lines(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	return (i);
 }

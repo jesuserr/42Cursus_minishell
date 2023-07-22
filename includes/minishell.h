@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/21 12:44:00 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 01:07:07 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ void	ft_error_handler(char *str, t_exec_data *d);
 char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
 int		check_empty_string(char *str);
+int		count_dbl_char_lines(char **env);
 /*	minishell_built_ins.c */
 int		built_in_exec(t_exec_data *d);
 /*	minishell_exec_fds.c	*/
