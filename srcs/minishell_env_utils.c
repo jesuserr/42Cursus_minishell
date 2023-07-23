@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/23 01:49:08 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:40:40 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*get_env_var(t_exec_data *d, char *name)
 		}
 		i++;
 	}
+	free(name_equal);
 	return (NULL);
 }
 
