@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/23 01:07:07 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 13:59:43 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "../ft_printf/includes/ft_printf.h"
 # include "errno.h"
 # include <fcntl.h>
+# include <limits.h>
 
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
@@ -28,6 +29,7 @@
 # define ERROR_CMDNOT		1
 # define ERROR_NOFILE		2
 # define ERROR_NOPERM		13
+# define ERROR_B_PWD		200
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255

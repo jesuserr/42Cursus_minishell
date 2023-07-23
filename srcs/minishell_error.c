@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 23:34:05 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 14:02:35 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_error_shell(char *error)
 
 	ft_strlcpy(errortmp, "Minishell: ", 500);
 	ft_strlcat(errortmp, error, 500);
-	ft_printf(STDERR_FILENO, "%s \n", errortmp);
+	ft_printf(STDERR_FILENO, "%s\n", errortmp);
 }
 
 /* Prints out error messages according to BASH through STDERR */
@@ -43,11 +43,13 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf(STDERR_FILENO, "minishell: %s: No such file or directory\n", d->exec_args[0]);
 	else if (d->int_error_code == ERROR_NOPERM)
 		ft_printf(STDERR_FILENO, "minishell: %s: Permission denied\n", d->exec_args[0]);
+	else if (d->int_error_code == ERROR_B_PWD)
+		ft_printf(STDERR_FILENO, "minishell: getcwd: failed: No such file or directory\n");
 	else if (d->int_error_code == ERROR_FORK)
-		ft_printf(STDERR_FILENO, "minishell: fork: retry: Resource temporarily u navailable\n");
+		ft_printf(STDERR_FILENO, "minishell: fork: retry: Resource temporarily unavailable\n");
 	else if (d->int_error_code == ERROR_MALLOC)
-		ft_printf(STDERR_FILENO, "minishell: malloc: Cannot alloc ate memory\n");
+		ft_printf(STDERR_FILENO, "minishell: malloc: Cannot allocate memory\n");
 	else if (d->int_error_code == ERROR_DUP)
-		ft_printf(STDERR_FILENO, "minishell: dup: Cannot duplicate file  descriptor\n");
+		ft_printf(STDERR_FILENO, "minishell: dup: Cannot duplicate file descriptor\n");
 	return ;
 }
