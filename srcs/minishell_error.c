@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/23 14:02:35 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 20:27:13 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ft_error_shell(char *error)
 /* Custom text message can be additionally sent through *str */
 void	ft_error_handler(char *str, t_exec_data *d)
 {
-	(void) str;
 	if (d->int_error_code == ERROR_XXX)
 	{
 		perror("Undefined Error");
@@ -43,6 +42,8 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf(STDERR_FILENO, "minishell: %s: No such file or directory\n", d->exec_args[0]);
 	else if (d->int_error_code == ERROR_NOPERM)
 		ft_printf(STDERR_FILENO, "minishell: %s: Permission denied\n", d->exec_args[0]);
+	else if (d->int_error_code == ERROR_B_UNSET)
+		ft_printf(STDERR_FILENO, "minishell: unset: `%s': not a valid identifier\n", str);
 	else if (d->int_error_code == ERROR_B_PWD)
 		ft_printf(STDERR_FILENO, "minishell: getcwd: failed: No such file or directory\n");
 	else if (d->int_error_code == ERROR_FORK)

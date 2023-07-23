@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/23 14:25:56 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:06:21 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,34 @@ int	built_in_env(t_exec_data *d)
 {
 	int	i;
 
+	if (exec_dups(d) == -1)
+		return (-2);
 	i = 0;
 	while (d->env[i])
-		printf("%s\n", d->env[i++]);
+		ft_printf(STDOUT_FILENO, "%s\n", d->env[i++]);
+	if (restore_fds(d) == -1)
+		return (-2);
+	return (0);
+}
+
+int	built_in_unset(t_exec_data *d, char *var)
+{
+	size_t	i;
+	
+	if (!var)
+		return (0);
+	i = 0;
+	while (i < ft_strlen(var))
+	{
+		if (!(ft_isalnum((var[i])) || var[i] == '_'))
+		{
+			d->int_error_code = ERROR_B_UNSET;
+			ft_error_handler(var, d);
+			break;
+		}
+		i++;
+	}
+	del_var_from_env(&d->env, var);
 	return (0);
 }
 
@@ -57,11 +82,4 @@ int	built_in_echo(t_exec_data *d)
 	printf("\n");
 	free_split(d->exec_args, NULL);
 	return (0);
-}
-
-//return (built_in_env(d));
-//return (built_in_echo(d));
-int	built_in_exec(t_exec_data *d)
-{
-	return (built_in_pwd(d));
 }
