@@ -8,7 +8,7 @@ COMP_FLAGS = -I/Users/$(USER)/.brew/opt/readline/include
 LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 - Notas cescanue 24/07
-- bug, revisar conbinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
+- bug, revisar combinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
 - Falta el control de errores en minishell_exec_pipes en los dup2
 - Bug, si se pone una coma entre comillas, lo interpreta como otro bloque, revisar.
 - Se tiene que alamcenar el estado del salida del ultimo comando ejecutado, de momento se borra, estan en minishell_executor_cmds.c funcion void	ft_executor_cmds_waitpid(t_list *lst)
