@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 12:36:46 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:35:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ char	*obtain_path(t_exec_data *d)
 /* File descriptors are restored before exiting the function */
 int	exec_fork(t_exec_data *d)
 {
-	/*if (exec_dups(d) == -1)
-		return (-2);*/
 	d->fork_pid = fork();
 	if (d->fork_pid == -1)
 	{
@@ -109,48 +107,13 @@ int	exec_fork(t_exec_data *d)
 	}
 	if (d->fork_pid == 0)
 	{
-		if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
-		{
-			ft_close_pipe(d->pipe_current[READ_END]);
-			dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
-			ft_close_pipe(d->pipe_current[WRITE_END]);
-		}
-		else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
-		{
-			dup2(d->pipe_last[READ_END], STDIN_FILENO);
-			ft_close_pipe(d->pipe_last[READ_END]);
-		}
-		else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
-		{
-			ft_close_pipe(d->pipe_current[READ_END]);
-			dup2(d->pipe_last[READ_END], STDIN_FILENO);
-			ft_close_pipe(d->pipe_last[READ_END]);
-			dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
-			ft_close_pipe(d->pipe_current[WRITE_END]);
-		}
-		else
-		{
-			if (exec_dups(d) == -1)
-				return (-2);
-		}
+		ft_exec_pipe_child(d);
 		execve(d->exec_path, d->exec_args, d->env);
 	}
 	else
 	{
 		free_split(d->exec_args, d->exec_path);
-		if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
-		{
-			ft_close_pipe(d->pipe_current[WRITE_END]);
-		}
-		else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
-		{
-			ft_close_pipe(d->pipe_last[READ_END]);
-		}
-		else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
-		{
-			ft_close_pipe(d->pipe_last[READ_END]);
-			ft_close_pipe(d->pipe_current[WRITE_END]);
-		}
+		ft_exec_pipe_parent(d);
 	}
 	return (0);
 }

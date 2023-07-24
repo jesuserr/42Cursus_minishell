@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 12:46:55 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 13:34:35 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
 void	ft_executor_cmds(t_list *lst);
 int		ft_executor_check_cmds(t_list *lst);
+void	ft_exec_pipe_child(t_exec_data *d);
+void	ft_exec_pipe_parent(t_exec_data *d);
 void	p_t_s_free_token(void *t);
 t_list	**parser(char *line);
 int		p_common_errors(char *line);
