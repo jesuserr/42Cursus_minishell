@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 12:46:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 19:16:21 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/24 21:16:04 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/24 21:16:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define ERROR_CMDNOT		1
 # define ERROR_NOFILE		2
 # define ERROR_NOPERM		13
+# define ERROR_NODIR		20
 # define ERROR_B_PWD		200
 # define ERROR_B_UNSET		201
 # define ERROR_DUP			253
@@ -136,10 +137,15 @@ char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
 int		check_empty_string(char *str);
 int		count_dbl_char_lines(char **env);
+void	double_free(char *str_1, char *str_2);
 /*	minishell_built_ins.c */
 int		built_in_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
+/*	minishell_built_in_cd.c	*/
+int		built_in_cd(t_exec_data *d, char *pathname);
+void	built_in_cd_error(t_exec_data *d, char *pathname);
+void	update_env_pwd(t_exec_data *d, char *pathname);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);

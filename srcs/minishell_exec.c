@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 13:35:22 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:12:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*check_usr_path(t_exec_data *d)
 		{
 			d->int_error_code = ERROR_NOFILE;
 			d->term_status = 127;
-			ft_error_handler(NULL, d);
+			ft_error_handler(d->exec_args[0], d);
 		}
 		else if (access(d->exec_args[0], X_OK))
 		{
@@ -124,6 +124,7 @@ int	exec_fork(t_exec_data *d)
 /* Provides error info inside struct variables int_error_code & term.status */
 int	ft_command_exec(t_exec_data *d)
 {
+	//d->exec_args = ft_split(d->argv[1], ' ');
 	if (check_empty_string(d->exec_args[0]) == -1)
 		return (-1);
 	d->exec_path = check_usr_path(d);
