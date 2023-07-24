@@ -6,12 +6,16 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/23 21:06:21 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:55:55 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* Prints out path working directory using getcwd */
+/* ENV variable not used since PWD could not exist due to removal */
+/* File descriptors management to be revised due to new code for piping */
+/* No STDIN for this kind of built-in */
 int	built_in_pwd(t_exec_data *d)
 {
 	char	buf[PATH_MAX];
@@ -32,6 +36,9 @@ int	built_in_pwd(t_exec_data *d)
 	return (0);
 }
 
+/* Prints out content of our environment variables */
+/* File descriptors management to be revised due to new code for piping */
+/* No STDIN for this kind of built-in */
 int	built_in_env(t_exec_data *d)
 {
 	int	i;
@@ -46,10 +53,13 @@ int	built_in_env(t_exec_data *d)
 	return (0);
 }
 
+/* Removes variable from environment. If variable name contains any character */
+/* that is not alphanumeric or '_' displays an error message */
+/* No STDIN/STDOUT for this kind of built-in */
 int	built_in_unset(t_exec_data *d, char *var)
 {
 	size_t	i;
-	
+
 	if (!var)
 		return (0);
 	i = 0;
@@ -59,7 +69,7 @@ int	built_in_unset(t_exec_data *d, char *var)
 		{
 			d->int_error_code = ERROR_B_UNSET;
 			ft_error_handler(var, d);
-			break;
+			break ;
 		}
 		i++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 13:04:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/23 20:57:18 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:13:55 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,13 @@ int	count_dbl_char_lines(char **env)
 	while (env[i])
 		i++;
 	return (i);
+}
+
+/* Allows to free two pointers at once, main purpose is saving lines of code */
+void	double_free(char *str_1, char *str_2)
+{
+	if (str_1)
+		free(str_1);
+	if (str_2)
+		free(str_2);	
 }
