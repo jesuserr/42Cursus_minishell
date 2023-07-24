@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/23 13:59:43 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:41:32 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@
 # define MAX_FDS 			4096
 # define BUFFER_SIZE 		1024
 
+# define READ_END			0
+# define WRITE_END			1
+
 typedef struct s_global_data
 {
 	char	**env;
@@ -51,6 +54,8 @@ typedef struct s_exec_data
 {
 	int		fd_in;
 	int		fd_out;
+	int		pipe_current[2];
+	int		pipe_last[2];
 	int		saved_fd_in;
 	int		saved_fd_out;
 	char	**argv;
@@ -65,27 +70,29 @@ typedef struct s_exec_data
 
 typedef struct s_token
 {
-	int		type;
-	char	*cmd;
-	int		cmdin;
-	int		cmdout;
-	char	**heredoc;
-	int		n_heredoc;
-	char	**in_literal;
-	int		n_in_literal;
-	char	**in;
-	int		n_in;
-	char	**out;
-	int		n_out;
-	char	**out_add;
-	int		n_out_add;
-	int		*fd_to_close;
-	int		last_in;
-	int		last_out;
+	int			type;
+	char		*cmd;
+	int			cmdin;
+	int			cmdout;
+	char		**heredoc;
+	int			n_heredoc;
+	char		**in_literal;
+	int			n_in_literal;
+	char		**in;
+	int			n_in;
+	char		**out;
+	int			n_out;
+	char		**out_add;
+	int			n_out_add;
+	int			*fd_to_close;
+	int			last_in;
+	int			last_out;
+	t_exec_data	*d;
 }	t_token;
 
 t_global_data	g_data;
 
+int		ft_close_pipe(int pipe);
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
 void	ft_executor(t_list **lst_cmds);

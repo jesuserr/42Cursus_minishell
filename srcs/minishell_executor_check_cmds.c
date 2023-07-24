@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:05:27 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/19 12:52:33 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:01:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	ft_executor_check_cmds(t_list *lst)
 	t_exec_data	d;
 
 	d.env = g_data.env;
+	d.exec_path = 0;
 	while (lst)
 	{
 		token = lst->content;

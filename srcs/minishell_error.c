@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 21:27:35 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/23 14:02:35 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/23 21:03:03 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

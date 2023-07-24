@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 10:37:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:44:18 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_list	**parser(char *line)
 	{
 		tline = p_identify_blocks(line);
 		tline = p_replace_env(tline);
-		cmds = ft_split(tline, ',');
+		cmds = ft_split_quotes(tline, ',');
 		tcmds = cmds;
 	}
 	lst_cmds = ft_calloc(1, sizeof(t_list *));

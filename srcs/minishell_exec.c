@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/20 19:35:58 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:36:46 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ char	*obtain_path(t_exec_data *d)
 /* File descriptors are restored before exiting the function */
 int	exec_fork(t_exec_data *d)
 {
-	if (exec_dups(d) == -1)
-		return (-2);
+	/*if (exec_dups(d) == -1)
+		return (-2);*/
 	d->fork_pid = fork();
 	if (d->fork_pid == -1)
 	{
@@ -108,14 +108,50 @@ int	exec_fork(t_exec_data *d)
 		return (-2);
 	}
 	if (d->fork_pid == 0)
+	{
+		if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
+		{
+			ft_close_pipe(d->pipe_current[READ_END]);
+			dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
+			ft_close_pipe(d->pipe_current[WRITE_END]);
+		}
+		else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
+		{
+			dup2(d->pipe_last[READ_END], STDIN_FILENO);
+			ft_close_pipe(d->pipe_last[READ_END]);
+		}
+		else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
+		{
+			ft_close_pipe(d->pipe_current[READ_END]);
+			dup2(d->pipe_last[READ_END], STDIN_FILENO);
+			ft_close_pipe(d->pipe_last[READ_END]);
+			dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
+			ft_close_pipe(d->pipe_current[WRITE_END]);
+		}
+		else
+		{
+			if (exec_dups(d) == -1)
+				return (-2);
+		}
 		execve(d->exec_path, d->exec_args, d->env);
-	waitpid(d->fork_pid, &d->waitpid_status, 0);
-	if (restore_fds(d) == -1)
-		return (-2);
-	d->term_status = WEXITSTATUS(d->waitpid_status);
-	free_split(d->exec_args, d->exec_path);
-	if (d->term_status)
-		return (-1);
+	}
+	else
+	{
+		free_split(d->exec_args, d->exec_path);
+		if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
+		{
+			ft_close_pipe(d->pipe_current[WRITE_END]);
+		}
+		else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
+		{
+			ft_close_pipe(d->pipe_last[READ_END]);
+		}
+		else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
+		{
+			ft_close_pipe(d->pipe_last[READ_END]);
+			ft_close_pipe(d->pipe_current[WRITE_END]);
+		}
+	}
 	return (0);
 }
 
@@ -125,7 +161,6 @@ int	exec_fork(t_exec_data *d)
 /* Provides error info inside struct variables int_error_code & term.status */
 int	ft_command_exec(t_exec_data *d)
 {
-	//d->exec_args = ft_split(d->argv[1], ' ');
 	if (check_empty_string(d->exec_args[0]) == -1)
 		return (-1);
 	d->exec_path = check_usr_path(d);

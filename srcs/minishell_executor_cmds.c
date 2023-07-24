@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/19 13:24:52 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 12:24:03 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@ void	ft_executor_cmds_init_exec(t_exec_data *d)
 void	ft_executor_cmds_redi_pipe(t_token *token, t_exec_data *d, int *p)
 {
 	if (p[0] > 2)
+	{
 		d->fd_in = p[0];
+		d->pipe_last[0] = p[0];
+		d->pipe_last[1] = p[1];
+	}
+	else
+	{
+		d->pipe_last[0] = -1;
+		d->pipe_last[1] = -1;
+	}
 	if (token->cmdin > 2)
 		d->fd_in = token->cmdin;
 	if (token->cmdout > 2)
@@ -33,11 +42,15 @@ void	ft_executor_cmds_redi_pipe(t_token *token, t_exec_data *d, int *p)
 	{
 		pipe(p);
 		d->fd_out = p[1];
+		d->pipe_current[0] = p[0];
+		d->pipe_current[1] = p[1];
 	}
 	else
 	{
 		p[0] = -1;
 		p[1] = -1;
+		d->pipe_current[0] = -1;
+		d->pipe_current[1] = -1;
 	}
 }
 
@@ -46,20 +59,29 @@ void	ft_executor_cmds(t_list *lst)
 	t_token		*token;
 	t_exec_data	*d;
 	int			p[2];
+	t_list		*copy;
 
 	p[0] = -1;
 	p[1] = -1;
+	copy = lst;
 	while (lst)
 	{
 		token = lst->content;
 		d = ft_calloc(1, sizeof(t_exec_data));
+		token->d = d;
 		d->exec_args = ft_split_quotes(token->cmd, ' ');
 		ft_strtrim_quotes(d->exec_args);
 		ft_executor_cmds_init_exec(d);
 		ft_executor_cmds_redi_pipe(token, d, p);
 		ft_command_exec(d);
-		if (d->fd_out > 2)
-			close (d->fd_out);
+		lst = lst->next;
+	}
+	lst = copy;
+	while (lst)
+	{
+		token = lst->content;
+		d = token->d;
+		waitpid(d->fork_pid, 0, 0);
 		free(d);
 		lst = lst->next;
 	}
