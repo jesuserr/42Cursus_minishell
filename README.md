@@ -8,7 +8,8 @@ COMP_FLAGS = -I/Users/$(USER)/.brew/opt/readline/include
 LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
 - Notas cescanue 24/07
-- bug, revisar combinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
+- (SOLVED) bug, revisar combinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
+- (SOLVED) bug, muestra que no se puede ejecutar comando, si el comando esta vacio.  
 - Falta el control de errores en minishell_exec_pipes en los dup2
 - Bug, si se pone una coma entre comillas, lo interpreta como otro bloque, revisar.
 - Se tiene que alamcenar el estado del salida del ultimo comando ejecutado, de momento se borra, estan en minishell_executor_cmds.c funcion void	ft_executor_cmds_waitpid(t_list *lst)
@@ -18,7 +19,7 @@ LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 *	minishell_exec
 *	minishell_executor_check_cmds
 *	minishell_executor_cmd
-- Tenemos que buscar la forma de controlar de imprimier \n en caso que el ultimo programa no lo haga, se pude hacer duplicado del fd del STDOUT
+- (No hace falta el bash se comporta de la misma forma) Tenemos que buscar la forma de controlar de imprimier \n en caso que el ultimo programa no lo haga, se pude hacer duplicado del fd del STDOUT
 
 - Notas cescanue 17/07
 
@@ -29,6 +30,6 @@ LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 - (DONE) Crear copia de ENV y todo lo necesario para su gestion --> Jesus
 - (SOLVED) Gestion de multiples FD y que hacer con los que son meramente transitorios, ejemplo: varios FDIN y solo se usa el ultimo
 - (SOLVED) Orden de procesado de las redicciones, decidir en caso de multiples que hacer. Posible BUG de diseño (solucionable). 
-- Ejecucion de comandos en paralelo, hacer el waitpid todos a la vez y cerrar de los FD en funcion de que vayan terminando los procesos. -->cescanue
+- (DONE) Ejecucion de comandos en paralelo, hacer el waitpid todos a la vez y cerrar de los FD en funcion de que vayan terminando los procesos. -->cescanue
 - Comnandos built_ins --> Jesus
 - Senales del sistema --> cescanue

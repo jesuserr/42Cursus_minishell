@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:40:16 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 13:35:33 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:06:56 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,13 @@ void	ft_exec_pipe_parent(t_exec_data *d)
 	{
 		ft_close_pipe(d->pipe_last[READ_END]);
 	}
-	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
+	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_last[READ_END] != -1
+		&& d->pipe_current[WRITE_END] != -1)
+	{
+		ft_close_pipe(d->pipe_last[READ_END]);
+		ft_close_pipe(d->pipe_current[WRITE_END]);
+	}
+	else
 	{
 		ft_close_pipe(d->pipe_last[READ_END]);
 		ft_close_pipe(d->pipe_current[WRITE_END]);
@@ -49,7 +55,8 @@ void	ft_exec_pipe_child(t_exec_data *d)
 		dup2(d->pipe_last[READ_END], STDIN_FILENO);
 		ft_close_pipe(d->pipe_last[READ_END]);
 	}
-	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_current[READ_END] != -1)
+	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_last[READ_END] != -1
+		&& d->pipe_current[WRITE_END] != -1)
 	{
 		ft_close_pipe(d->pipe_current[READ_END]);
 		dup2(d->pipe_last[READ_END], STDIN_FILENO);
