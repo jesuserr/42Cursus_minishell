@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:40:16 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:06:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 21:43:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,24 +46,42 @@ void	ft_exec_pipe_child(t_exec_data *d)
 {
 	if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
 	{
+		ft_printf(2, "caso1\n");
 		ft_close_pipe(d->pipe_current[READ_END]);
-		dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
+		if (dup2(d->pipe_current[WRITE_END], STDOUT_FILENO) < 0)
+			ft_error("dup2: bad file descriptor");
 		ft_close_pipe(d->pipe_current[WRITE_END]);
 	}
 	else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
 	{
-		dup2(d->pipe_last[READ_END], STDIN_FILENO);
+		ft_printf(2, "caso2\n");
+		if (dup2(d->pipe_last[READ_END], STDIN_FILENO) < 0)
+			ft_error("dup2: bad file descriptor");
 		ft_close_pipe(d->pipe_last[READ_END]);
 	}
 	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_last[READ_END] != -1
 		&& d->pipe_current[WRITE_END] != -1)
 	{
+		ft_printf(2, "caso3\n");
 		ft_close_pipe(d->pipe_current[READ_END]);
-		dup2(d->pipe_last[READ_END], STDIN_FILENO);
+		if (dup2(d->pipe_last[READ_END], STDIN_FILENO) < 0
+			|| dup2(d->pipe_current[WRITE_END], STDOUT_FILENO) < 0)
+			ft_error("dup2: bad file descriptor");
 		ft_close_pipe(d->pipe_last[READ_END]);
-		dup2(d->pipe_current[WRITE_END], STDOUT_FILENO);
 		ft_close_pipe(d->pipe_current[WRITE_END]);
 	}
 	else
-		exec_dups(d);
+	{
+		ft_printf(2, "caso4\n");
+		if (d->pipe_last[READ_END] != -1)
+		{
+			
+			ft_printf(2, "caso4.1\n");
+			int ee = open("README.me", O_RDONLY, 0444);
+			dup2(ee, STDIN_FILENO);
+			//close(ee);
+		}
+		else 
+			exec_dups(d);
+	}
 }
