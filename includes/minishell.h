@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 12:51:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 12:41:32 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/24 12:46:13 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/24 12:46:55 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define ERROR_NOFILE		2
 # define ERROR_NOPERM		13
 # define ERROR_B_PWD		200
+# define ERROR_B_UNSET		201
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255
@@ -132,7 +133,9 @@ char	**copy_dbl_char_pointer(char **src);
 int		check_empty_string(char *str);
 int		count_dbl_char_lines(char **env);
 /*	minishell_built_ins.c */
-int		built_in_exec(t_exec_data *d);
+int		built_in_pwd(t_exec_data *d);
+int		built_in_env(t_exec_data *d);
+int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
