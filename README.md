@@ -11,7 +11,7 @@ LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 - (SOLVED) bug, revisar combinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
 - (SOLVED) bug, muestra que no se puede ejecutar comando, si el comando esta vacio.  
 - Falta el control de errores en minishell_exec_pipes en los dup2
-- Bug, si se pone una coma entre comillas, lo interpreta como otro bloque, revisar.
+- (SOLVED) Bug, si se pone una coma entre comillas, lo interpreta como otro bloque, revisar.
 - Se tiene que alamcenar el estado del salida del ultimo comando ejecutado, de momento se borra, estan en minishell_executor_cmds.c funcion void	ft_executor_cmds_waitpid(t_list *lst)
 - Notas cescanue 19/07
 - ENV, en cuando tengamos nuestra copia de variables de sistema, se tienen que modificar los siguientes ficheros/funciones
