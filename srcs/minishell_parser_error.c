@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:22:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:53:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,7 @@ int	p_common_errors2(char *line)
 
 int	p_common_errors1(char *line)
 {
-	if (ft_strnstr(line, ";", ft_strlen(line)))
-	{
-		ft_error_shell("syntax error near unexpected token ';'");
-		return (1);
-	}
-	else if (ft_strnstr(line, "<<<<", ft_strlen(line)))
+	if (ft_strnstr(line, "<<<<", ft_strlen(line)))
 	{
 		ft_error_shell("syntax error near unexpected token '<'");
 		return (1);
