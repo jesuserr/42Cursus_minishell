@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:05:27 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:14:35 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:41:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_executor_check_cmds2(t_token *token, t_exec_data	*d)
 	ft_strtrim_quotes(d->exec_args);
 	if (check_empty_string(d->exec_args[0]) == -1)
 	{
+		ft_error_shell("not command");
 		free_split(d->exec_args, d->exec_path);
 		return (0);
 	}

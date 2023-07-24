@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:04:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 15:36:45 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,6 @@ void	ft_executor_cmds(t_list *lst)
 		ft_executor_cmds_init_exec(d);
 		ft_executor_cmds_redi_pipe(token, d, p);
 		ft_command_exec(d);
-		ft_executor_close_fds(token);
 		lst = lst->next;
 	}
 	ft_executor_cmds_waitpid(lstcopy);
