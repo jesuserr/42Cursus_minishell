@@ -6,13 +6,13 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:36:45 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:54:33 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_executor_cmds_init_exec(t_exec_data *d)
+void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t)
 {
 	d->env = g_data.env;
 	d->int_error_code = 0;
@@ -23,6 +23,8 @@ void	ft_executor_cmds_init_exec(t_exec_data *d)
 	d->pipe_current[1] = -1;
 	d->pipe_last[0] = -1;
 	d->pipe_last[1] = -1;
+	d->n_in = t->n_in + t->n_heredoc + t->n_in_literal;
+	d->n_out = t->n_out + t->n_out_add;
 }
 
 void	ft_executor_cmds_redi_pipe2(t_token *token, t_exec_data *d, int *p)
@@ -97,7 +99,7 @@ void	ft_executor_cmds(t_list *lst)
 		token->d = d;
 		d->exec_args = ft_split_quotes(token->cmd, ' ');
 		ft_strtrim_quotes(d->exec_args);
-		ft_executor_cmds_init_exec(d);
+		ft_executor_cmds_init_exec(d, token);
 		ft_executor_cmds_redi_pipe(token, d, p);
 		ft_command_exec(d);
 		lst = lst->next;

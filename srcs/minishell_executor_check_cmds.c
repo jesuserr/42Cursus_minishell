@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:05:27 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 15:41:22 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/24 19:02:01 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_executor_check_cmds2(t_token *token, t_exec_data	*d)
 	d->exec_path = check_usr_path(d);
 	if (!d->exec_path && d->term_status)
 	{
-		ft_executor_check_cmds_error(*d);
+		free_split(d->exec_args, d->exec_path);
 		return (0);
 	}
 	if (!d->exec_path)
