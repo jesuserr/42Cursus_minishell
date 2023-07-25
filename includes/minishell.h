@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:13:48 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 20:37:42 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:21:27 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define ERROR_NODIR		20
 # define ERROR_B_PWD		200
 # define ERROR_B_UNSET		201
+# define ERROR_B_NOHOME		202
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255

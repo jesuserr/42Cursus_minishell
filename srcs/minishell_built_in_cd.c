@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 20:51:09 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:31:06 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,12 @@ int	built_in_cd(t_exec_data *d, char *pathname)
 	{
 		home_path = get_env_var(d, "HOME");
 		if (!home_path)
+		{
+			d->int_error_code = ERROR_B_NOHOME;
+			d->term_status = 1;
+			ft_error_handler(NULL, d);
 			return (0);
+		}
 		if (execute_cd(d, home_path) == -1)
 		{
 			free(home_path);
