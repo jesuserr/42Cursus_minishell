@@ -6,63 +6,40 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 12:12:43 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:13:17 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 void	built_in_cd_error(t_exec_data *d, char *pathname);
-void	update_env_pwd(t_exec_data *d, char *pathname, char *old_pwd);
+int		execute_cd_home(t_exec_data *d);
+int		execute_cd_absolute(t_exec_data *d, char *new_pwd);
+int		execute_cd_relative(t_exec_data *d, char *new_pwd);
 
 int	built_in_cd(t_exec_data *d, char *pathname)
 {
-	char	*path_slash;
-	char	*path_complete;	
+	char	*new_pwd;
 	char	*pwd;
 
 	if (pathname[0] == '.' && pathname[1] == '\0')
 		return (0);
-	pwd = obtain_pwd(d);
-	if (!pwd)
-		return (-1);
 	if (check_empty_string(pathname))
+		return (execute_cd_home(d));
+	if (pathname[0] == '/')
+		return (execute_cd_absolute(d, pathname));
+	if (!(ft_strncmp(pathname, "..", 2)) && ft_strlen(pathname) == 2)
 	{
-		path_complete = get_env_var(d, "HOME");
-		if (!path_complete)
-		{
-			free(pwd);
-			return (0);
-		}
-		chdir(path_complete);
-		update_env_pwd(d, path_complete, pwd);
-		free(path_complete);
-	}
-	else if (pathname[0] == '/')
-	{
-		if (chdir(pathname) == -1)
-			built_in_cd_error(d, pathname);
-		else
-			update_env_pwd(d, pathname, pwd);
-	}
-	else if (!(ft_strncmp(pathname, "..", 2)) && ft_strlen(pathname) == 2)
-	{
+		pwd = obtain_pwd(d);
+		if (!pwd)
+			return (-1);
 		chdir(pathname);
-		path_complete = obtain_pwd(d);
-		update_env_pwd(d, path_complete, pwd);
-		free(path_complete);
+		new_pwd = obtain_pwd(d);
+		update_env_pwd(d, new_pwd, pwd);
+		double_free(new_pwd, pwd);
 	}
 	else
-	{
-		path_slash = ft_strjoin(pwd, "/");
-		path_complete = ft_strjoin(path_slash, pathname);
-		if (chdir(pathname) == -1)
-			built_in_cd_error(d, pathname);
-		else
-			update_env_pwd(d, path_complete, pwd);
-		double_free(path_slash, path_complete);
-	}
-	free(pwd);
+		return (execute_cd_relative(d, pathname));
 	return (0);
 }
 
@@ -87,16 +64,57 @@ void	built_in_cd_error(t_exec_data *d, char *pathname)
 	return ;
 }
 
-void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
+int	execute_cd_home(t_exec_data *d)
 {
+	char	*old_pwd;
 	char	*new_pwd;
+
+	old_pwd = obtain_pwd(d);
+	if (!old_pwd)
+		return (-1);
+	new_pwd = get_env_var(d, "HOME");
+	if (!new_pwd)
+	{
+		free(old_pwd);
+		return (0);
+	}
+	chdir(new_pwd);
+	update_env_pwd(d, new_pwd, old_pwd);
+	double_free(old_pwd, new_pwd);
+	return (0);
+}
+
+int	execute_cd_absolute(t_exec_data *d, char *new_pwd)
+{
 	char	*old_pwd;
 
-	new_pwd = ft_strjoin("PWD=", new_path);
-	add_var_to_env(&d->env, new_pwd);
-	old_pwd = ft_strjoin("OLDPWD=", old_path);
-	add_var_to_env(&d->env, old_pwd);
-	free (new_pwd);
-	free (old_pwd);
-	return ;
+	old_pwd = obtain_pwd(d);
+	if (!old_pwd)
+		return (-1);
+	if (chdir(new_pwd) == -1)
+		built_in_cd_error(d, new_pwd);
+	else
+		update_env_pwd(d, new_pwd, old_pwd);
+	free(old_pwd);
+	return (0);
+}
+
+int	execute_cd_relative(t_exec_data *d, char *new_pwd)
+{
+	char	*path_complete;
+	char	*path_slash;
+	char	*old_pwd;
+
+	old_pwd = obtain_pwd(d);
+	if (!old_pwd)
+		return (-1);
+	path_slash = ft_strjoin(old_pwd, "/");
+	path_complete = ft_strjoin(path_slash, new_pwd);
+	if (chdir(new_pwd) == -1)
+		built_in_cd_error(d, new_pwd);
+	else
+		update_env_pwd(d, path_complete, old_pwd);
+	double_free(path_slash, path_complete);
+	free(old_pwd);
+	return (0);
 }

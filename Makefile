@@ -29,6 +29,7 @@ SRC_FILES	= minishell \
 			  minishell_exec_pipes \
 			  minishell_utils \
 			  minishell_built_ins \
+			  minishell_built_ins_utils \
 			  minishell_built_in_cd \
 			  minishell_executor \
 			  minishell_get_next_line \
