@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 13:07:40 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:39:36 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t)
 	d->n_out = t->n_out + t->n_out_add;
 	d->redi_in = t->cmdin;
 	d->redi_out = t->cmdout;
+	d->exec_args = ft_split_quotes(t->cmd, ' ');
+	ft_strtrim_quotes(d->exec_args);
 }
 
 void	ft_executor_cmds_redi_pipe2(t_token *token, t_exec_data *d, int *p)
@@ -99,8 +101,6 @@ void	ft_executor_cmds(t_list *lst)
 		token = lst->content;
 		d = ft_calloc(1, sizeof(t_exec_data));
 		token->d = d;
-		d->exec_args = ft_split_quotes(token->cmd, ' ');
-		ft_strtrim_quotes(d->exec_args);
 		ft_executor_cmds_init_exec(d, token);
 		ft_executor_cmds_redi_pipe(token, d, p);
 		ft_command_exec(d);
