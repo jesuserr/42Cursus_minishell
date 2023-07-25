@@ -6,40 +6,64 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 13:13:17 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:39:20 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+int		execute_cd(t_exec_data *d, char *new_pwd);
 void	built_in_cd_error(t_exec_data *d, char *pathname);
-int		execute_cd_home(t_exec_data *d);
-int		execute_cd_absolute(t_exec_data *d, char *new_pwd);
-int		execute_cd_relative(t_exec_data *d, char *new_pwd);
+void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
 
+/* If no arguments are provided the value of $HOME is passed to chdir */
+/* In any other case the argument is passed directly to chdir function */
+/* No STDIN/STDOUT for this kind of built-in */
 int	built_in_cd(t_exec_data *d, char *pathname)
 {
-	char	*new_pwd;
-	char	*pwd;
+	char	*home_path;
 
-	if (pathname[0] == '.' && pathname[1] == '\0')
-		return (0);
 	if (check_empty_string(pathname))
-		return (execute_cd_home(d));
-	if (pathname[0] == '/')
-		return (execute_cd_absolute(d, pathname));
-	if (!(ft_strncmp(pathname, "..", 2)) && ft_strlen(pathname) == 2)
 	{
-		pwd = obtain_pwd(d);
-		if (!pwd)
+		home_path = get_env_var(d, "HOME");
+		if (!home_path)
+			return (0);
+		if (execute_cd(d, home_path) == -1)
+		{
+			free(home_path);
 			return (-1);
-		chdir(pathname);
-		new_pwd = obtain_pwd(d);
-		update_env_pwd(d, new_pwd, pwd);
-		double_free(new_pwd, pwd);
+		}
+		free(home_path);
+		return (0);
 	}
 	else
-		return (execute_cd_relative(d, pathname));
+		return (execute_cd(d, pathname));
+}
+
+/* Stores the value of the current PWD, executes chdir command and stores the */
+/* value of the new PWD, and then updates the environment variables PWD & OLDPWD */
+int	execute_cd(t_exec_data *d, char *tmp_pwd)
+{
+	char	*old_pwd;
+	char	*new_pwd;
+
+	old_pwd = obtain_pwd(d);
+	if (!old_pwd)
+		return (-1);
+	if (chdir(tmp_pwd) == -1)
+		built_in_cd_error(d, tmp_pwd);
+	else
+	{
+		new_pwd = obtain_pwd(d);
+		if (!new_pwd)
+		{
+			free(old_pwd);
+			return (-1);
+		}
+		update_env_pwd(d, new_pwd, old_pwd);
+		free(new_pwd);
+	}
+	free(old_pwd);
 	return (0);
 }
 
@@ -64,57 +88,16 @@ void	built_in_cd_error(t_exec_data *d, char *pathname)
 	return ;
 }
 
-int	execute_cd_home(t_exec_data *d)
+void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
 {
-	char	*old_pwd;
 	char	*new_pwd;
-
-	old_pwd = obtain_pwd(d);
-	if (!old_pwd)
-		return (-1);
-	new_pwd = get_env_var(d, "HOME");
-	if (!new_pwd)
-	{
-		free(old_pwd);
-		return (0);
-	}
-	chdir(new_pwd);
-	update_env_pwd(d, new_pwd, old_pwd);
-	double_free(old_pwd, new_pwd);
-	return (0);
-}
-
-int	execute_cd_absolute(t_exec_data *d, char *new_pwd)
-{
 	char	*old_pwd;
 
-	old_pwd = obtain_pwd(d);
-	if (!old_pwd)
-		return (-1);
-	if (chdir(new_pwd) == -1)
-		built_in_cd_error(d, new_pwd);
-	else
-		update_env_pwd(d, new_pwd, old_pwd);
-	free(old_pwd);
-	return (0);
-}
-
-int	execute_cd_relative(t_exec_data *d, char *new_pwd)
-{
-	char	*path_complete;
-	char	*path_slash;
-	char	*old_pwd;
-
-	old_pwd = obtain_pwd(d);
-	if (!old_pwd)
-		return (-1);
-	path_slash = ft_strjoin(old_pwd, "/");
-	path_complete = ft_strjoin(path_slash, new_pwd);
-	if (chdir(new_pwd) == -1)
-		built_in_cd_error(d, new_pwd);
-	else
-		update_env_pwd(d, path_complete, old_pwd);
-	double_free(path_slash, path_complete);
-	free(old_pwd);
-	return (0);
+	new_pwd = ft_strjoin("PWD=", new_path);
+	add_var_to_env(&d->env, new_pwd);
+	old_pwd = ft_strjoin("OLDPWD=", old_path);
+	add_var_to_env(&d->env, old_pwd);
+	free (new_pwd);
+	free (old_pwd);
+	return ;
 }

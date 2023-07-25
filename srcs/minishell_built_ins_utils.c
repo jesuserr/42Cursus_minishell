@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 13:13:35 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:35:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,3 @@ char	*obtain_pwd(t_exec_data *d)
 	return (ft_strdup(pwd));
 }
 
-void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
-{
-	char	*new_pwd;
-	char	*old_pwd;
-
-	new_pwd = ft_strjoin("PWD=", new_path);
-	add_var_to_env(&d->env, new_pwd);
-	old_pwd = ft_strjoin("OLDPWD=", old_path);
-	add_var_to_env(&d->env, old_pwd);
-	free (new_pwd);
-	free (old_pwd);
-	return ;
-}

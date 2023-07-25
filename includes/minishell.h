@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:13:48 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 13:56:04 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:37:42 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,6 @@ int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
-void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d, char *pathname);
 /*	minishell_exec_fds.c	*/
