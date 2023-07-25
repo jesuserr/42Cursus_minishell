@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 20:35:31 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:51:26 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,3 @@ char	*obtain_pwd(t_exec_data *d)
 	}
 	return (ft_strdup(pwd));
 }
-

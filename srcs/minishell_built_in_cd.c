@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 20:39:20 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:51:09 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	built_in_cd(t_exec_data *d, char *pathname)
 		return (execute_cd(d, pathname));
 }
 
-/* Stores the value of the current PWD, executes chdir command and stores the */
-/* value of the new PWD, and then updates the environment variables PWD & OLDPWD */
+/* Stores the value of the current PWD, executes chdir command and stores */
+/* also the value of the new PWD, and then updates the environment variables */
+/* PWD & OLDPWD */
 int	execute_cd(t_exec_data *d, char *tmp_pwd)
 {
 	char	*old_pwd;
