@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 21:16:04 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 09:39:12 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 11:32:21 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int		count_dbl_char_lines(char **env);
 void	double_free(char *str_1, char *str_2);
 /*	minishell_built_ins.c */
 int		built_in_pwd(t_exec_data *d);
+char	*obtain_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_built_in_cd.c	*/
