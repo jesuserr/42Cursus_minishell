@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 21:16:04 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 21:16:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:39:12 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,6 @@ int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d, char *pathname);
-void	built_in_cd_error(t_exec_data *d, char *pathname);
-void	update_env_pwd(t_exec_data *d, char *pathname);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);

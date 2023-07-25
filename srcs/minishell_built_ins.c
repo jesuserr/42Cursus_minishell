@@ -6,14 +6,14 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 19:55:55 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/24 20:59:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Prints out path working directory using getcwd */
-/* ENV variable not used since PWD could not exist due to removal */
+/* Prints out path working directory using getcwd instead of our environment */
+/* PWD variable to aovid failure in case that PWD is not present */
 /* File descriptors management to be revised due to new code for piping */
 /* No STDIN for this kind of built-in */
 int	built_in_pwd(t_exec_data *d)
