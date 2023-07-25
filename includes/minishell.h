@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 21:16:04 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 21:16:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 11:10:30 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef struct s_exec_data
 	int		pipe_last[2];
 	int		n_in;
 	int		n_out;
+	int		redi_in;
+	int		redi_out;
 	int		saved_fd_in;
 	int		saved_fd_out;
 	char	**argv;

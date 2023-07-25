@@ -7,6 +7,8 @@ Para compilar en MacOS
 COMP_FLAGS = -I/Users/$(USER)/.brew/opt/readline/include  
 LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
+- Notas cescanue 25/07
+- Posible bug en heredoc, dentr de heredoc haces ctrl-d da segmentacion fail (en cuanto controlemos las señales del sistema, veremos)
 - Notas cescanue 24/07
 - (SOLVED) bug, revisar combinacion de redirecciones y pipes, ejemplo:  cat < README.md | wc -l
 - (SOLVED) bug, muestra que no se puede ejecutar comando, si el comando esta vacio.  

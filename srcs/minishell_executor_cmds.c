@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 19:54:33 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:07:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,13 @@ void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t)
 	d->pipe_last[1] = -1;
 	d->n_in = t->n_in + t->n_heredoc + t->n_in_literal;
 	d->n_out = t->n_out + t->n_out_add;
+	d->redi_in = t->cmdin;
+	d->redi_out = t->cmdout;
 }
 
 void	ft_executor_cmds_redi_pipe2(t_token *token, t_exec_data *d, int *p)
 {
-	if (token->type == T_PIPE && token->cmdout < 3)
+	if (token->type == T_PIPE)
 	{
 		pipe(p);
 		d->fd_out = p[1];

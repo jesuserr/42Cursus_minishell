@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:50:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 11:48:14 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 12:59:26 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_heredoc(char *sep)
 	char	*str;
 
 	pipe(p);
-	printf("heredoc> ");
+	printf("> ");
 	fflush(stdout);
 	str = get_next_line(0);
 	while (!ft_strnstr(str, sep, ft_strlen(str))
@@ -27,7 +27,7 @@ int	ft_heredoc(char *sep)
 		write(p[1], str, ft_strlen(str));
 		if (str)
 			free(str);
-		printf("heredoc> ");
+		printf("> ");
 		fflush(stdout);
 		str = get_next_line(0);
 	}
