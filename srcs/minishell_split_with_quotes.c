@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 12:28:07 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:59:42 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,27 +98,26 @@ char	**ft_split_quotes(char const *s, char c)
 void	ft_strtrim_quotes(char **strs)
 {
 	char	*tmp;
-
+	
 	while (*strs)
 	{
 		tmp = ft_strtrim(*strs, " ");
 		free(*strs);
 		*strs = tmp;
 		tmp = ft_strtrim(*strs, "\"");
-		free(*strs);
-		*strs = tmp;
-		tmp = ft_strtrim(*strs, "'");
-		free(*strs);
-		*strs = tmp;
-		tmp = ft_strtrim(*strs, "\"");
-		free(*strs);
-		*strs = tmp;
-		tmp = ft_strtrim(*strs, "'");
-		free(*strs);
-		*strs = tmp;
-		tmp = ft_strtrim(*strs, " ");
-		free(*strs);
-		*strs = tmp;
+		if (ft_strlen(tmp) != ft_strlen(*strs))
+		{
+			free(*strs);
+			*strs = tmp;
+		}
+		else
+		{
+			free(*strs);
+			*strs = tmp;
+			tmp = ft_strtrim(*strs, "'");
+			free(*strs);
+			*strs = tmp;
+		}
 		strs++;
 	}
 }

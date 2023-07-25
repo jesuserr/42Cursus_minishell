@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:13:48 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 13:56:04 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:32:38 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
 void	ft_executor_cmds(t_list *lst);
 int		ft_executor_check_cmds(t_list *lst);
+int		executor_check_built_ins(t_token *token, t_exec_data *d);
 void	ft_exec_pipe_child(t_exec_data *d);
 void	ft_exec_pipe_parent(t_exec_data *d);
 void	p_t_s_free_token(void *t);

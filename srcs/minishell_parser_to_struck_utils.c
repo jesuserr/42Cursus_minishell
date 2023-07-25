@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:01:25 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 14:16:16 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:43:16 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ char	*p_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	count;
 	size_t	count1;
+	int		c;
 
+	c = 0;
 	if (!*needle)
 		return ((char *) haystack);
 	count = 0;
 	while (haystack[count] && count < len)
 	{
-		if (haystack[count] == '\'')
+		if (haystack[count] == '"')
+			c++;
+		if (haystack[count] == '\'' && !(c % 2))
 			while (haystack[count] && haystack[++count] != '\'')
 				;
 		count1 = 0;

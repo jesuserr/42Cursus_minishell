@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 14:11:13 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/25 21:09:27 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ char	*p_get_first_env(char *tline)
 
 void	p_replace_str1(char *new, char *tmp, char *dst, char *old)
 {
-	int	count;
+	int	count[2];
 
-	count = 0;
+	count[0] = 0;
+	count[1] = 0;
 	if (*dst == '{')
+	{
+		count[1]++;
 		dst++;
-	while (*dst && ++count < (int) ft_strlen(old) + 1)
+	}	
+	while (*dst && ++count[0] < (int) ft_strlen(old) + 1)
 		dst++;
-	if (*dst == '}')
+	if (*dst == '}' && count[1])
 		dst++;
 	while (new && *new)
 	{
