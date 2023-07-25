@@ -6,14 +6,14 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 19:55:55 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/25 11:33:48 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Prints out path working directory using getcwd */
-/* ENV variable not used since PWD could not exist due to removal */
+/* Prints out path working directory using getcwd instead of our environment */
+/* PWD variable to avoid failure in case that PWD is not present */
 /* File descriptors management to be revised due to new code for piping */
 /* No STDIN for this kind of built-in */
 int	built_in_pwd(t_exec_data *d)
@@ -34,6 +34,24 @@ int	built_in_pwd(t_exec_data *d)
 	if (restore_fds(d) == -1)
 		return (-2);
 	return (0);
+}
+
+/* Returns path working directory using getcwd instead of our environment */
+/* PWD variable to avoid failure in case that PWD is not present */
+/* Returned value must be freed by the calling function */
+char	*obtain_pwd(t_exec_data *d)
+{
+	char	buf[PATH_MAX];
+	char	*pwd;
+
+	pwd = getcwd(buf, PATH_MAX);
+	if (!pwd)
+	{
+		d->int_error_code = ERROR_B_PWD;
+		ft_error_handler(NULL, d);
+		return (NULL);
+	}
+	return (ft_strdup(pwd));
 }
 
 /* Prints out content of our environment variables */
@@ -77,6 +95,7 @@ int	built_in_unset(t_exec_data *d, char *var)
 	return (0);
 }
 
+/* DRAFT */
 int	built_in_echo(t_exec_data *d)
 {
 	int	i;

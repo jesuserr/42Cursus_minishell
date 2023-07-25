@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/24 21:16:04 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 11:10:30 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/25 13:13:48 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/25 13:13:49 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,12 +142,11 @@ int		count_dbl_char_lines(char **env);
 void	double_free(char *str_1, char *str_2);
 /*	minishell_built_ins.c */
 int		built_in_pwd(t_exec_data *d);
+char	*obtain_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d, char *pathname);
-void	built_in_cd_error(t_exec_data *d, char *pathname);
-void	update_env_pwd(t_exec_data *d, char *pathname);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
