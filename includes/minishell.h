@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 13:13:48 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 21:32:38 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/25 21:58:52 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/25 21:58:53 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define ERROR_NODIR		20
 # define ERROR_B_PWD		200
 # define ERROR_B_UNSET		201
+# define ERROR_B_NOHOME		202
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255
@@ -147,7 +148,6 @@ int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d, char *var);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
-void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d, char *pathname);
 /*	minishell_exec_fds.c	*/
