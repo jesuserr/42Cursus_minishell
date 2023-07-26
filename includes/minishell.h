@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:58:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 18:59:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:36:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
 void	ft_executor_cmds(t_list *lst);
 int		ft_executor_check_cmds(t_list *lst);
-int		executor_check_built_ins(t_token *token, t_exec_data *d);
+int		ft_executor_check_built_in(t_exec_data	*d);
 void	ft_exec_pipe_child(t_exec_data *d);
 void	ft_exec_pipe_parent(t_exec_data *d);
 void	p_t_s_free_token(void *t);
@@ -127,8 +127,10 @@ void	p_t_s_cmd(char *block, char **cmd);
 int		p_t_s_type(char *block);
 void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***t_str);
 int		p_common_errors(char *line);
-/*	minishell_exec.c	*/
-int		ft_command_exec(t_exec_data *d);
+int		ft_command_exec_built_in(t_exec_data *d);
+void	ft_strtolower(char *str);
+/*	minishell_exec_cmd.c	*/
+int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);
 char	*obtain_path(t_exec_data *d);
 /*	minishell_error.c	*/

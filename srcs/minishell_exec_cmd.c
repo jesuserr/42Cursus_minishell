@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_exec.c                                   :+:      :+:    :+:   */
+/*   minishell_exec_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 19:11:19 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 21:16:58 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ int	exec_fork(t_exec_data *d)
 	{
 		d->int_error_code = ERROR_FORK;
 		ft_error_handler(NULL, d);
-		free_split(d->exec_args, d->exec_path);
 		return (-2);
 	}
 	if (d->fork_pid == 0)
@@ -109,7 +108,6 @@ int	exec_fork(t_exec_data *d)
 	}
 	else
 	{
-		free_split(d->exec_args, d->exec_path);
 		ft_exec_pipe_parent(d);
 	}
 	return (0);
@@ -119,22 +117,18 @@ int	exec_fork(t_exec_data *d)
 /* creates child process for its execution */
 /* Returns error codes (0) OK, (-1) command/path error, (-2) system error */
 /* Provides error info inside struct variables int_error_code & term.status */
-int	ft_command_exec(t_exec_data *d)
+int	ft_command_exec_cmd(t_exec_data *d)
 {
 	if (check_empty_string(d->exec_args[0]) == -1)
 		return (-1);
 	d->exec_path = check_usr_path(d);
 	if (!d->exec_path && d->term_status)
-	{
-		free_split(d->exec_args, NULL);
 		return (-1);
-	}
 	if (!d->exec_path)
 		d->exec_path = obtain_path(d);
 	if (!d->exec_path)
 	{
 		ft_error_handler(NULL, d);
-		free_split(d->exec_args, NULL);
 		return (-1);
 	}
 	return (exec_fork(d));
