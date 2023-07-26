@@ -6,16 +6,15 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 13:09:56 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:03:11 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Prints out path working directory using getcwd instead of our environment */
-/* PWD variable to avoid failure in case that PWD is not present */
-/* File descriptors management to be revised due to new code for piping */
-/* No STDIN for this kind of built-in */
+/* Prints out path working directory using getcwd instead of using */
+/* environment variable (PWD) in order to avoid failure in case that (PWD) */
+/* is not present - No STDIN for this kind of built-in */
 int	built_in_pwd(t_exec_data *d)
 {
 	char	buf[PATH_MAX];
@@ -28,52 +27,53 @@ int	built_in_pwd(t_exec_data *d)
 		ft_error_handler(NULL, d);
 		return (-1);
 	}
-	if (exec_dups(d) == -1)
-		return (-2);
 	ft_printf(STDOUT_FILENO, "%s\n", pwd);
-	if (restore_fds(d) == -1)
-		return (-2);
 	return (0);
 }
 
-/* Prints out content of our environment variables */
-/* File descriptors management to be revised due to new code for piping */
+/* Prints out all the content of the environment variables */
 /* No STDIN for this kind of built-in */
 int	built_in_env(t_exec_data *d)
 {
 	int	i;
 
-	if (exec_dups(d) == -1)
-		return (-2);
 	i = 0;
 	while (d->env[i])
 		ft_printf(STDOUT_FILENO, "%s\n", d->env[i++]);
-	if (restore_fds(d) == -1)
-		return (-2);
 	return (0);
 }
 
 /* Removes variable from environment. If variable name contains any character */
 /* that is not alphanumeric or '_' displays an error message */
+/* The real unset built-in can delete multiple variables in one commnad line */
+/* i.e. "unset PWD PATH LANG ", implemented too */
 /* No STDIN/STDOUT for this kind of built-in */
-int	built_in_unset(t_exec_data *d, char *var)
+int	built_in_unset(t_exec_data *d)
 {
 	size_t	i;
+	size_t	j;
+	char	*var;
 
-	if (!var)
+	if (!d->exec_args[1])
 		return (0);
-	i = 0;
-	while (i < ft_strlen(var))
+	j = 1;
+	while (d->exec_args[j])
 	{
-		if (!(ft_isalnum((var[i])) || var[i] == '_'))
+		var = ft_strdup(d->exec_args[j++]);
+		i = 0;
+		while (i < ft_strlen(var))
 		{
-			d->int_error_code = ERROR_B_UNSET;
-			ft_error_handler(var, d);
-			break ;
+			if (!(ft_isalnum((var[i])) || var[i] == '_'))
+			{
+				d->int_error_code = ERROR_B_UNSET;
+				ft_error_handler(var, d);
+				break ;
+			}
+			i++;
 		}
-		i++;
+		del_var_from_env(&d->env, var);
+		free (var);
 	}
-	del_var_from_env(&d->env, var);
 	return (0);
 }
 
