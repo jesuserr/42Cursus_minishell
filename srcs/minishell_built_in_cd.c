@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 21:31:06 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:53:06 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	built_in_cd_error(t_exec_data *d, char *pathname);
 void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
 
 /* If no arguments are provided the value of $HOME is passed to chdir */
+/* If $HOME does not exist, error message according bash is printed */
 /* In any other case the argument is passed directly to chdir function */
 /* No STDIN/STDOUT for this kind of built-in */
-int	built_in_cd(t_exec_data *d, char *pathname)
+int	built_in_cd(t_exec_data *d)
 {
 	char	*home_path;
 
-	if (check_empty_string(pathname))
+	if (check_empty_string(d->exec_args[1]))
 	{
 		home_path = get_env_var(d, "HOME");
 		if (!home_path)
@@ -42,7 +43,7 @@ int	built_in_cd(t_exec_data *d, char *pathname)
 		return (0);
 	}
 	else
-		return (execute_cd(d, pathname));
+		return (execute_cd(d, d->exec_args[1]));
 }
 
 /* Stores the value of the current PWD, executes chdir command and stores */

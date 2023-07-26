@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 18:03:11 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:59:11 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	built_in_echo(t_exec_data *d)
 {
 	int	i;
 
-	d->exec_args = ft_split(d->argv[1], ' ');
+	//d->exec_args = ft_split(d->argv[1], ' ');
 	i = 1;
 	while (d->exec_args[i])
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 21:17:26 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:11:19 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,8 @@ char	*obtain_path(t_exec_data *d)
 	return (NULL);
 }
 
-/* First of all duplicates one or both file descriptors if needed */
 /* Opens a child process to execute the command once we are sure that exists */
-/* and that the user has execution rights. If the command execution does not */
-/* finish with 0 value, -1 value is returned to inform main program */
-/* File descriptors are restored before exiting the function */
+/* and that the user has execution rights */
 int	exec_fork(t_exec_data *d)
 {
 	d->fork_pid = fork();

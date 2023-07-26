@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 21:58:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 17:33:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 18:59:33 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct s_exec_data
 	int		redi_out;
 	int		saved_fd_in;
 	int		saved_fd_out;
-	char	**argv;
 	char	**env;
 	int		int_error_code;
 	int		term_status;
@@ -149,7 +148,7 @@ int		built_in_unset(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
 /*	minishell_built_in_cd.c	*/
-int		built_in_cd(t_exec_data *d, char *pathname);
+int		built_in_cd(t_exec_data *d);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
