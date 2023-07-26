@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 19:05:47 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/26 20:24:47 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,14 @@ int	main(int argc, char **argv, char **env)
 		//d.fd_in = open("input", O_RDONLY, 0444);
 		//d.fd_out = open("output", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		//del_var_from_env(&d.env, "HOME");
-		d.exec_args = ft_split("cd /Users/jesuserr/Downloads", ' ');
-		ft_printf(1, "Return:%d\t", built_in_cd(&d));
+		d.exec_args = ft_split_quotes("echo -n \\\\hola amigos", ' ');
+		ft_printf(1, "Return:%d\t", built_in_echo(&d));
 		ft_printf(1, "Int.Error:%d\tTerm.Status:%d\n", d.int_error_code, d.term_status);
-		built_in_pwd(&d);
+		//built_in_pwd(&d);
+		//free_split(d.exec_args, NULL);
+		//d.exec_args = ft_split("ls", ' ');
+		//ft_command_exec(&d);
 		free_split(d.exec_args, NULL);
-		d.exec_args = ft_split("ls", ' ');
-		ft_command_exec(&d);		
 		free_split(d.env, NULL);
 	}
 	else
