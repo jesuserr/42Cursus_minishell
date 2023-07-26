@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/25 21:58:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 21:36:31 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/26 21:57:04 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,7 @@ void	double_free(char *str_1, char *str_2);
 int		built_in_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d);
+int		built_in_echo(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
 /*	minishell_built_in_cd.c	*/
