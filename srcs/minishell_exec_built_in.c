@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 21:52:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:19:20 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void *ft_executor_get_built_in(t_exec_data *d)
 	ft_strtolower(tmp);
 	//if (!ft_strncmp("echo", tmp, ft_strlen(tmp)))
 	//	fp = built_in_echo;
-	if (!ft_strncmp("cd", tmp, ft_strlen(tmp)))
+	if (!strncmp("cd", tmp, 2))
 		fp = built_in_cd;
-	else if (!ft_strncmp("pwd", tmp, ft_strlen(tmp)))
+	else if (!strncmp("pwd", tmp, 3))
 		fp = built_in_pwd;
 	//else if (!ft_strncmp("export", tmp, ft_strlen(tmp)))
 	//	fp = built_in_export;
-	else if (!ft_strncmp("unset", tmp, ft_strlen(tmp)))
+	else if (!strncmp("unset", tmp, 5))
 		fp = built_in_unset;
-	else if (!ft_strncmp("env", tmp, ft_strlen(tmp)))
+	else if (!strncmp("env", tmp, 3))
 		fp = built_in_env;
 	else
 		fp = 0;

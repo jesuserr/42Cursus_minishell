@@ -5,12 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/03 20:57:13 by cescanue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/07/26 21:22:02 by cescanue         ###   ########.fr       */
-=======
-/*   Updated: 2023/07/26 20:24:47 by jesuserr         ###   ########.fr       */
->>>>>>> 03897457d887b1d942a729e3b8a35dbb41d5936a
+/*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/26 22:11:23 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +17,7 @@ void	ft_readcmdline()
 	char	*line;
 
 	line = 0;
-	while (!line || ft_strncmp(line, "exit", ft_strlen(line)))
+	while (ft_strncmp(line, "exit", ft_strlen(line)) != 0)
 	{
 		if (line)
 			free(line);
@@ -79,11 +75,8 @@ int	main(int argc, char **argv, char **env)
 		//d.exec_args = ft_split("ls", ' ');
 		//ft_command_exec(&d);
 		free_split(d.exec_args, NULL);
-<<<<<<< HEAD
 		d.exec_args = ft_split("ls", ' ');
 		ft_command_exec_cmd(&d);		
-=======
->>>>>>> 03897457d887b1d942a729e3b8a35dbb41d5936a
 		free_split(d.env, NULL);
 	}
 	else
