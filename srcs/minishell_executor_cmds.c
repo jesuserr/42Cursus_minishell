@@ -6,13 +6,13 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 12:29:07 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:10:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t, t_exec_data *gd)
+void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t, t_global *gd)
 {
 	d->env = gd->env;
 	d->int_error_code = 0;
@@ -86,7 +86,7 @@ void	ft_executor_cmds_waitpid(t_list *lst)
 	}
 }
 
-void	ft_executor_cmds(t_list *lst, t_exec_data *gd)
+void	ft_executor_cmds(t_list *lst, t_global *gd)
 {
 	t_token		*token;
 	t_exec_data	*d;

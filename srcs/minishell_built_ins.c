@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_ins.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 20:25:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:26:47 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	built_in_env(t_exec_data *d)
 	int	i;
 
 	i = 0;
-	while (d->env[i])
-		ft_printf(STDOUT_FILENO, "%s\n", d->env[i++]);
+	while ((*d->env)[i])
+		ft_printf(STDOUT_FILENO, "%s\n", (*d->env)[i++]);
 	return (0);
 }
 
@@ -71,7 +71,7 @@ int	built_in_unset(t_exec_data *d)
 			}
 			i++;
 		}
-		del_var_from_env(&d->env, var);
+		del_var_from_env(d->env, var);
 		free (var);
 	}
 	return (0);

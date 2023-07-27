@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_env_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/23 21:40:40 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:38:38 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ char	*get_env_var(t_exec_data *d, char *name)
 	name_equal = ft_strjoin(split_name[0], "=");
 	free_split(split_name, NULL);
 	i = 0;
-	while (d->env[i])
+	while ((*d->env)[i])
 	{
-		if (ft_strnstr(d->env[i], name_equal, ft_strlen(name_equal)) != NULL)
+		if (ft_strnstr((*d->env)[i], name_equal, ft_strlen(name_equal)) != NULL)
 		{
-			result = ft_strdup(d->env[i] + ft_strlen(name_equal));
+			result = ft_strdup((*d->env)[i] + ft_strlen(name_equal));
 			free(name_equal);
 			return (result);
 		}
@@ -61,10 +61,10 @@ char	**add_var_to_env(char ***src, char *line)
 
 	if (!src || !*src || !line)
 		return (NULL);
+	lines = count_dbl_char_lines(*src);
 	if (check_existance(*src, line) == 1)
 		if (!del_existing_var(src, line))
 			return (NULL);
-	lines = count_dbl_char_lines(*src);
 	dst = (char **)malloc(sizeof(char *) * (lines + 2));
 	if (!dst)
 		return (NULL);
@@ -81,6 +81,7 @@ char	**add_var_to_env(char ***src, char *line)
 	*src = dst;
 	return (dst);
 }
+
 
 /* Removes line starting with 'var' from 'src' - 'var' expected without '=' */
 /* Function uses triple pointer, therefore the environment variable */

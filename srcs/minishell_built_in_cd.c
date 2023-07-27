@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 12:56:19 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:34:47 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,9 +102,9 @@ void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
 
 	(void) d;
 	new_pwd = ft_strjoin("PWD=", new_path);
-	add_var_to_env(&d->env, new_pwd);
+	add_var_to_env(d->env, new_pwd);
 	old_pwd = ft_strjoin("OLDPWD=", old_path);
-	add_var_to_env(&d->env, old_pwd);
+	add_var_to_env(d->env, old_pwd);
 	free (new_pwd);
 	free (old_pwd);
 	return ;

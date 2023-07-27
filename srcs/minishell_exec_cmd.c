@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 21:16:58 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:24:25 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ char	*obtain_path(t_exec_data *d)
 	int		i;
 
 	i = 0;
-	while (ft_strnstr(d->env[i], "PATH=", 5) == NULL)
+	while (ft_strnstr((*d->env)[i], "PATH=", 5) == NULL)
 		i++;
-	all_paths = ft_split(d->env[i] + 5, ':');
+	all_paths = ft_split((*d->env)[i] + 5, ':');
 	i = 0;
 	while (all_paths[i])
 	{
@@ -104,7 +104,7 @@ int	exec_fork(t_exec_data *d)
 	if (d->fork_pid == 0)
 	{
 		ft_exec_pipe_child(d);
-		execve(d->exec_path, d->exec_args, d->env);
+		execve(d->exec_path, d->exec_args, *d->env);
 	}
 	else
 	{

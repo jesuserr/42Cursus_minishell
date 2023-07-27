@@ -6,13 +6,13 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 12:36:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 16:36:32 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_readcmdline(t_exec_data *gd)
+void	ft_readcmdline(t_global *gd)
 {
 	char	*line;
 
@@ -39,18 +39,21 @@ void	ft_startmsg(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_exec_data	gd;
-	(void)argv;
+	t_global	gd;
+	(void) argv;
+	(void) argc;
 
-	gd.env = copy_dbl_char_pointer(env);
-	gd.int_error_code = 0;
+	gd.env = ft_calloc(1, sizeof(char ***));
+	*gd.env = copy_dbl_char_pointer(env);
+	/*gd.int_error_code = 0;
 	gd.term_status = 0;
 	if (!gd.env)
 	{
 		gd.int_error_code = ERROR_MALLOC;
 		ft_error_handler(NULL, &gd);
 		return (-2);
-	}
+	}*/
+	/*
 	if (argc == 2)
 	{
 		gd.int_error_code = 0;
@@ -73,10 +76,13 @@ int	main(int argc, char **argv, char **env)
 		ft_command_exec_cmd(&gd);		
 		free_split(gd.env, NULL);
 	}
-	else
+	else*/
 	{
 		ft_startmsg();
 		ft_readcmdline(&gd);
+		free_split(*gd.env, 0);
+		free(gd.env);
+
 	}
 	return (0);
 }
