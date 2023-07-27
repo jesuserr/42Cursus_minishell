@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 22:03:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:30:01 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int	ft_executor_out_order(t_token *token)
 	return (1);
 }
 
-void	ft_executor(t_list **list_cmds)
+void	ft_executor(t_list **list_cmds, t_exec_data *gd)
 {
 	t_list	*lst;
 	t_token	*token;
 
 	lst = *list_cmds;
-	if (!ft_executor_check_cmds(lst))
+	if (!ft_executor_check_cmds(lst, gd))
 	{
 		ft_executor_free(list_cmds);
 		return ;
@@ -102,6 +102,6 @@ void	ft_executor(t_list **list_cmds)
 		lst = lst->next;
 	}
 	lst = *list_cmds;
-	ft_executor_cmds(lst);
+	ft_executor_cmds(lst, gd);
 	ft_executor_free(list_cmds);
 }

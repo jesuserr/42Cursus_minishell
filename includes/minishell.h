@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 21:57:04 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:51:27 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,6 @@
 
 # define READ_END			0
 # define WRITE_END			1
-
-typedef struct s_global_data
-{
-	char	**env;
-}	t_global_data;
 
 typedef struct s_exec_data
 {
@@ -96,12 +91,11 @@ typedef struct s_token
 	t_exec_data	*d;
 }	t_token;
 
-t_global_data	g_data;
-
+void	ft_printenv(char **str);
 int		ft_close_pipe(int pipe);
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
-void	ft_executor(t_list **lst_cmds);
+void	ft_executor(t_list **lst_cmds, t_exec_data *gd);
 void	ft_executor_heredoc(t_token *token);
 void	ft_executor_in_literal(t_token *token);
 int		ft_executor_in_file(t_token *token);
@@ -109,8 +103,8 @@ int		ft_executor_out_file(t_token *t);
 int		ft_executor_out_file_add(t_token *t);
 void	ft_executor_close_fds(t_token *t);
 void	ft_executor_add_fd(int fd, t_token *t);
-void	ft_executor_cmds(t_list *lst);
-int		ft_executor_check_cmds(t_list *lst);
+void	ft_executor_cmds(t_list *lst, t_exec_data *gd);
+int		ft_executor_check_cmds(t_list *lst, t_exec_data *gd);
 int		ft_executor_check_built_in(t_exec_data	*d);
 void	ft_exec_pipe_child(t_exec_data *d);
 void	ft_exec_pipe_parent(t_exec_data *d);

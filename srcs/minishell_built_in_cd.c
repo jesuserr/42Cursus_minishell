@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_cd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 18:53:06 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/27 12:56:19 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
 	char	*new_pwd;
 	char	*old_pwd;
 
+	(void) d;
 	new_pwd = ft_strjoin("PWD=", new_path);
 	add_var_to_env(&d->env, new_pwd);
 	old_pwd = ft_strjoin("OLDPWD=", old_path);
