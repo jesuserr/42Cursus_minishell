@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 21:45:01 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 23:20:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,12 @@ char	*obtain_path(t_exec_data *d)
 	{
 		temp_path = ft_strjoin(all_paths[i++], "/");
 		path = ft_strjoin(temp_path, d->exec_args[0]);
-		free(temp_path);
 		if (check_access(path, d))
 		{
-			free_split(all_paths, NULL);
+			free_split(all_paths, temp_path);
 			return (path);
 		}
-		free(path);
+		double_free(path, temp_path);
 	}
 	free_split(all_paths, NULL);
 	return (NULL);
@@ -109,9 +108,7 @@ int	exec_fork(t_exec_data *d)
 		execve(d->exec_path, d->exec_args, *d->env);
 	}
 	else
-	{
 		ft_exec_pipe_parent(d);
-	}
 	return (0);
 }
 
