@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 13:04:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/24 21:21:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:34:35 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ char	**copy_dbl_char_pointer(char **src)
 	j = 0;
 	while (src[j])
 		j++;
-	dst = (char **)malloc(sizeof(char *) * (j + 1));
+	dst = (char **)ft_calloc(sizeof(char *), (j + 1));
 	if (!dst)
 		return (NULL);
 	i = 0;
 	while (i < j)
 	{
 		len = ft_strlen(src[i]);
-		dst[i] = (char *)malloc(sizeof(char) * (len + 1));
+		dst[i] = (char *)ft_calloc(sizeof(char), (len + 1));
 		if (!dst[i])
 			return (free_split(dst, NULL));
 		ft_strlcpy(dst[i], src[i], len + 1);

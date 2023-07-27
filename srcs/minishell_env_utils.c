@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_env_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 16:38:38 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:31:54 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,11 @@ char	**add_var_to_env(char ***src, char *line)
 
 	if (!src || !*src || !line)
 		return (NULL);
-	lines = count_dbl_char_lines(*src);
 	if (check_existance(*src, line) == 1)
 		if (!del_existing_var(src, line))
 			return (NULL);
-	dst = (char **)malloc(sizeof(char *) * (lines + 2));
+	lines = count_dbl_char_lines(*src);
+	dst = (char **)ft_calloc(sizeof(char *), (lines + 2));
 	if (!dst)
 		return (NULL);
 	i = 0;
@@ -82,7 +82,6 @@ char	**add_var_to_env(char ***src, char *line)
 	return (dst);
 }
 
-
 /* Removes line starting with 'var' from 'src' - 'var' expected without '=' */
 /* Function uses triple pointer, therefore the environment variable */
 /* must be passed dereferenced with & */
@@ -98,7 +97,7 @@ char	**del_var_from_env(char ***src, char *var)
 	if ((check_existance(*src, var) == 0) || !src || !*src || !var)
 		return (NULL);
 	lines = count_dbl_char_lines(*src);
-	dst = (char **)malloc(sizeof(char *) * (lines));
+	dst = (char **)ft_calloc(sizeof(char *), lines);
 	if (!dst)
 		return (NULL);
 	var_equ = ft_strjoin(var, "=");

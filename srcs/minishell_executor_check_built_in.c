@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor_check_built_in.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:37:59 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/26 22:17:12 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:33:19 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_strtolower(char *str)
 	while (*str)
 	{
 		if (*str >= 'A' && *str <= 'Z')
-		*str += ('a' - 'A');
+			*str += ('a' - 'A');
 		str++;
 	}
 }
@@ -32,17 +32,17 @@ int	ft_executor_check_built_in(t_exec_data	*d)
 	c = 0;
 	tmp = ft_strdup(d->exec_args[0]);
 	ft_strtolower(tmp);
-	if (!ft_strncmp("echo", tmp, 4))
+	if (!ft_strncmp("echo", tmp, 4) && ft_strlen(tmp) == 4)
 		c++;
-	else if (!ft_strncmp("cd", tmp, 2))
+	else if (!ft_strncmp("cd", tmp, 2) && ft_strlen(tmp) == 2)
 		c++;
-	else if (!ft_strncmp("pwd", tmp, 3))
+	else if (!ft_strncmp("pwd", tmp, 3) && ft_strlen(tmp) == 3)
 		c++;
-	else if (!ft_strncmp("export", tmp, 6))
+	else if (!ft_strncmp("export", tmp, 6) && ft_strlen(tmp) == 6)
 		c++;
-	else if (!ft_strncmp("unset", tmp, 5))
+	else if (!ft_strncmp("unset", tmp, 5) && ft_strlen(tmp) == 5)
 		c++;
-	else if (!ft_strncmp("env", tmp, 3))
+	else if (!ft_strncmp("env", tmp, 3) && ft_strlen(tmp) == 3)
 		c++;
 	free (tmp);
 	if (c)

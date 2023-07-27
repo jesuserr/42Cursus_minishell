@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_split_with_quotes.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/26 21:53:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:34:24 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ char	**ft_split_quotes(char const *s, char c)
 	if (!s)
 		return (NULL);
 	j = count_substrings(s, c);
-	final = (char **)malloc(sizeof(char *) * (j + 1));
+	final = (char **)ft_calloc(sizeof(char *), (j + 1));
 	if (!final)
 		return (NULL);
 	i = 0;
@@ -86,7 +86,7 @@ char	**ft_split_quotes(char const *s, char c)
 	while (i < j)
 	{
 		get_string(&string, &string_len, c);
-		final[i] = (char *)malloc(sizeof(char) * (string_len + 1));
+		final[i] = (char *)ft_calloc(sizeof(char), (string_len + 1));
 		if (!final[i])
 			return (free_split(final, NULL));
 		ft_strlcpy(final[i++], string, string_len + 1);

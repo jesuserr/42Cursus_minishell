@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_ins.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 16:26:47 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:33:49 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,11 @@ int	built_in_echo(t_exec_data *d)
 	int	i;
 	int	flag;
 
+	if (!d->exec_args[1])
+	{
+		ft_printf(STDOUT_FILENO, "\n");
+		return (0);
+	}
 	i = 1;
 	flag = 0;
 	if (!(ft_strncmp(d->exec_args[1], "-n", 2)) && \

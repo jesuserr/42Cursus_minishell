@@ -3,25 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_built_in.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 12:53:12 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:32:48 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void *ft_executor_get_built_in(t_exec_data *d)
+void	*ft_executor_get_built_in(t_exec_data *d)
 {
 	char	*tmp;
 	int		(*fp)(t_exec_data *d);
 
 	tmp = ft_strdup(d->exec_args[0]);
 	ft_strtolower(tmp);
-	/*if (!ft_strncmp("echo", tmp, ft_strlen(tmp)))
-		fp = built_in_echo;*/
-	if (!strncmp("cd", tmp, 2))
+	if (!strncmp("echo", tmp, 4))
+		fp = built_in_echo;
+	else if (!strncmp("cd", tmp, 2))
 		fp = built_in_cd;
 	else if (!strncmp("pwd", tmp, 3))
 		fp = built_in_pwd;
@@ -41,7 +41,7 @@ int	ft_command_exec_built_in(t_exec_data *d)
 {
 	int		(*fp)(t_exec_data *d);
 	int		r;
-	
+
 	ft_exec_pipe_child(d);
 	fp = ft_executor_get_built_in(d);
 	if (fp)
@@ -49,5 +49,5 @@ int	ft_command_exec_built_in(t_exec_data *d)
 	else
 		r = 0;
 	ft_exec_pipe_parent(d);
-	return (r);	
+	return (r);
 }

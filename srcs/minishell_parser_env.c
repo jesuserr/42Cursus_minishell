@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_env.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 21:09:27 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 18:32:07 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	p_replace_str1(char *new, char *tmp, char *dst, char *old)
 	{
 		count[1]++;
 		dst++;
-	}	
+	}
 	while (*dst && ++count[0] < (int) ft_strlen(old) + 1)
 		dst++;
 	if (*dst == '}' && count[1])
