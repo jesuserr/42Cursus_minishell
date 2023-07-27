@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 16:09:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:56:41 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ typedef struct s_token
 	t_exec_data	*d;
 }	t_token;
 
-void	ft_printenv(char **str);
 int		ft_close_pipe(int pipe);
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
@@ -113,11 +112,13 @@ int		ft_executor_check_cmds(t_list *lst, t_global *gd);
 int		ft_executor_check_built_in(t_exec_data	*d);
 void	ft_exec_pipe_child(t_exec_data *d);
 void	ft_exec_pipe_parent(t_exec_data *d);
+void	ft_exec_built_in_pipe_start(t_exec_data *d);
+void	ft_exec_built_in_pipe_end(t_exec_data *d);
 void	p_t_s_free_token(void *t);
-t_list	**parser(char *line);
+t_list	**parser(char *line, t_global *gd);
 int		p_common_errors(char *line);
 char	*p_identify_blocks(char *line);
-char	*p_replace_env(char	*tline);
+char	*p_replace_env(char	*tline, t_global *gd);
 char	*p_strnstr(const char *haystack, const char *needle, size_t len);
 char	*p2_strnstr(const char *haystack, const char *needle, size_t len);
 t_token	*p_t_s(char *block);

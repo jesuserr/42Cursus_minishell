@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_exec_pipes.c                             :+:      :+:    :+:   */
+/*   minishell_exec_cmds_pipes.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 20:40:16 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 13:06:43 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:28:00 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ void	ft_exec_pipe_child_case3(t_exec_data *d)
 	}
 }
 
+void	ft_exec_pipe_child_case2(t_exec_data *d)
+{
+	if (dup2(d->pipe_last[READ_END], STDIN_FILENO) < 0)
+		ft_error("dup2: bad file descriptor");
+	ft_close_pipe(d->pipe_last[READ_END]);
+	if (d->n_in > 0 && d->redi_in > 2)
+	{
+		if (dup2(d->redi_in, STDIN_FILENO) == -1)
+			ft_error("dup2: bad file descriptor");
+	}
+}
+
 void	ft_exec_pipe_child(t_exec_data *d)
 {
 	if (d->fd_in < 3 && d->fd_out > 2 && d->pipe_current[WRITE_END] != -1)
@@ -76,18 +88,14 @@ void	ft_exec_pipe_child(t_exec_data *d)
 		if (dup2(d->pipe_current[WRITE_END], STDOUT_FILENO) < 0)
 			ft_error("dup2: bad file descriptor");
 		ft_close_pipe(d->pipe_current[WRITE_END]);
-	}
-	else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
-	{
-		if (dup2(d->pipe_last[READ_END], STDIN_FILENO) < 0)
-			ft_error("dup2: bad file descriptor");
-		ft_close_pipe(d->pipe_last[READ_END]);
-		if (d->n_in > 0 && d->redi_in > 2)
+		if (d->n_out > 0 && d->redi_out > 2)
 		{
-			if (dup2(d->redi_in, STDIN_FILENO) == -1)
+			if (dup2(d->redi_out, STDOUT_FILENO) == -1)
 				ft_error("dup2: bad file descriptor");
 		}
 	}
+	else if (d->fd_in > 2 && d->fd_out < 3 && d->pipe_last[READ_END] != -1)
+		ft_exec_pipe_child_case2(d);
 	else if (d->fd_in > 2 && d->fd_out > 2 && d->pipe_last[READ_END] != -1
 		&& d->pipe_current[WRITE_END] != -1)
 		ft_exec_pipe_child_case3(d);

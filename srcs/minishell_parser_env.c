@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_env.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 18:32:07 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/27 22:03:37 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,20 @@ char	*p_replace_str(char *dst, char *old, char *new)
 	return (str);
 }
 
-char	*p_replace_env(char *tline)
+char	*p_replace_env(char *tline, t_global *gd)
 {
-	char	*tmp;
+	char		*tmp;
+	char		*tmp1;
+	t_exec_data	d;
 
+	d.env = gd->env;
 	while (p_strnstr(tline, "$", ft_strlen(tline)))
 	{
 		tmp = p_get_first_env(tline);
-		tline = p_replace_str(tline, tmp, getenv(tmp));
+		tmp1 = get_env_var(&d, tmp);
+		tline = p_replace_str(tline, tmp, tmp1);
 		free (tmp);
+		free (tmp1);
 	}
 	return (tline);
 }

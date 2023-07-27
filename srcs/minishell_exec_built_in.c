@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_built_in.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 18:32:48 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:07:03 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int	ft_command_exec_built_in(t_exec_data *d)
 	int		(*fp)(t_exec_data *d);
 	int		r;
 
-	ft_exec_pipe_child(d);
+	ft_exec_built_in_pipe_start(d);
 	fp = ft_executor_get_built_in(d);
 	if (fp)
 		r = fp(d);
 	else
 		r = 0;
-	ft_exec_pipe_parent(d);
+	ft_exec_built_in_pipe_end(d);
 	return (r);
 }

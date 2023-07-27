@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 16:36:32 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:55:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_readcmdline(t_global *gd)
 		if (line && *line && ft_strncmp(line, "exit", ft_strlen(line)) != 0)
 		{
 			add_history(line);
-			ft_executor(parser(line), gd);
+			ft_executor(parser(line, gd), gd);
 		}
 	}
 	if (line)
@@ -85,13 +85,4 @@ int	main(int argc, char **argv, char **env)
 
 	}
 	return (0);
-}
-
-void ft_printenv(char **str)
-{
-	while (*str)
-	{
-		ft_printf(1,"%s\n", *str);
-		str++;
-	}
 }

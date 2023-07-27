@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 16:24:25 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:45:01 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ char	*obtain_path(t_exec_data *d)
 	int		i;
 
 	i = 0;
-	while (ft_strnstr((*d->env)[i], "PATH=", 5) == NULL)
+	while ((*d->env)[i] && ft_strnstr((*d->env)[i], "PATH=", 5) == NULL)
 		i++;
+	if (!(*d->env)[i])
+		return (0);
 	all_paths = ft_split((*d->env)[i] + 5, ':');
 	i = 0;
 	while (all_paths[i])
