@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/25 20:51:26 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:15:33 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,26 @@ char	*obtain_pwd(t_exec_data *d)
 		return (NULL);
 	}
 	return (ft_strdup(pwd));
+}
+
+/* Swaps the values of two variables */
+void	swap_values(int *a, int *b)
+{
+	int	swap;
+
+	swap = *a;
+	*a = *b;
+	*b = swap;
+}
+
+/* Used by built_in_export in order to initialize an array with the same */
+/* number of elements than the enviroment variable with numbers in */
+/* correlative order - created mainly to meet norminette */
+void	init_array(int **array, int env_l)
+{
+	int	i;
+
+	i = 0;
+	while (i++ < env_l)
+		(*array)[i] = i;
 }

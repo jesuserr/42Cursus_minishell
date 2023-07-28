@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 15:26:23 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:08:17 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,8 @@ int		built_in_unset(t_exec_data *d);
 int		built_in_echo(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
+void	swap_values(int *a, int *b);
+void	init_array(int **array, int env_l);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/
