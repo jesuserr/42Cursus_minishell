@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 16:10:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 10:46:12 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_executor_cmds_redi_pipe(t_token *token, t_exec_data *d, int *p)
 	ft_executor_cmds_redi_pipe2(token, d, p);
 }
 
-void	ft_executor_cmds_waitpid(t_list *lst)
+void	ft_executor_cmds_waitpid(t_list *lst, t_global *gd)
 {
 	t_token		*token;
 	t_exec_data	*d;
@@ -80,6 +80,7 @@ void	ft_executor_cmds_waitpid(t_list *lst)
 		d = token->d;
 		waitpid(d->fork_pid, &d->waitpid_status, 0);
 		d->term_status = WEXITSTATUS(d->waitpid_status);
+		gd->last_status = d->term_status;
 		ft_executor_close_fds(token);
 		free(d);
 		lst = lst->next;
@@ -106,9 +107,9 @@ void	ft_executor_cmds(t_list *lst, t_global *gd)
 		if (ft_executor_check_built_in(d))
 			ft_command_exec_built_in(d);
 		else
-			ft_command_exec_cmd(d);
+			gd->last_status = ft_command_exec_cmd(d);
 		free_split(d->exec_args, d->exec_path);
 		lst = lst->next;
 	}
-	ft_executor_cmds_waitpid(lstcopy);
+	ft_executor_cmds_waitpid(lstcopy, gd);
 }

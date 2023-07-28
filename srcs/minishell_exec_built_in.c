@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_built_in.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 23:30:22 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 10:13:20 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@ void	*ft_executor_get_built_in(t_exec_data *d)
 
 	tmp = ft_strdup(d->exec_args[0]);
 	ft_strtolower(tmp);
-	if (!ft_strncmp("echo", tmp, 4))
+	if (!ft_strncmp("echo", tmp, 4) && ft_strlen(tmp) == 4)
 		fp = built_in_echo;
-	else if (!ft_strncmp("cd", tmp, 2))
+	else if (!ft_strncmp("cd", tmp, 2) && ft_strlen(tmp) == 2)
 		fp = built_in_cd;
-	else if (!ft_strncmp("pwd", tmp, 3))
+	else if (!ft_strncmp("pwd", tmp, 3) && ft_strlen(tmp) == 3)
 		fp = built_in_pwd;
-	//else if (!ft_strncmp("export", tmp, ft_strlen(tmp)))
+	//else if (!ft_strncmp("export", tmp, 6) && ft_strlen(tmp) == 6)
 	//	fp = built_in_export;
-	else if (!ft_strncmp("unset", tmp, 5))
+	else if (!ft_strncmp("unset", tmp, 5) && ft_strlen(tmp) == 5)
 		fp = built_in_unset;
-	else if (!ft_strncmp("env", tmp, 3))
+	else if (!ft_strncmp("env", tmp, 3) && ft_strlen(tmp) == 3)
 		fp = built_in_env;
 	else
 		fp = 0;

@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 21:56:41 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 10:09:05 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 typedef struct s_global
 {
 	char	***env;
+	int		last_status;
 }	t_global;
 
 typedef struct s_exec_data
