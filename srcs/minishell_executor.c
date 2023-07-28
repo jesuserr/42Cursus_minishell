@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 16:22:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:52:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void	ft_executor_close_fds(t_token *t)
 	}
 }
 
-void	ft_executor_free(t_list **list_cmds)
+void	ft_executor_free(t_list ***list_cmds)
 {
-	ft_lstclear(list_cmds, p_t_s_free_token);
+	ft_lstclear(*list_cmds, p_t_s_free_token);
+	free(**list_cmds);
 	free(*list_cmds);
-	free(list_cmds);
+	*list_cmds = 0;
 }
 
 int	ft_executor_in_order(t_token *token)
@@ -80,12 +81,12 @@ int	ft_executor_out_order(t_token *token)
 	return (1);
 }
 
-void	ft_executor(t_list **list_cmds, t_global *gd)
+void	ft_executor(t_list ***list_cmds, t_global *gd)
 {
 	t_list	*lst;
 	t_token	*token;
 
-	lst = *list_cmds;
+	lst = **list_cmds;
 	if (!ft_executor_check_cmds(lst, gd))
 	{
 		ft_executor_free(list_cmds);
@@ -101,7 +102,7 @@ void	ft_executor(t_list **list_cmds, t_global *gd)
 		}
 		lst = lst->next;
 	}
-	lst = *list_cmds;
+	lst = **list_cmds;
 	ft_executor_cmds(lst, gd);
 	ft_executor_free(list_cmds);
 }

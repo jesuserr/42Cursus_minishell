@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 12:06:47 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:48:00 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	gd.env = ft_calloc(1, sizeof(char ***));
 	*gd.env = copy_dbl_char_pointer(env);
+	gd.cmds = ft_calloc(1, sizeof(t_list ***));
+	*gd.cmds = 0;
 	if (!gd.env || !(*gd.env))
 	{
 		ft_printf(STDERR_FILENO, "minishell: malloc: Cannot allocate memory\n");
@@ -55,5 +57,6 @@ int	main(int argc, char **argv, char **env)
 	ft_readcmdline(&gd);
 	free_split(*gd.env, 0);
 	free(gd.env);
+	free(gd.cmds);
 	return (0);
 }

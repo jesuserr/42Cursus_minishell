@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 18:08:17 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:42:03 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_global
 {
 	char	***env;
 	int		last_status;
+	t_list	***cmds;
 }	t_global;
 
 typedef struct s_exec_data
@@ -100,7 +101,7 @@ typedef struct s_token
 int		ft_close_pipe(int pipe);
 int		ft_heredoc(char *sep);
 char	*get_next_line(int fd);
-void	ft_executor(t_list **lst_cmds, t_global *gd);
+void	ft_executor(t_list ***lst_cmds, t_global *gd);
 void	ft_executor_heredoc(t_token *token);
 void	ft_executor_in_literal(t_token *token);
 int		ft_executor_in_file(t_token *token);
@@ -116,7 +117,7 @@ void	ft_exec_pipe_parent(t_exec_data *d);
 void	ft_exec_built_in_pipe_start(t_exec_data *d);
 void	ft_exec_built_in_pipe_end(t_exec_data *d);
 void	p_t_s_free_token(void *t);
-t_list	**parser(char *line, t_global *gd);
+t_list	***parser(char *line, t_global *gd);
 int		p_common_errors(char *line);
 char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline, t_global *gd);

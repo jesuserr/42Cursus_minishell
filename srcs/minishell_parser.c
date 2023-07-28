@@ -6,13 +6,13 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 21:56:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:53:38 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_list	**parser(char *line, t_global *gd)
+t_list	***parser(char *line, t_global *gd)
 {
 	char	*tline;
 	char	**cmds;
@@ -21,7 +21,6 @@ t_list	**parser(char *line, t_global *gd)
 
 	cmds = 0;
 	tcmds = 0;
-	tline = 0;
 	if (!p_common_errors(line))
 	{
 		tline = p_identify_blocks(line);
@@ -38,5 +37,6 @@ t_list	**parser(char *line, t_global *gd)
 		tcmds++;
 	}
 	free_split(cmds, tline);
-	return (lst_cmds);
+	*gd->cmds = lst_cmds;
+	return (gd->cmds);
 }
