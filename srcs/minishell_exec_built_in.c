@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_built_in.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 12:08:47 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:27:18 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	*ft_executor_get_built_in(t_exec_data *d)
 		fp = built_in_unset;
 	else if (!ft_strncmp("env", tmp, 3) && ft_strlen(tmp) == 3)
 		fp = built_in_env;
+	else if (!ft_strncmp("history", tmp, 7) && ft_strlen(tmp) == 7)
+		fp = built_in_history;
 	else
 		fp = 0;
 	free (tmp);

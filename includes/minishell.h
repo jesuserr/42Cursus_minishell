@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 12:11:23 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:26:23 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	p_t_s_pattern(char *block, char *pattern, int *token_n, char ***t_str);
 int		p_common_errors(char *line);
 int		ft_command_exec_built_in(t_exec_data *d);
 void	ft_strtolower(char *str);
+int		built_in_history(t_exec_data *d);
 /*	minishell_exec_cmd.c	*/
 int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor_check_built_in.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 20:37:59 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 18:33:19 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:26:50 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_executor_check_built_in(t_exec_data	*d)
 	else if (!ft_strncmp("unset", tmp, 5) && ft_strlen(tmp) == 5)
 		c++;
 	else if (!ft_strncmp("env", tmp, 3) && ft_strlen(tmp) == 3)
+		c++;
+	else if (!ft_strncmp("history", tmp, 7) && ft_strlen(tmp) == 7)
 		c++;
 	free (tmp);
 	if (c)

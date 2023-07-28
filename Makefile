@@ -44,6 +44,7 @@ SRC_FILES	= minishell \
 			  minishell_executor_check_built_in \
 			  minishell_split_with_quotes \
 			  minishell_env_utils \
+			  minishell_built_in_history \
 			  
 			  			  
 SRC_FILESB	= 

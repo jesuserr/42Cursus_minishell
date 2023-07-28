@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_heredoc.c                                :+:      :+:    :+:   */
+/*   minishell_built_in_history.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/17 10:50:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 15:23:14 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/28 15:24:46 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/28 15:52:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_heredoc(char *sep)
+int	built_in_history(t_exec_data *d)
 {
-	int		p[2];
-	char	*str;
+	HIST_ENTRY	**his;
+	int			count;
 
-	pipe(p);
-	ft_printf(1, "> ");
-	str = get_next_line(0);
-	while (!ft_strnstr(str, sep, ft_strlen(str))
-		|| (ft_strlen(str) - 1) != ft_strlen(sep))
+	(void) d;
+	count = 1;
+	his = history_list();
+	while (*his)
 	{
-		write(p[1], str, ft_strlen(str));
-		if (str)
-			free(str);
-		ft_printf(1, "> ");
-		str = get_next_line(0);
+		ft_printf(1, " %4d  %s\n", count, (*his)->line);
+		his++;
+		count++;
 	}
-	if (str)
-		free(str);
-	close (p[1]);
-	return (p[0]);
+	return (0);
 }

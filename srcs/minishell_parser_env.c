@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 22:03:37 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 15:20:33 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ char	*p_get_first_env(char *tline)
 			count++;
 	}
 	else
-		while (tmp[count] && tmp[count] >= 'A' && tmp[count] <= 'Z')
+		while (tmp[count] && (tmp[count] >= '?'
+				|| (tmp[count] >= 'A' && tmp[count] <= 'Z')))
 			count++;
 	tmp1 = ft_calloc(count + 2, sizeof(char));
 	if (!tmp1)
@@ -101,7 +102,10 @@ char	*p_replace_env(char *tline, t_global *gd)
 	while (p_strnstr(tline, "$", ft_strlen(tline)))
 	{
 		tmp = p_get_first_env(tline);
-		tmp1 = get_env_var(&d, tmp);
+		if (ft_strlen(tmp) == 1 && *tmp == '?')
+			tmp1 = ft_itoa(gd->last_status);
+		else
+			tmp1 = get_env_var(&d, tmp);
 		tline = p_replace_str(tline, tmp, tmp1);
 		free (tmp);
 		free (tmp1);
