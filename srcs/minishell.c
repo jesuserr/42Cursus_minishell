@@ -24,7 +24,7 @@ void	ft_readcmdline(t_global *gd)
 		line = readline(PROMPT);
 		if (!line)
 		{
-			ft_printf(1, "exit\n\b");
+			ft_printf(1, "Good bye\n\b");
 			line = ft_strdup("exit");
 		}
 		if (line && *line && ft_strncmp(line, "exit", ft_strlen(line)) != 0)
