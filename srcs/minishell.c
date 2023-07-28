@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 20:48:00 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 22:07:08 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,11 @@ void	ft_readcmdline(t_global *gd)
 		if (line)
 			free(line);
 		line = readline(PROMPT);
+		if (!line)
+		{
+			ft_printf(1, "exit\n\b");
+			line = ft_strdup("exit");
+		}
 		if (line && *line && ft_strncmp(line, "exit", ft_strlen(line)) != 0)
 		{
 			add_history(line);
@@ -52,6 +57,7 @@ int	main(int argc, char **argv, char **env)
 		ft_printf(STDERR_FILENO, "minishell: malloc: Cannot allocate memory\n");
 		exit(EXIT_FAILURE);
 	}
+	ft_signals_init(&gd);
 	gd.last_status = 0;
 	ft_startmsg();
 	ft_readcmdline(&gd);

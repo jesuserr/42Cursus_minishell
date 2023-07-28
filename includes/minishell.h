@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 20:42:03 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:50:57 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include "errno.h"
 # include <fcntl.h>
 # include <limits.h>
+# include <signal.h>
 
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
@@ -50,9 +51,10 @@
 
 typedef struct s_global
 {
-	char	***env;
-	int		last_status;
-	t_list	***cmds;
+	char				***env;
+	int					last_status;
+	t_list				***cmds;
+	struct sigaction	sig_data;
 }	t_global;
 
 typedef struct s_exec_data
@@ -132,6 +134,7 @@ int		p_common_errors(char *line);
 int		ft_command_exec_built_in(t_exec_data *d);
 void	ft_strtolower(char *str);
 int		built_in_history(t_exec_data *d);
+void	ft_signals_init(t_global *gd);
 /*	minishell_exec_cmd.c	*/
 int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);

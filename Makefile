@@ -45,8 +45,8 @@ SRC_FILES	= minishell \
 			  minishell_split_with_quotes \
 			  minishell_env_utils \
 			  minishell_built_in_history \
-			  
-			  			  
+			  minishell_signals \
+			  			  			  
 SRC_FILESB	= 
 		  
 HEADER		=	includes/minishell.h \
