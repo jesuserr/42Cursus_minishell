@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/27 23:55:02 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 12:08:09 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,7 @@ void	ft_error_shell(char *error)
 /* Custom text message can be additionally sent through *str */
 void	ft_error_handler(char *str, t_exec_data *d)
 {
-	if (d->int_error_code == ERROR_XXX)
-	{
-		perror("Undefined Error");
-		exit(EXIT_FAILURE);
-	}
-	else if (d->int_error_code == ERROR_CMDNOT)
+	if (d->int_error_code == ERROR_CMDNOT)
 		ft_printf(2, "minishell: %s: command not found\n", d->exec_args[0]);
 	else if (d->int_error_code == ERROR_NOFILE)
 		ft_printf(2, "minishell: %s: No such file or directory\n", str);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_built_in.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:14:51 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 10:13:20 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 12:08:47 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	*ft_executor_get_built_in(t_exec_data *d)
 		fp = built_in_cd;
 	else if (!ft_strncmp("pwd", tmp, 3) && ft_strlen(tmp) == 3)
 		fp = built_in_pwd;
-	//else if (!ft_strncmp("export", tmp, 6) && ft_strlen(tmp) == 6)
-	//	fp = built_in_export;
+	else if (!ft_strncmp("export", tmp, 6) && ft_strlen(tmp) == 6)
+		fp = built_in_export;
 	else if (!ft_strncmp("unset", tmp, 5) && ft_strlen(tmp) == 5)
 		fp = built_in_unset;
 	else if (!ft_strncmp("env", tmp, 3) && ft_strlen(tmp) == 3)

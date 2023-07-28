@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 10:09:05 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/28 12:11:23 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ int		built_in_echo(t_exec_data *d);
 char	*obtain_pwd(t_exec_data *d);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
+/*	minishell_built_in_export	*/
+int		built_in_export(t_exec_data *d);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);
