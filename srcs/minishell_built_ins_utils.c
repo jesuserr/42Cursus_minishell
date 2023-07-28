@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/28 18:15:33 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 22:32:10 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ void	init_array(int **array, int env_l)
 	int	i;
 
 	i = 0;
-	while (i++ < env_l)
+	while (i < env_l)
+	{
 		(*array)[i] = i;
+		i++;
+	}
 }
