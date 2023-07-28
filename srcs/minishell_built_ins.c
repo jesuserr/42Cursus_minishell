@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 18:33:49 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/28 19:10:32 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,15 +61,15 @@ int	built_in_unset(t_exec_data *d)
 	{
 		var = ft_strdup(d->exec_args[j++]);
 		i = 0;
-		while (i < ft_strlen(var))
+		while (i++ < ft_strlen(var))
 		{
-			if (!(ft_isalnum((var[i])) || var[i] == '_'))
+			if (!(ft_isalnum((var[i - 1])) || var[i - 1] == '_'))
 			{
 				d->int_error_code = ERROR_B_UNSET;
+				d->term_status = 1;
 				ft_error_handler(var, d);
 				break ;
 			}
-			i++;
 		}
 		del_var_from_env(d->env, var);
 		free (var);
