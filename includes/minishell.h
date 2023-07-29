@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/29 13:17:01 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 14:09:50 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,6 +160,7 @@ char	*obtain_pwd(t_exec_data *d);
 void	swap_values(int *a, int *b);
 void	init_array(int **array, int env_l);
 int		longest_var(t_exec_data *d);
+void	export_var_error(t_exec_data *d, int j, int *flag);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/

@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 13:16:47 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 14:09:38 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ int	longest_var(t_exec_data *d)
 		i++;
 	}
 	return (max_length);
+}
+
+void	export_var_error(t_exec_data *d, int j, int *flag)
+{
+	d->int_error_code = ERROR_B_EXPORT;
+	d->term_status = 1;
+	ft_error_handler(d->exec_args[j], d);
+	*flag = 1;
 }

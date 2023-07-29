@@ -6,20 +6,22 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:09:57 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 13:44:21 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 15:57:22 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int		*env_print_order(t_exec_data *d);
-void	insert_var(t_exec_data *d);
+void	insert_var(t_exec_data *d, size_t index);
 void	export_var(t_exec_data *d);
 void	insert_content_var(t_exec_data *d, char **split);
 
 /* If no arguments are provided prints all the environment variables */
 /* sorted alphabetically, adding "declare -x" at the beginning of each line */
 /* If arguments are provided calls 'export_var' function */
+/* The real export built-in can add multiple variables in one commnad line */
+/* i.e. "export V1="A" V2="B" V3="C"", behaviour implemented */
 /* No STDIN for this kind of built-in */
 int	built_in_export(t_exec_data *d)
 {
@@ -52,39 +54,42 @@ int	built_in_export(t_exec_data *d)
 void	export_var(t_exec_data *d)
 {
 	size_t	i;
+	size_t	j;
 	char	**split;
 	int		flag;
 
-	flag = 0;
-	split = ft_split(d->exec_args[1], '=');
-	i = 0;
-	while (i++ < ft_strlen(split[0]))
+	j = 1;
+	while (d->exec_args[j])
 	{
-		if (!(ft_isalnum((split[0][i - 1])) || split[0][i -1] == '_') || \
-		d->exec_args[1][0] == '=' || ft_isdigit(d->exec_args[1][0]))
+		flag = 0;
+		split = ft_split(d->exec_args[j], '=');
+		i = 0;
+		while (i++ < ft_strlen(split[0]))
 		{
-			d->int_error_code = ERROR_B_EXPORT;
-			d->term_status = 1;
-			ft_error_handler(d->exec_args[1], d);
-			flag = 1;
-			break ;
+			if (!(ft_isalnum((split[0][i - 1])) || split[0][i -1] == '_') || \
+			d->exec_args[j][0] == '=' || ft_isdigit(d->exec_args[j][0]))
+			{
+				export_var_error(d, j, &flag);
+				break ;
+			}
 		}
+		free_split(split, NULL);
+		if (flag == 0)
+			insert_var(d, j);
+		j++;
 	}
-	free_split(split, NULL);
-	if (flag == 0)
-		insert_var(d);
 }
 
 /* Analyzes the content of the var (empty or with content) and acts in */
 /* consequence. If the var name is XXX, XXX= or XXX="", it inserts XXX="" */
 /* in the environment variable */
-void	insert_var(t_exec_data *d)
+void	insert_var(t_exec_data *d, size_t j)
 {
 	char	**split;
 	char	*var_equal;
 	char	*var_quotes;
 
-	split = ft_split(d->exec_args[1], '=');
+	split = ft_split(d->exec_args[j], '=');
 	if (!(split[1]) || (!ft_strncmp(split[1], "\"\"", 2) && \
 	ft_strlen(split[1]) == 2))
 	{
