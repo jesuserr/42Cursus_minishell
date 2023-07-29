@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 21:50:57 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:17:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define ERROR_B_PWD		200
 # define ERROR_B_UNSET		201
 # define ERROR_B_NOHOME		202
+# define ERROR_B_EXPORT		203
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255
@@ -158,6 +159,7 @@ int		built_in_echo(t_exec_data *d);
 char	*obtain_pwd(t_exec_data *d);
 void	swap_values(int *a, int *b);
 void	init_array(int **array, int env_l);
+int		longest_var(t_exec_data *d);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/

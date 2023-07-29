@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/28 22:32:10 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 13:16:47 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,23 @@ void	init_array(int **array, int env_l)
 		(*array)[i] = i;
 		i++;
 	}
+}
+
+/* Returns the length of the longest environment variable */
+int	longest_var(t_exec_data *d)
+{
+	int	i;
+	int	length;
+	int	max_length;
+
+	i = 0;
+	max_length = 0;
+	while ((*d->env)[i])
+	{
+		length = ft_strlen((*d->env)[i]);
+		if (length > max_length)
+			max_length = length;
+		i++;
+	}
+	return (max_length);
 }
