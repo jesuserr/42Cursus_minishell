@@ -6,16 +6,16 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:09:57 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 15:57:22 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:08:58 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 int		*env_print_order(t_exec_data *d);
-void	insert_var(t_exec_data *d, size_t index);
+void	format_export_output(t_exec_data *d, int *order, int i);
 void	export_var(t_exec_data *d);
-void	insert_content_var(t_exec_data *d, char **split);
+void	insert_var(t_exec_data *d, size_t index);
 
 /* If no arguments are provided prints all the environment variables */
 /* sorted alphabetically, adding "declare -x" at the beginning of each line */
@@ -26,8 +26,7 @@ void	insert_content_var(t_exec_data *d, char **split);
 int	built_in_export(t_exec_data *d)
 {
 	int		*order;
-	int		i;
-	char	*msg;
+	int		i;	
 
 	if (!d->exec_args[1])
 	{
@@ -37,15 +36,60 @@ int	built_in_export(t_exec_data *d)
 		i = 0;
 		while ((*d->env)[i])
 		{
-			msg = ft_strjoin("declare -x ", (*d->env)[order[i++]]);
-			ft_printf(STDOUT_FILENO, "%s\n", msg);
-			free(msg);
+			format_export_output(d, order, i);
+			i++;
 		}
 		free(order);
 	}
 	else
 		export_var(d);
 	return (0);
+}
+
+/* Uses very basic sorting algorithm to determine the printing order of the */
+/* environment variables - Returns an array indicating in which order the */
+/* environment lines must be printed, if array creation fails returns NULL */
+int	*env_print_order(t_exec_data *d)
+{
+	int	i;
+	int	var_l;
+	int	env_l;
+	int	*p;
+
+	var_l = longest_var(d);
+	env_l = count_dbl_char_lines(*d->env);
+	p = (int *)ft_calloc(env_l, sizeof(int));
+	if (!p)
+		return (NULL);
+	init_array(&p, env_l);
+	i = 0;
+	while (env_l)
+	{
+		i = 0;
+		while ((*d->env)[i + 1])
+		{
+			if (ft_strncmp((*d->env)[p[i]], (*d->env)[p[i + 1]], var_l) > 0)
+				swap_values(&(p[i]), &(p[i + 1]));
+			i++;
+		}
+		env_l--;
+	}
+	return (p);
+}
+
+void	format_export_output(t_exec_data *d, int *order, int i)
+{
+	char	**split;
+	char	*msg;
+	int		line_l;
+	int		name_l;
+
+	split = ft_split((*d->env)[order[i]], '=');
+	line_l = ft_strlen((*d->env)[order[i]]);
+	name_l = ft_strlen(split[0]);
+	msg = ft_substr((*d->env)[order[i]], name_l + 1, line_l - name_l - 1);
+	ft_printf(STDOUT_FILENO, "declare -x %s=\"%s\"\n", split[0], msg);
+	free_split(split, msg);
 }
 
 /* Before inserting the var it is checked if the var name meets requirements */
@@ -87,74 +131,16 @@ void	insert_var(t_exec_data *d, size_t j)
 {
 	char	**split;
 	char	*var_equal;
-	char	*var_quotes;
 
 	split = ft_split(d->exec_args[j], '=');
 	if (!(split[1]) || (!ft_strncmp(split[1], "\"\"", 2) && \
 	ft_strlen(split[1]) == 2))
 	{
 		var_equal = ft_strjoin(split[0], "=");
-		var_quotes = ft_strjoin(var_equal, "\"\"");
-		add_var_to_env(d->env, var_quotes);
-		double_free(var_equal, var_quotes);
+		add_var_to_env(d->env, var_equal);
+		free(var_equal);
 	}
 	else
 		insert_content_var(d, split);
 	free_split(split, NULL);
-}
-
-/* Used to insert var when then var_name is VAR="XXX" or VAR=XXX */
-void	insert_content_var(t_exec_data *d, char **split)
-{
-	char	*var_equal;
-	char	*var_quotes;
-	char	*var_value;
-	char	*temp_1;
-	char	*temp_2;
-
-	var_value = ft_strtrim(split[1], "\"\'");
-	if (ft_strchr(var_value, '\"'))
-		d->term_status = 1;
-	else
-	{
-		var_equal = ft_strjoin(split[0], "=");
-		temp_1 = ft_strjoin(var_equal, "\"");
-		temp_2 = ft_strjoin(temp_1, var_value);
-		var_quotes = ft_strjoin(temp_2, "\"");
-		add_var_to_env(d->env, var_quotes);
-		double_free(var_quotes, var_equal);
-		double_free(temp_1, temp_2);
-	}
-	free(var_value);
-}
-
-/* Uses very basic sorting algorithm to determine the printing order of the */
-/* environment variables - Returns an array indicating in which order the */
-/* environment lines must be printed, if array creation fails returns NULL */
-int	*env_print_order(t_exec_data *d)
-{
-	int	i;
-	int	var_l;
-	int	env_l;
-	int	*p;
-
-	var_l = longest_var(d);
-	env_l = count_dbl_char_lines(*d->env);
-	p = (int *)ft_calloc(env_l, sizeof(int));
-	if (!p)
-		return (NULL);
-	init_array(&p, env_l);
-	i = 0;
-	while (env_l)
-	{
-		i = 0;
-		while ((*d->env)[i + 1])
-		{
-			if (ft_strncmp((*d->env)[p[i]], (*d->env)[p[i + 1]], var_l) > 0)
-				swap_values(&(p[i]), &(p[i + 1]));
-			i++;
-		}
-		env_l--;
-	}
-	return (p);
 }

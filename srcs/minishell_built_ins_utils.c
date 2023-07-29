@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 14:09:38 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:09:14 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,6 @@ char	*obtain_pwd(t_exec_data *d)
 		return (NULL);
 	}
 	return (ft_strdup(pwd));
-}
-
-/* Swaps the values of two variables */
-void	swap_values(int *a, int *b)
-{
-	int	swap;
-
-	swap = *a;
-	*a = *b;
-	*b = swap;
 }
 
 /* Used by built_in_export in order to initialize an array with the same */
@@ -80,4 +70,24 @@ void	export_var_error(t_exec_data *d, int j, int *flag)
 	d->term_status = 1;
 	ft_error_handler(d->exec_args[j], d);
 	*flag = 1;
+}
+
+/* Used to insert var when then var_name is VAR="XXX" or VAR=XXX */
+void	insert_content_var(t_exec_data *d, char **split)
+{
+	char	*var_equal;
+	char	*var_total;
+	char	*var_value;	
+
+	var_value = ft_strtrim(split[1], "\"\'");
+	if (ft_strchr(var_value, '\"'))
+		d->term_status = 1;
+	else
+	{
+		var_equal = ft_strjoin(split[0], "=");
+		var_total = ft_strjoin(var_equal, var_value);
+		add_var_to_env(d->env, var_total);
+		double_free(var_total, var_equal);
+	}
+	free(var_value);
 }

@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/29 14:09:50 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:09:32 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,8 @@ char	**copy_dbl_char_pointer(char **src);
 int		check_empty_string(char *str);
 int		count_dbl_char_lines(char **env);
 void	double_free(char *str_1, char *str_2);
+/*	minishell_utils_2.c	*/
+void	swap_values(int *a, int *b);
 /*	minishell_built_ins.c */
 int		built_in_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
@@ -157,10 +159,10 @@ int		built_in_unset(t_exec_data *d);
 int		built_in_echo(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
-void	swap_values(int *a, int *b);
 void	init_array(int **array, int env_l);
 int		longest_var(t_exec_data *d);
 void	export_var_error(t_exec_data *d, int j, int *flag);
+void	insert_content_var(t_exec_data *d, char **split);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/
