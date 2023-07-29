@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:09:57 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 18:08:58 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:23:38 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ int	*env_print_order(t_exec_data *d)
 	return (p);
 }
 
+/* Prints out the environment variables as in bash, that means, adding */
+/* 'declare -x' at the beginning and putting the value of the variable */
+/* between double quotes */
 void	format_export_output(t_exec_data *d, int *order, int i)
 {
 	char	**split;
@@ -125,8 +128,7 @@ void	export_var(t_exec_data *d)
 }
 
 /* Analyzes the content of the var (empty or with content) and acts in */
-/* consequence. If the var name is XXX, XXX= or XXX="", it inserts XXX="" */
-/* in the environment variable */
+/* consequence. */
 void	insert_var(t_exec_data *d, size_t j)
 {
 	char	**split;

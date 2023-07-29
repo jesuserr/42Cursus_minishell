@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 18:09:14 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/29 18:25:03 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	longest_var(t_exec_data *d)
 	return (max_length);
 }
 
+/* Prints out error message when the enviroment variable to be */
+/* added with 'export' does not meet the variable name requirements */
 void	export_var_error(t_exec_data *d, int j, int *flag)
 {
 	d->int_error_code = ERROR_B_EXPORT;
@@ -72,7 +74,7 @@ void	export_var_error(t_exec_data *d, int j, int *flag)
 	*flag = 1;
 }
 
-/* Used to insert var when then var_name is VAR="XXX" or VAR=XXX */
+/* Used by 'insert_var' to add var_name that has content */
 void	insert_content_var(t_exec_data *d, char **split)
 {
 	char	*var_equal;
