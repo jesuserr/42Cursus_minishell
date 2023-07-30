@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:59:41 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 22:08:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:25:19 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ void	ft_process_signal(int sig, siginfo_t *info, void *context)
 	(void) sig;
 	(void) info;
 	(void) context;
+	ft_printf(1, "\b\b\033[K");
 	rl_replace_line("", 0);
-	ft_printf(1, "\b\b\n", 1);
+	rl_on_new_line();
+	rl_redisplay();
+	ft_printf(1, "\n");
 	rl_on_new_line();
 	rl_redisplay();
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_split_with_quotes.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 17:34:24 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:14:39 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,17 +104,17 @@ void	ft_strtrim_quotes(char **strs)
 		tmp = ft_strtrim(*strs, " ");
 		free(*strs);
 		*strs = tmp;
-		tmp = ft_strtrim(*strs, "\"");
-		if (ft_strlen(tmp) != ft_strlen(*strs))
+		if (*strs && ft_strlen(*strs) > 1 && (*strs)[0] == '\"'
+			&& (*strs)[ft_strlen(*strs) - 1] == '\"')
 		{
+			tmp = ft_strtrim(*strs, "\"");
 			free(*strs);
 			*strs = tmp;
 		}
-		else
+		else if (*strs && ft_strlen(*strs) > 1 && (*strs)[0] == '\''
+			&& (*strs)[ft_strlen(*strs) - 1] == '\'')
 		{
-			free(*strs);
-			*strs = tmp;
-			tmp = ft_strtrim(*strs, "'");
+			tmp = ft_strtrim(*strs, "\'");
 			free(*strs);
 			*strs = tmp;
 		}

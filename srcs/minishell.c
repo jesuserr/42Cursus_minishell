@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 22:07:08 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/30 18:17:38 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_readcmdline(t_global *gd)
 		line = readline(PROMPT);
 		if (!line)
 		{
-			ft_printf(1, "Good bye\n\b");
+			ft_printf(1, "\b%sexit\n", PROMPT);
 			line = ft_strdup("exit");
 		}
 		if (line && *line && ft_strncmp(line, "exit", ft_strlen(line)) != 0)
