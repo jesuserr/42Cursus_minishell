@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/29 18:09:32 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/30 22:45:42 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@
 # define ERROR_B_UNSET		201
 # define ERROR_B_NOHOME		202
 # define ERROR_B_EXPORT		203
+# define ERROR_B_TOKEN_D	204
+# define ERROR_B_TOKEN_S	205
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255
@@ -156,7 +158,6 @@ void	swap_values(int *a, int *b);
 int		built_in_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d);
-int		built_in_echo(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
 char	*obtain_pwd(t_exec_data *d);
 void	init_array(int **array, int env_l);
@@ -167,6 +168,8 @@ void	insert_content_var(t_exec_data *d, char **split);
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/
 int		built_in_export(t_exec_data *d);
+/*	minishell_built_in_echo.c */
+int		built_in_echo(t_exec_data *d);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);

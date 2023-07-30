@@ -35,6 +35,7 @@ SRC_FILES	= minishell \
 			  minishell_built_ins_utils \
 			  minishell_built_in_cd \
 			  minishell_built_in_export \
+			  minishell_built_in_echo \
 			  minishell_executor \
 			  minishell_get_next_line \
 			  minishell_heredoc \

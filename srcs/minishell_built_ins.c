@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 17:03:40 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/28 19:10:32 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/30 13:14:41 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,37 +74,5 @@ int	built_in_unset(t_exec_data *d)
 		del_var_from_env(d->env, var);
 		free (var);
 	}
-	return (0);
-}
-
-/* Prints out the list of arguments provided, if first argument is -n */
-/* no newline is sent to terminal at the end of the printing */
-/* No STDIN for this kind of built-in */
-int	built_in_echo(t_exec_data *d)
-{
-	int	i;
-	int	flag;
-
-	if (!d->exec_args[1])
-	{
-		ft_printf(STDOUT_FILENO, "\n");
-		return (0);
-	}
-	i = 1;
-	flag = 0;
-	if (!(ft_strncmp(d->exec_args[1], "-n", 2)) && \
-	ft_strlen(d->exec_args[1]) == 2)
-	{
-		flag = 1;
-		i++;
-	}
-	while (d->exec_args[i])
-	{
-		ft_printf(STDOUT_FILENO, "%s", d->exec_args[i++]);
-		if (d->exec_args[i])
-			ft_printf(STDOUT_FILENO, " ");
-	}
-	if (!flag)
-		ft_printf(STDOUT_FILENO, "\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/29 10:56:03 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/30 17:46:16 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,10 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf(2, "minishell: %s: Permission denied\n", d->exec_args[0]);
 	else if (d->int_error_code == ERROR_NODIR)
 		ft_printf(2, "minishell: %s: Not a directory\n", str);
+	else if (d->int_error_code == ERROR_B_TOKEN_D)
+		ft_printf(2, "minishell: syntax error near unexpected token `\"\'\n");
+	else if (d->int_error_code == ERROR_B_TOKEN_S)
+		ft_printf(2, "minishell: syntax error near unexpected token `\'\'\n");
 	else if (d->int_error_code == ERROR_B_EXPORT)
 		ft_printf(2, "minishell: export: `%s': not a valid identifier\n", str);
 	else if (d->int_error_code == ERROR_B_NOHOME)
