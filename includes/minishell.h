@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 18:23:55 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 20:30:22 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_global
 	int					last_status;
 	t_list				***cmds;
 	struct sigaction	sig_data;
+	int					copy_stdin;
+	int					copy_stdout;
 }	t_global;
 
 typedef struct s_exec_data
@@ -77,6 +79,7 @@ typedef struct s_exec_data
 	int		term_status;
 	int		waitpid_status;
 	pid_t	fork_pid;
+	int		fork_pid_status;
 	char	**exec_args;
 	char	*exec_path;
 }	t_exec_data;
@@ -102,6 +105,8 @@ typedef struct s_token
 	int			last_out;
 	t_exec_data	*d;
 }	t_token;
+
+t_global	*g_info;
 
 int		ft_close_pipe(int pipe);
 int		ft_heredoc(char *sep);

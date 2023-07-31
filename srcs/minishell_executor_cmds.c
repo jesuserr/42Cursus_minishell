@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 18:49:06 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 20:31:18 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ft_executor_cmds_init_exec(t_exec_data *d, t_token *t, t_global *gd)
 	d->n_out = t->n_out + t->n_out_add;
 	d->redi_in = t->cmdin;
 	d->redi_out = t->cmdout;
+	d->fork_pid_status = 1;
 	d->exec_args = ft_split_quotes(t->cmd, ' ');
 	ft_strtrim_quotes(d->exec_args);
 }
@@ -85,6 +86,7 @@ void	ft_executor_cmds_waitpid(t_list *lst, t_global *gd)
 			waitpid(d->fork_pid, &d->waitpid_status, 0);
 			d->term_status = WEXITSTATUS(d->waitpid_status);
 			gd->last_status = d->term_status;
+			d->fork_pid_status = 0;
 		}
 		ft_executor_close_fds(token);
 		free_split(d->exec_args, d->exec_path);

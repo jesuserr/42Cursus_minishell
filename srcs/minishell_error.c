@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 18:56:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 21:58:59 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ void	ft_error_shell(char *error)
 void	ft_error_handler2(char *str, t_exec_data *d)
 {
 	(void) str;
-	if (d->int_error_code == ERROR_MALLOC)
+	if (d->int_error_code == ERROR_FORK)
+		ft_printf(2, "minishell: fork: Resource temporarily unavailable\n");
+	else if (d->int_error_code == ERROR_MALLOC)
 		ft_printf(2, "minishell: malloc: Cannot allocate memory\n");
 	else if (d->int_error_code == ERROR_DUP)
 		ft_printf(2, "minishell: dup: Cannot duplicate file descriptor\n");
@@ -41,6 +43,7 @@ void	ft_error_handler2(char *str, t_exec_data *d)
 /* Custom text message can be additionally sent through *str */
 void	ft_error_handler(char *str, t_exec_data *d)
 {
+	g_info->last_status = d->term_status;
 	if (d->int_error_code == ERROR_CMDNOT)
 		ft_printf(2, "minishell: %s: command not found\n", d->exec_args[0]);
 	else if (d->int_error_code == ERROR_NOFILE)
@@ -61,8 +64,6 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf(2, "minishell: unset: `%s': not a valid identifier\n", str);
 	else if (d->int_error_code == ERROR_B_PWD)
 		ft_printf(2, "minishell: getcwd: failed: No such file or directory\n");
-	else if (d->int_error_code == ERROR_FORK)
-		ft_printf(2, "minishell: fork: Resource temporarily unavailable\n");
 	else
 		ft_error_handler2(str, d);
 	return ;
