@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/31 00:09:18 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/31 12:24:26 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	echo_print(t_exec_data *d, char *str);
 int		verify_syntax(t_exec_data *d, char *str);
+char	*quotes_analysis(t_exec_data *d, char *str);
 
 /*****************************************************************/
 /* IMPORTANT!! ALL THE ARGS OF ECHO MUST BE IN JUST ONE ARGUMENT */
@@ -51,18 +52,19 @@ int	built_in_echo(t_exec_data *d)
 	return (0);
 }
 
-/* Verifies if the single and double quotes sintax is correct */
+/* Verifies if the single and double quotes syntax is correct */
 /* If is correct prints out (character by character) the string */
-/* following same quoting rules applied inside 'verify_syntax' */ 
+/* following same quoting rules applied inside 'verify_syntax' */
+/* In theory this function won't be needed if this is done before*/
+/* calling the function */
+/* For testing: echo "hello"'"'"wo'r'ld'""$USER"'$USER'"'s's'" */
 void	echo_print(t_exec_data *d, char *str)
 {
-	int	syntax;
 	int	flag_dq;
 	int	flag_sq;
 	int	i;
 
-	syntax = verify_syntax(d, str);
-	if (syntax == 1)
+	if (verify_syntax(d, str) == 1)
 	{
 		i = 0;
 		flag_sq = 1;
@@ -80,7 +82,7 @@ void	echo_print(t_exec_data *d, char *str)
 	}
 }
 
-/* Verifies if the single and double quotes sintax is correct */
+/* Verifies if the single and double quotes syntax is correct */
 /* If is correct returns (1) otherwise prints out error message and */
 /* returns (0) */
 int	verify_syntax(t_exec_data *d, char *str)
@@ -109,4 +111,43 @@ int	verify_syntax(t_exec_data *d, char *str)
 	d->term_status = 258;
 	ft_error_handler(NULL, d);
 	return (0);
+}
+
+/* Verifies if the single/double quoting syntax in the 'str' provided */
+/* is correct. If it is correct it creates a 'new_str' with the quoting */
+/* syntax interpreted. If it is not correct, 'verify_syntax' prints out an */
+/* error message and NULL is returned */
+/* Created new_str must be freed by the calling function */
+/* NORMINETTE KO FOR THE MOMENT */
+char	*quotes_analysis(t_exec_data *d, char *str)
+{
+	int		flag_dq;
+	int		flag_sq;
+	int		i;
+	int		j;
+	char	*new_str;
+
+	if (verify_syntax(d, str) == 1)
+	{
+		new_str = (char *)ft_calloc(sizeof(char), ft_strlen(str) + 1);
+		if (!new_str)
+			return (NULL);
+		j = 0;
+		i = 0;
+		flag_sq = 1;
+		flag_dq = 1;
+		while (str[i])
+		{
+			if (str[i] == '\"' && flag_sq == 1)
+				flag_dq *= -1;
+			else if (str[i] == '\'' && flag_dq == 1)
+				flag_sq *= -1;
+			else if (str[i] != '\"' || str[i] != '\'')
+				new_str[j++] = str[i];
+			i++;
+		}
+		new_str[j] = '\0';
+		return (new_str);
+	}
+	return (NULL);
 }
