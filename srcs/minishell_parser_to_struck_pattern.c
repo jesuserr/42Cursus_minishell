@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:43:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/14 20:57:08 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:46:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,26 @@ int	p_t_s_pattern_count(char *block, char *pattern)
 
 void	p_t_s_pattern_fill1(char *block, char **str)
 {
-	int	lenblock;
+	int		lenblock;
+	char	*tmp;
 
 	lenblock = p_t_s_count(block);
 	*str = ft_calloc(lenblock + 1, sizeof(char));
 	if (!str)
 		ft_error("Unable to allocate memory in p_t_s_heredoc_fill");
 	ft_strlcpy(*str, block, lenblock + 1);
+	if ((*str)[0] == '\"' && (*str)[ft_strlen(*str) - 1] == '\"')
+	{
+		tmp = ft_strtrim(*str, "\"");
+		free (*str);
+		*str = tmp;
+	}
+	else if ((*str)[0] == '\'' && (*str)[ft_strlen(*str) - 1] == '\'')
+	{
+		tmp = ft_strtrim(*str, "\'");
+		free (*str);
+		*str = tmp;
+	}
 }
 
 void	p_t_s_pattern_fill(char *block, char *pattern, char **str)

@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:01:25 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/25 20:43:16 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:47:01 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,24 @@
 
 int	p_t_s_count(char *block)
 {
-	int	count;
+	int		count;
+	char	q;
 
 	count = 0;
 	while (*block != ' ' && *block != '|' && *block != ';' && *block
 		!= '&' && *block != '>' && *block != '<' && *block)
 	{
+		if (*block == '\"' || *block == '\'')
+		{
+			q = *block;
+			count++;
+			block++;
+			while (*block && *block != q)
+			{
+				count++;
+				block++;
+			}
+		}
 		count++;
 		block++;
 	}
