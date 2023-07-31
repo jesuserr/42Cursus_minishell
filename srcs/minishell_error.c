@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/30 17:46:16 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:56:56 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,16 @@ void	ft_error_shell(char *error)
 	ft_strlcpy(errortmp, "Minishell: ", 500);
 	ft_strlcat(errortmp, error, 500);
 	ft_printf(STDERR_FILENO, "%s\n", errortmp);
+}
+
+void	ft_error_handler2(char *str, t_exec_data *d)
+{
+	(void) str;
+	if (d->int_error_code == ERROR_MALLOC)
+		ft_printf(2, "minishell: malloc: Cannot allocate memory\n");
+	else if (d->int_error_code == ERROR_DUP)
+		ft_printf(2, "minishell: dup: Cannot duplicate file descriptor\n");
+	return ;
 }
 
 /* Prints out error messages according to BASH through STDERR */
@@ -53,9 +63,7 @@ void	ft_error_handler(char *str, t_exec_data *d)
 		ft_printf(2, "minishell: getcwd: failed: No such file or directory\n");
 	else if (d->int_error_code == ERROR_FORK)
 		ft_printf(2, "minishell: fork: Resource temporarily unavailable\n");
-	else if (d->int_error_code == ERROR_MALLOC)
-		ft_printf(2, "minishell: malloc: Cannot allocate memory\n");
-	else if (d->int_error_code == ERROR_DUP)
-		ft_printf(2, "minishell: dup: Cannot duplicate file descriptor\n");
+	else
+		ft_error_handler2(str, d);
 	return ;
 }

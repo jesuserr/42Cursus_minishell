@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 20:52:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:53:17 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ void	ft_executor(t_list ***list_cmds, t_global *gd)
 	t_list	*lst;
 	t_token	*token;
 
+	if (!list_cmds)
+		return ;
 	lst = **list_cmds;
 	if (!ft_executor_check_cmds(lst, gd))
 	{

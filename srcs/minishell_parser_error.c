@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/24 18:53:14 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:03:05 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	p_common_errors2(char *line)
 	if (t_e > -1)
 	{
 		if (!t_e)
-			sprintf(tmp, "syntax error near unexpected token EOF");
+			sprintf(tmp, "syntax error near unexpected token `newline'");
 		else
 			sprintf(tmp, "syntax error near unexpected token '%c'", t_e);
 		ft_error_shell(tmp);
@@ -62,9 +62,19 @@ int	p_common_errors2(char *line)
 
 int	p_common_errors1(char *line)
 {
-	if (ft_strnstr(line, "<<<<", ft_strlen(line)))
+	if (ft_strnstr(line, "<<<<<", ft_strlen(line)))
+	{
+		ft_error_shell("syntax error near unexpected token '<<'");
+		return (1);
+	}
+	else if (ft_strnstr(line, "<<<<", ft_strlen(line)))
 	{
 		ft_error_shell("syntax error near unexpected token '<'");
+		return (1);
+	}
+	else if (ft_strnstr(line, ">>>>", ft_strlen(line)))
+	{
+		ft_error_shell("syntax error near unexpected token '>>'");
 		return (1);
 	}
 	else if (ft_strnstr(line, ">>>", ft_strlen(line)))
@@ -72,6 +82,8 @@ int	p_common_errors1(char *line)
 		ft_error_shell("syntax error near unexpected token '>'");
 		return (1);
 	}
+	else if (!verify_syntax_quotes(line))
+		return (1);
 	return (0);
 }
 
@@ -97,5 +109,8 @@ int	p_common_errors(char *line)
 		ft_error_shell("syntax error near unexpected token at EOL");
 		return (1);
 	}
-	return (p_common_errors1(line) + p_common_errors2(line));
+	if (p_common_errors1(line))
+		return (1);
+	else
+		return (p_common_errors2(line));
 }

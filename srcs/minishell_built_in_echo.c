@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_echo.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/31 12:24:26 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:53:36 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 void	echo_print(t_exec_data *d, char *str);
-int		verify_syntax(t_exec_data *d, char *str);
-char	*quotes_analysis(t_exec_data *d, char *str);
 
 /*****************************************************************/
 /* IMPORTANT!! ALL THE ARGS OF ECHO MUST BE IN JUST ONE ARGUMENT */
@@ -43,7 +41,7 @@ int	built_in_echo(t_exec_data *d)
 	}
 	while (d->exec_args[i])
 	{
-		echo_print(d, d->exec_args[i++]);
+		ft_printf(1, "%s", d->exec_args[i++]);
 		if (d->exec_args[i])
 			ft_printf(STDOUT_FILENO, " ");
 	}
@@ -53,43 +51,14 @@ int	built_in_echo(t_exec_data *d)
 }
 
 /* Verifies if the single and double quotes syntax is correct */
-/* If is correct prints out (character by character) the string */
-/* following same quoting rules applied inside 'verify_syntax' */
-/* In theory this function won't be needed if this is done before*/
-/* calling the function */
-/* For testing: echo "hello"'"'"wo'r'ld'""$USER"'$USER'"'s's'" */
-void	echo_print(t_exec_data *d, char *str)
-{
-	int	flag_dq;
-	int	flag_sq;
-	int	i;
-
-	if (verify_syntax(d, str) == 1)
-	{
-		i = 0;
-		flag_sq = 1;
-		flag_dq = 1;
-		while (str[i])
-		{
-			if (str[i] == '\"' && flag_sq == 1)
-				flag_dq *= -1;
-			else if (str[i] == '\'' && flag_dq == 1)
-				flag_sq *= -1;
-			else if (str[i] != '\"' || str[i] != '\'')
-				ft_printf(1, "%c", str[i]);
-			i++;
-		}
-	}
-}
-
-/* Verifies if the single and double quotes syntax is correct */
 /* If is correct returns (1) otherwise prints out error message and */
 /* returns (0) */
-int	verify_syntax(t_exec_data *d, char *str)
+int	verify_syntax_quotes(char *str)
 {
-	int	flag_dq;
-	int	flag_sq;
-	int	i;
+	int			flag_dq;
+	int			flag_sq;
+	int			i;
+	t_exec_data	d;
 
 	i = 0;
 	flag_sq = 1;
@@ -105,11 +74,11 @@ int	verify_syntax(t_exec_data *d, char *str)
 	if (flag_dq == 1 && flag_sq == 1)
 		return (1);
 	if (flag_dq == -1)
-		d->int_error_code = ERROR_B_TOKEN_D;
+		d.int_error_code = ERROR_B_TOKEN_D;
 	else if (flag_sq == -1)
-		d->int_error_code = ERROR_B_TOKEN_S;
-	d->term_status = 258;
-	ft_error_handler(NULL, d);
+		d.int_error_code = ERROR_B_TOKEN_S;
+	d.term_status = 258;
+	ft_error_handler(NULL, &d);
 	return (0);
 }
 
@@ -119,7 +88,7 @@ int	verify_syntax(t_exec_data *d, char *str)
 /* error message and NULL is returned */
 /* Created new_str must be freed by the calling function */
 /* NORMINETTE KO FOR THE MOMENT */
-char	*quotes_analysis(t_exec_data *d, char *str)
+char	*quotes_analysis(char *str)
 {
 	int		flag_dq;
 	int		flag_sq;
@@ -127,27 +96,23 @@ char	*quotes_analysis(t_exec_data *d, char *str)
 	int		j;
 	char	*new_str;
 
-	if (verify_syntax(d, str) == 1)
+	new_str = (char *)ft_calloc(sizeof(char), ft_strlen(str) + 1);
+	if (!new_str)
+		return (NULL);
+	j = 0;
+	i = 0;
+	flag_sq = 1;
+	flag_dq = 1;
+	while (str[i])
 	{
-		new_str = (char *)ft_calloc(sizeof(char), ft_strlen(str) + 1);
-		if (!new_str)
-			return (NULL);
-		j = 0;
-		i = 0;
-		flag_sq = 1;
-		flag_dq = 1;
-		while (str[i])
-		{
-			if (str[i] == '\"' && flag_sq == 1)
-				flag_dq *= -1;
-			else if (str[i] == '\'' && flag_dq == 1)
-				flag_sq *= -1;
-			else if (str[i] != '\"' || str[i] != '\'')
-				new_str[j++] = str[i];
-			i++;
-		}
-		new_str[j] = '\0';
-		return (new_str);
+		if (str[i] == '\"' && flag_sq == 1)
+			flag_dq *= -1;
+		else if (str[i] == '\'' && flag_dq == 1)
+			flag_sq *= -1;
+		else if (str[i] != '\"' || str[i] != '\'')
+			new_str[j++] = str[i];
+		i++;
 	}
-	return (NULL);
+	new_str[j] = '\0';
+	return (new_str);
 }

@@ -7,6 +7,8 @@ Para compilar en MacOS
 COMP_FLAGS = -I/Users/$(USER)/.brew/opt/readline/include  
 LINK_FLAGS = -L/Users/$(USER)/.brew/opt/readline/lib -lreadline
 
+- Notas cescanue 31/07
+- Revisa porque cmd: ls < ls | < g no dice error
 - Notas jesuserr 31/07
 - Comandos built-in hechos a falta de solucionar el tema de como le llegan los argumentos con comillas dobles/simples a 'echo' y 'export'.
 - Ideas locas para el final, añadir carpeta actual en el prompt y añadir indicativo visual de si el comando termino con exito o no (tipo zsh).

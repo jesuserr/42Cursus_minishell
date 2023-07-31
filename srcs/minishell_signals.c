@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:59:41 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/30 18:25:19 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:06:43 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@ void	ft_signals_init(t_global *gd)
 	sigemptyset(&gd->sig_data.sa_mask);
 	gd->sig_data.sa_flags = 0;
 	sigaction(SIGINT, &gd->sig_data, 0);
+	sigaction(SIGQUIT, &gd->sig_data, 0);
 }

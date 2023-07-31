@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 11:59:36 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:23:55 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,8 +171,8 @@ int		built_in_export(t_exec_data *d);
 /*	minishell_built_in_echo.c */
 int		built_in_echo(t_exec_data *d);
 void	echo_print(t_exec_data *d, char *str);
-int		verify_syntax(t_exec_data *d, char *str);
-char	*quotes_analysis(t_exec_data *d, char *str);
+char	*quotes_analysis(char *str);
+int		verify_syntax_quotes(char *str);
 /*	minishell_exec_fds.c	*/
 int		exec_dups(t_exec_data *d);
 int		restore_fds(t_exec_data *d);

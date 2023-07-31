@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/30 18:14:39 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 18:49:20 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,20 +104,9 @@ void	ft_strtrim_quotes(char **strs)
 		tmp = ft_strtrim(*strs, " ");
 		free(*strs);
 		*strs = tmp;
-		if (*strs && ft_strlen(*strs) > 1 && (*strs)[0] == '\"'
-			&& (*strs)[ft_strlen(*strs) - 1] == '\"')
-		{
-			tmp = ft_strtrim(*strs, "\"");
-			free(*strs);
-			*strs = tmp;
-		}
-		else if (*strs && ft_strlen(*strs) > 1 && (*strs)[0] == '\''
-			&& (*strs)[ft_strlen(*strs) - 1] == '\'')
-		{
-			tmp = ft_strtrim(*strs, "\'");
-			free(*strs);
-			*strs = tmp;
-		}
+		tmp = quotes_analysis(*strs);
+		free(*strs);
+		*strs = tmp;
 		strs++;
 	}
 }
