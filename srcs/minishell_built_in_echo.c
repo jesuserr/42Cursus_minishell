@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_echo.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 22:12:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 22:12:51 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:39:10 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	built_in_echo(t_exec_data *d)
 		if (d->exec_args[i])
 			ft_printf(STDOUT_FILENO, " ");
 	}
-	if (!flag && d->term_status == 0)
+	if (!flag)
 		ft_printf(STDOUT_FILENO, "\n");
 	return (0);
 }

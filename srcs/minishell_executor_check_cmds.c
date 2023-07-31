@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor_check_cmds.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:05:27 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 15:17:32 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/07/31 23:21:50 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_executor_check_cmds2(t_exec_data	*d)
 		d->exec_path = obtain_path(d);
 	if (!d->exec_path)
 	{
-		ft_executor_check_cmds_error(*d);
+		ft_error_handler(NULL, d);
 		return (0);
 	}
 	return (1);
