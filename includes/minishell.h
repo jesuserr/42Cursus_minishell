@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 21:57:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 20:30:22 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/31 22:12:47 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/31 22:12:48 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,6 @@ int		built_in_cd(t_exec_data *d);
 int		built_in_export(t_exec_data *d);
 /*	minishell_built_in_echo.c */
 int		built_in_echo(t_exec_data *d);
-void	echo_print(t_exec_data *d, char *str);
 char	*quotes_analysis(char *str);
 int		verify_syntax_quotes(char *str);
 /*	minishell_exec_fds.c	*/

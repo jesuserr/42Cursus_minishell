@@ -5,19 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/31 21:54:11 by cescanue         ###   ########.fr       */
+/*   Created: 2023/07/31 22:12:21 by cescanue          #+#    #+#             */
+/*   Updated: 2023/07/31 22:12:51 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	echo_print(t_exec_data *d, char *str);
-
-/*****************************************************************/
-/* IMPORTANT!! ALL THE ARGS OF ECHO MUST BE IN JUST ONE ARGUMENT */
-/* FUNCTION MUST BE MODIFIED WHEN THIS IS DONE 					 */
-/*****************************************************************/
 /* Prints out the list of arguments provided, if first argument is -n */
 /* no newline is sent to terminal at the end of the printing */
 /* No STDIN for this kind of built-in */
@@ -41,7 +35,7 @@ int	built_in_echo(t_exec_data *d)
 	}
 	while (d->exec_args[i])
 	{
-		ft_printf(1, "%s", d->exec_args[i++]);
+		ft_printf(STDOUT_FILENO, "%s", d->exec_args[i++]);
 		if (d->exec_args[i])
 			ft_printf(STDOUT_FILENO, " ");
 	}
@@ -82,12 +76,8 @@ int	verify_syntax_quotes(char *str)
 	return (0);
 }
 
-/* Verifies if the single/double quoting syntax in the 'str' provided */
-/* is correct. If it is correct it creates a 'new_str' with the quoting */
-/* syntax interpreted. If it is not correct, 'verify_syntax' prints out an */
-/* error message and NULL is returned */
-/* Created new_str must be freed by the calling function */
-/* NORMINETTE KO FOR THE MOMENT */
+/* Creates a 'new_str' with the quoting syntax interpreted */
+/* Created 'new_str' must be freed by the calling function */
 char	*quotes_analysis(char *str)
 {
 	int		flag_dq;
