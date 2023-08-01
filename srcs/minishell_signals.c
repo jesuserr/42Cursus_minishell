@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 20:59:41 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 13:55:03 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:30:08 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,10 @@ void	ft_process_signal_int2(t_list *lst, int fork_pid)
 		rl_on_new_line();
 		rl_redisplay();
 	}
+	if (dup2(g_info->copy_stdin, STDIN_FILENO) == -1
+		|| dup2(g_info->copy_stdout, STDOUT_FILENO) == -1)
+		ft_error_shell("dup2: bad file descriptor");
+	g_info->last_status = 130;
 }
 
 void	ft_process_signal_int(int sig)
@@ -47,16 +51,17 @@ void	ft_process_signal_int(int sig)
 		while (lst && !fork_pid)
 		{
 			token = lst->content;
-			fork_pid = token->d->fork_pid;
-			if (!token->d->fork_pid)
-				lst = lst->next;
+			if (token->d)
+			{
+				fork_pid = token->d->fork_pid;
+				if (!token->d->fork_pid)
+					lst = lst->next;
+			}
+			else
+				lst = 0;
 		}
 	}
 	ft_process_signal_int2(lst, fork_pid);
-	if (dup2(g_info->copy_stdin, STDIN_FILENO) == -1
-		|| dup2(g_info->copy_stdout, STDOUT_FILENO) == -1)
-		ft_error_shell("dup2: bad file descriptor");
-	g_info->last_status = 130;
 }
 
 void	ft_process_signal_quit2(t_list *lst)
@@ -72,6 +77,10 @@ void	ft_process_signal_quit2(t_list *lst)
 	{
 		ft_printf(1, "Quit: 3\n");
 	}
+	if (dup2(g_info->copy_stdin, STDIN_FILENO) == -1
+		|| dup2(g_info->copy_stdout, STDOUT_FILENO) == -1)
+		ft_error_shell("dup2: bad file descriptor");
+	g_info->last_status = 131;
 }
 
 void	ft_process_signal_quit(int sig)
@@ -90,16 +99,17 @@ void	ft_process_signal_quit(int sig)
 		while (lst && !fork_pid)
 		{
 			token = lst->content;
-			fork_pid = token->d->fork_pid;
-			if (!token->d->fork_pid)
-				lst = lst->next;
+			if (token->d)
+			{
+				fork_pid = token->d->fork_pid;
+				if (!token->d->fork_pid)
+					lst = lst->next;
+			}
+			else
+				lst = 0;
 		}
 	}
 	ft_process_signal_quit2(lst);
-	if (dup2(g_info->copy_stdin, STDIN_FILENO) == -1
-		|| dup2(g_info->copy_stdout, STDOUT_FILENO) == -1)
-		ft_error_shell("dup2: bad file descriptor");
-	g_info->last_status = 131;
 }
 
 void	ft_signals_init(void)
