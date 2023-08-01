@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 22:12:47 by cescanue          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/08/01 12:52:53 by cescanue         ###   ########.fr       */
-=======
-/*   Updated: 2023/08/01 13:17:13 by jesuserr         ###   ########.fr       */
->>>>>>> 9faca01e309fc073ae1c5a4183504ef47d4e5ae3
+/*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
+/*   Updated: 2023/08/01 15:22:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
