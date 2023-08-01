@@ -3,31 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor_check_cmds.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 12:05:27 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 01:02:18 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:56:12 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_executor_check_cmds_error(t_exec_data d)
-{
-	char		error[500];
-
-	ft_strlcpy(error, d.exec_args[0], 500);
-	ft_strlcat(error, ": command not found", 500);
-	ft_error_shell(error);
-}
 
 int	ft_executor_check_cmds2(t_exec_data	*d)
 {
 	if (check_empty_string(d->exec_args[0]) == -1)
 		return (0);
 	d->exec_path = check_usr_path(d);
-	if (!d->exec_path && d->term_status)	//added JS 2023/08/01 00:53
-		return (0);							//added JS 2023/08/01 00:53
+	if (!d->exec_path && d->term_status)
+		return (0);
 	if (!d->exec_path)
 		d->exec_path = obtain_path(d);
 	if (!d->exec_path)
@@ -56,7 +47,6 @@ int	ft_executor_check_cmds(t_list *lst, t_global *gd)
 			if (!ft_executor_check_cmds2(&d))
 			{
 				free_split(d.exec_args, d.exec_path);
-				//gd->last_status = 127;	//removed JS 2023/08/01 00:53				
 				return (0);
 			}
 		}

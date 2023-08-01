@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 21:59:20 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:46:27 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_readcmdline(t_global *gd)
 	char	*line;
 
 	line = 0;
-	while (ft_strncmp(line, "exit", ft_strlen(line)) != 0)
+	while (ft_strncmp(line, "exit", 4) != 0)
 	{
 		if (line)
 			free(line);
@@ -27,7 +27,7 @@ void	ft_readcmdline(t_global *gd)
 			ft_printf(1, "\b%sexit\n", PROMPT);
 			line = ft_strdup("exit");
 		}
-		if (line && *line && ft_strncmp(line, "exit", ft_strlen(line)) != 0)
+		if (line && *line && ft_strncmp(line, "exit", 4) != 0)
 		{
 			add_history(line);
 			ft_executor(parser(line, gd), gd);
@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	(void) argc;
 	ft_init_gd(&gd, env);
-	ft_signals_init(&gd);
+	ft_signals_init();
 	ft_startmsg();
 	ft_readcmdline(&gd);
 	free_split(*gd.env, 0);

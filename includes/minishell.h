@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 22:12:47 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 22:12:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/01 12:52:53 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ typedef struct s_global
 	char				***env;
 	int					last_status;
 	t_list				***cmds;
-	struct sigaction	sig_data;
 	int					copy_stdin;
 	int					copy_stdout;
 }	t_global;
@@ -142,7 +141,7 @@ int		p_common_errors(char *line);
 int		ft_command_exec_built_in(t_exec_data *d);
 void	ft_strtolower(char *str);
 int		built_in_history(t_exec_data *d);
-void	ft_signals_init(t_global *gd);
+void	ft_signals_init(void);
 /*	minishell_exec_cmd.c	*/
 int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);
