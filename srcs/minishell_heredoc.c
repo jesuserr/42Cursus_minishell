@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 10:50:30 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 15:21:38 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/01 15:23:07 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	ft_heredoc(char *sep)
 	int		p[2];
 	char	*str;
 
+	str = 0;
 	pipe(p);
 	ft_printf(1, "> ");
 	//str = get_next_line(0);
