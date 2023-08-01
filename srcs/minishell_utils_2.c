@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:04:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/08/01 17:25:09 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:10:16 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	swap_values(int *a, int *b)
 /* line = readline(pwd); */
 /* free (pwd); */
 /* NOT IMPLEMENTED YET!!! */
-
 char	*pwd_as_prompt(void)
 {
 	char	buf[PATH_MAX];

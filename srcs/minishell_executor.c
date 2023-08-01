@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_executor.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/15 20:07:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 16:42:43 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/01 19:04:06 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ void	ft_executor(t_list ***list_cmds, t_global *gd)
 		}
 		lst = lst->next;
 	}
+	lst = **list_cmds;
 	if (!ft_executor_check_cmds(lst, gd))
 	{
 		ft_executor_free(list_cmds);
