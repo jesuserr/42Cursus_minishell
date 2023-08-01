@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 18:25:03 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:03:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,24 +72,4 @@ void	export_var_error(t_exec_data *d, int j, int *flag)
 	d->term_status = 1;
 	ft_error_handler(d->exec_args[j], d);
 	*flag = 1;
-}
-
-/* Used by 'insert_var' to add var_name that has content */
-void	insert_content_var(t_exec_data *d, char **split)
-{
-	char	*var_equal;
-	char	*var_total;
-	char	*var_value;	
-
-	var_value = ft_strtrim(split[1], "\"\'");
-	if (ft_strchr(var_value, '\"'))
-		d->term_status = 1;
-	else
-	{
-		var_equal = ft_strjoin(split[0], "=");
-		var_total = ft_strjoin(var_equal, var_value);
-		add_var_to_env(d->env, var_total);
-		double_free(var_total, var_equal);
-	}
-	free(var_value);
 }
