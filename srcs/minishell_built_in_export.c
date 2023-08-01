@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:09:57 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/29 18:23:38 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:19:30 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,16 +133,21 @@ void	insert_var(t_exec_data *d, size_t j)
 {
 	char	**split;
 	char	*var_equal;
+	char	*var_total;
 
 	split = ft_split(d->exec_args[j], '=');
+	var_equal = ft_strjoin(split[0], "=");
 	if (!(split[1]) || (!ft_strncmp(split[1], "\"\"", 2) && \
 	ft_strlen(split[1]) == 2))
 	{
-		var_equal = ft_strjoin(split[0], "=");
 		add_var_to_env(d->env, var_equal);
 		free(var_equal);
 	}
 	else
-		insert_content_var(d, split);
+	{
+		var_total = ft_strjoin(var_equal, split[1]);
+		add_var_to_env(d->env, var_total);
+		double_free(var_total, var_equal);
+	}
 	free_split(split, NULL);
 }
