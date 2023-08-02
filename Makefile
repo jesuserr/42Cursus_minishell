@@ -48,6 +48,7 @@ SRC_FILES	= minishell \
 			  minishell_env_utils \
 			  minishell_built_in_history \
 			  minishell_signals \
+			  minishell_history \
 			  			  			  
 SRC_FILESB	= 
 		  

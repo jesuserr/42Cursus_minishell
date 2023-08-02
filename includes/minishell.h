@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 15:22:14 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:53:34 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ int		ft_command_exec_built_in(t_exec_data *d);
 void	ft_strtolower(char *str);
 int		built_in_history(t_exec_data *d);
 void	ft_signals_init(void);
+char	*ft_history(char *line);
+int		ft_check_history(char *line);
 /*	minishell_exec_cmd.c	*/
 int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);

@@ -6,11 +6,40 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/01 13:46:27 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/02 20:24:45 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*ft_readcmdline2(char *line, t_global *gd)
+{
+	int	status_h;
+
+	if (!line)
+	{
+		ft_printf(1, "\b%sexit\n", PROMPT);
+		line = ft_strdup("exit");
+	}
+	if (line && *line)
+	{
+		status_h = ft_check_history(line);
+		if (status_h == 2)
+			line = ft_history(line);
+		if (status_h == 0)
+		{
+			free (line);
+			line = 0;
+		}
+	}
+	if (line && *line && ft_strncmp(line, "exit", 4) != 0)
+	{
+		if (status_h == 1)
+			add_history(line);
+		ft_executor(parser(line, gd), gd);
+	}
+	return (line);
+}
 
 void	ft_readcmdline(t_global *gd)
 {
@@ -22,19 +51,13 @@ void	ft_readcmdline(t_global *gd)
 		if (line)
 			free(line);
 		line = readline(PROMPT);
-		if (!line)
-		{
-			ft_printf(1, "\b%sexit\n", PROMPT);
-			line = ft_strdup("exit");
-		}
-		if (line && *line && ft_strncmp(line, "exit", 4) != 0)
-		{
-			add_history(line);
-			ft_executor(parser(line, gd), gd);
-		}
+		line = ft_readcmdline2(line, gd);
 	}
 	if (line)
+	{
 		free(line);
+		line = 0;
+	}
 }
 
 void	ft_startmsg(void)

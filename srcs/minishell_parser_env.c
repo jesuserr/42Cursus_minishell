@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 15:20:33 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/02 18:00:13 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*p_get_first_env(char *tline)
 	tmp = p_strnstr(tline, "$", ft_strlen(tline));
 	count = 0;
 	tmp++;
-	if (tmp[count] && tmp[count] >= '{')
+	if (tmp[count] && tmp[count] == '{')
 	{
 		tmp++;
 		while (tmp[count] && tmp[count] != '}')
