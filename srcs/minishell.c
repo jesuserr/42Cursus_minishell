@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/02 20:24:45 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/03 09:10:19 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 char	*ft_readcmdline2(char *line, t_global *gd)
 {
-	int	status_h;
+	int		status_h;
+	char	*tmp;
 
-	if (!line)
-	{
-		ft_printf(1, "\b%sexit\n", PROMPT);
-		line = ft_strdup("exit");
-	}
+	tmp = ft_strtrim(line, " ");
+	free (line);
+	line = tmp;
 	if (line && *line)
 	{
 		status_h = ft_check_history(line);
@@ -51,7 +50,13 @@ void	ft_readcmdline(t_global *gd)
 		if (line)
 			free(line);
 		line = readline(PROMPT);
-		line = ft_readcmdline2(line, gd);
+		if (line)
+			line = ft_readcmdline2(line, gd);
+		else if (!line)
+		{
+			ft_printf(1, "\b%sexit\n", PROMPT);
+			line = ft_strdup("exit");
+		}
 	}
 	if (line)
 	{
