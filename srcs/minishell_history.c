@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:52:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/02 20:45:21 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/03 11:06:24 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,14 @@ char	*ft_history(char *line)
 	{
 		aline = line;
 		line = p2_strnstr(line, "!", ft_strlen(line));
-		ft_strlcat(tline, aline, (line - aline) + ft_strlen(tline) + 1);
-		line++;
+		ft_strlcat(tline, aline, (line++ - aline) + ft_strlen(tline) + 1);
 		ft_history_copy_his(line, tline, size);
 		if (*line == '-')
 			line++;
 		while (*line >= '0' && *line <= '9')
 			line++;
 	}
+	ft_strlcat(tline, line, size);
 	free (copyline);
 	ft_printf(1, "%s\n", tline);
 	return (tline);
