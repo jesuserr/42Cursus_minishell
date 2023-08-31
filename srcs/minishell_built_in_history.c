@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 15:24:46 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/28 15:52:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/31 21:15:39 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	built_in_history(t_exec_data *d)
 	(void) d;
 	count = 1;
 	his = history_list();
-	while (*his)
+	while (his && *his)
 	{
 		ft_printf(1, " %4d  %s\n", count, (*his)->line);
 		his++;

@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/03 09:10:19 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/08/31 21:13:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ char	*ft_readcmdline2(char *line, t_global *gd)
 	}
 	if (line && *line && ft_strncmp(line, "exit", 4) != 0)
 	{
-		if (status_h == 1)
-			add_history(line);
 		ft_executor(parser(line, gd), gd);
+		if (status_h == 1 && gd->last_status != 127)
+			add_history(line);
 	}
 	return (line);
 }
