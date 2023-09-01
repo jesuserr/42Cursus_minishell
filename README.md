@@ -1,5 +1,8 @@
 # minishell
 
+- Notas cescanue 01/09
+- Se tiene que hafer que al salir con exit, salga con el numero de error indicado en el exit
+
 - Notas jesuserr 01/08
 - Error al introducir un comando del estilo ;s
 
