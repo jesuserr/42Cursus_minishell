@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 17:52:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/03 11:06:24 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 16:41:58 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_check_history(char *line)
 	{
 		c = 2;
 		line = p2_strnstr(line, "!", ft_strlen(line)) + 1;
-		hpos = atoi(line);
+		hpos = ft_atoi(line);
 		if ((hpos < 0 && (history_length + hpos) < 0)
 			|| hpos == 0 || hpos > history_length)
 		{
@@ -45,7 +45,7 @@ int	ft_line_new_size(char *line)
 	while (p2_strnstr(line, "!", ft_strlen(line)))
 	{
 		line = p2_strnstr(line, "!", ft_strlen(line)) + 1;
-		hpos = atoi(line);
+		hpos = ft_atoi(line);
 		if (hpos < 0)
 			hpos = history_length + hpos + 1;
 		his = history_list();
@@ -66,7 +66,7 @@ void	ft_history_copy_his(char *line, char *tline, int size)
 	int			count;
 	int			hpos;
 
-	hpos = atoi(line);
+	hpos = ft_atoi(line);
 	count = 1;
 	his = history_list();
 	if (hpos < 0)
