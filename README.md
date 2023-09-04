@@ -1,26 +1,15 @@
 # minishell
 
-- Notas cescanue 01/09
-- Se tiene que hafer que al salir con exit, salga con el numero de error indicado en el exit
-
-- Notas jesuserr 01/08
+- Notas 04/09
+- Se tiene que hacer que al salir con exit, salga con el numero de error indicado en el exit, y el codigo salida si no indica nada el usuarip tiene que ser el del ultimo comando ejecutado
 - Error al introducir un comando del estilo ;s
+- echo $ tiene que mostrar $
+- Funciones no autorizadas
+	sprintf
+	history_length
+	history_list
+- builtin cd , error al borrar el directorio actual. 
 
-- Notas cescanue 31/07
-- Revisa porque cmd: ls < ls | < g no dice error
-
-- Notas jesuserr 31/07
-- Ideas locas para el final, añadir carpeta actual en el prompt y añadir indicativo visual de si el comando termino con exito o no (tipo zsh).
-- Detectado un problema con ficheros que tienen un espacio en blanco en el nombre. Ej: "readline installation.rtf" inside prelim/info.
-
-- Notas cescanue 28/07
-- Estadod de salida
-- - Se guarda el estado de salida de los procesos, pero se hace de forma secuencial, por lo que no es el del ultimo, revisar. 
-- - No se controla que si trata de ejecutar algo que no existe, el valor de las status tiene que ser 127
-- Posible bug en heredoc, dentr de heredoc haces ctrl-d da segmentacion fail (en cuanto controlemos las señales del sistema, veremos)
-- Se tiene que alamcenar el estado del salida del ultimo comando ejecutado, de momento se borra, estan en minishell_executor_cmds.c funcion void	ft_executor_cmds_waitpid(t_list *lst)
-- Unificar gestion de errores
-- Senales del sistema --> cescanue
 
 Para compilar en linux  
 LINK_FLAGS = -lreadline  

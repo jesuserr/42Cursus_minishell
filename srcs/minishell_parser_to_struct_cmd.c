@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/17 20:30:53 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:35:51 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	p_t_s_cmd_count2(char *block, int *count)
 			while (*(block++) && *block != deli)
 				(*count)++;
 			(*count)++;
+			block++;
 		}
 		else
 		{
