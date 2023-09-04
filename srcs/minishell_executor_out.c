@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:33:07 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 12:01:48 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:10:19 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ft_executor_out_file_error(t_token *t, char *out)
 	char	strerr[500];
 
 	t->cmdout = 1;
-	sprintf(strerr, "%s: Permission denied", out);
+	ft_strlcpy(strerr, out, 500);
+	ft_strlcat(strerr, ": Permission denied", 500);
 	ft_error_shell(strerr);
 }
 

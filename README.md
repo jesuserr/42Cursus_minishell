@@ -1,11 +1,11 @@
 # minishell
 
 - Notas 04/09
-- Se tiene que hacer que al salir con exit, salga con el numero de error indicado en el exit, y el codigo salida si no indica nada el usuarip tiene que ser el del ultimo comando ejecutado
+- (solved) Se tiene que hacer que al salir con exit, salga con el numero de error indicado en el exit, y el codigo salida si no indica nada el usuarip tiene que ser el del ultimo comando ejecutado
 - Error al introducir un comando del estilo ;s
-- echo $ tiene que mostrar $
+- (solved) echo $ tiene que mostrar $
 - Funciones no autorizadas
-	sprintf
+	(done) sprintf
 	history_length
 	history_list
 - builtin cd , error al borrar el directorio actual. 

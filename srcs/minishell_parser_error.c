@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 19:03:05 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:14:42 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,30 @@ char	error_redi_pattern(char *line, char pattern)
 	return (-1);
 }
 
+int	p_common_errors3(char *line)
+{
+	char	t_e;
+	char	tmp[500];
+
+	t_e = error_redi_pattern(line, '>');
+	if (t_e > -1)
+	{
+		if (!t_e)
+		{
+			ft_strlcpy(tmp, "syntax error near unexpected token", 500);
+			ft_strlcat(tmp, " `newline'", 500);
+		}
+		else
+		{
+			ft_strlcpy(tmp, "syntax error near unexpected token ", 500);
+			ft_strlcat(tmp, &t_e, 500);
+		}		
+		ft_error_shell(tmp);
+		return (1);
+	}
+	return (0);
+}
+
 int	p_common_errors2(char *line)
 {
 	char	t_e;
@@ -41,23 +65,16 @@ int	p_common_errors2(char *line)
 	if (t_e > -1)
 	{
 		if (!t_e)
-			sprintf(tmp, "syntax error near unexpected token EOF");
+			ft_strlcpy(tmp, "syntax error near unexpected token EOF", 500);
 		else
-			sprintf(tmp, "syntax error near unexpected token '%c'", t_e);
+		{
+			ft_strlcpy(tmp, "syntax error near unexpected token ", 500);
+			ft_strlcat(tmp, &t_e, 500);
+		}		
 		ft_error_shell(tmp);
 		return (1);
 	}
-	t_e = error_redi_pattern(line, '>');
-	if (t_e > -1)
-	{
-		if (!t_e)
-			sprintf(tmp, "syntax error near unexpected token `newline'");
-		else
-			sprintf(tmp, "syntax error near unexpected token '%c'", t_e);
-		ft_error_shell(tmp);
-		return (1);
-	}
-	return (0);
+	return (p_common_errors3(line));
 }
 
 int	p_common_errors1(char *line)

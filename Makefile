@@ -49,6 +49,7 @@ SRC_FILES	= minishell \
 			  minishell_built_in_history \
 			  minishell_signals \
 			  minishell_history \
+			  minishell_readline \
 			  			  			  
 SRC_FILESB	= 
 		  

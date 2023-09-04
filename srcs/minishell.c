@@ -6,64 +6,11 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/08/31 21:18:28 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 21:18:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	*ft_readcmdline2(char *line, t_global *gd)
-{
-	int		status_h;
-	char	*tmp;
-
-	tmp = ft_strtrim(line, " ");
-	free (line);
-	line = tmp;
-	if (line && *line)
-	{
-		status_h = ft_check_history(line);
-		if (status_h == 2)
-			line = ft_history(line);
-		if (status_h == 0)
-		{
-			free (line);
-			line = 0;
-		}
-	}
-	if (line && *line && ft_strncmp(line, "exit", 4) != 0)
-	{
-		if (status_h == 1)
-			add_history(line);
-		ft_executor(parser(line, gd), gd);
-	}
-	return (line);
-}
-
-void	ft_readcmdline(t_global *gd)
-{
-	char	*line;
-
-	line = 0;
-	while (ft_strncmp(line, "exit", 4) != 0)
-	{
-		if (line)
-			free(line);
-		line = readline(PROMPT);
-		if (line)
-			line = ft_readcmdline2(line, gd);
-		else if (!line)
-		{
-			ft_printf(1, "\b%sexit\n", PROMPT);
-			line = ft_strdup("exit");
-		}
-	}
-	if (line)
-	{
-		free(line);
-		line = 0;
-	}
-}
 
 void	ft_startmsg(void)
 {
@@ -92,18 +39,36 @@ void	ft_init_gd(t_global *gd, char **env)
 	}
 }
 
+int	ft_get_exitcode(char *line)
+{
+	int	count;
+
+	count = 4;
+	if (ft_strlen(line) > 4)
+	{
+		while (line[count] && (line[count] == ' ' || line[count] == '('))
+			count++;
+		return (ft_atoi(&line[count]));
+	}
+	else
+		return (g_info->last_status);
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_global	gd;
+	int			exitcode;
+	char		*line;
 
 	(void) argv;
 	(void) argc;
 	ft_init_gd(&gd, env);
 	ft_signals_init();
 	ft_startmsg();
-	ft_readcmdline(&gd);
-	free_split(*gd.env, 0);
+	line = ft_readcmdline(&gd);
+	exitcode = ft_get_exitcode(line);
+	free_split(*gd.env, line);
 	free(gd.env);
 	free(gd.cmds);
-	return (0);
+	return (exitcode);
 }

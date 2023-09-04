@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 14:36:42 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 12:01:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/04 22:01:50 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	ft_executor_in_file(t_token	*token)
 		else
 		{
 			token->cmdin = 0;
-			sprintf(strerr, "%s: No such file or directory",
-				token->in[count]);
+			ft_strlcpy(strerr, token->in[count], 500);
+			ft_strlcat(strerr, ": No such file or directory", 500);
 			ft_error_shell(strerr);
 			return (0);
 		}
