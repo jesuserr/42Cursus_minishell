@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:04:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/08/01 19:10:16 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:33:48 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,13 @@ void	swap_values(int *a, int *b)
 	*b = swap;
 }
 
-/* Returns a formatted prompt that shows the current folder */
-/* Returned str must be free by the calling function */
+/* Returns a formatted prompt that contains the current working folder */
+/* Returned str must be freed by the calling function */
 /* To be used inside ft_readcmdline - How to use it: */
 /* char	*pwd; */
 /* pwd = pwd_as_prompt(); */
 /* line = readline(pwd); */
 /* free (pwd); */
-/* NOT IMPLEMENTED YET!!! */
 char	*pwd_as_prompt(void)
 {
 	char	buf[PATH_MAX];
@@ -38,7 +37,15 @@ char	*pwd_as_prompt(void)
 	char	**split;
 	int		i;
 
-	split = ft_split(getcwd(buf, PATH_MAX), '/');
+	pwd = getcwd(buf, PATH_MAX);
+	if (!pwd)
+	{
+		pwd = ft_strdup("/");
+		split = ft_split(pwd, '/');
+		free (pwd);
+	}
+	else
+		split = ft_split(pwd, '/');
 	i = 0;
 	while (split[i])
 		i++;

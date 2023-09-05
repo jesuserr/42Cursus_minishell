@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_cd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 16:34:47 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:19:05 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,12 @@ int	execute_cd(t_exec_data *d, char *tmp_pwd)
 	char	*old_pwd;
 	char	*new_pwd;
 
-	old_pwd = obtain_pwd(d);
-	if (!old_pwd)
-		return (-1);
+	old_pwd = obtain_pwd();
 	if (chdir(tmp_pwd) == -1)
 		built_in_cd_error(d, tmp_pwd);
 	else
 	{
-		new_pwd = obtain_pwd(d);
-		if (!new_pwd)
-		{
-			free(old_pwd);
-			return (-1);
-		}
+		new_pwd = obtain_pwd();
 		update_env_pwd(d, new_pwd, old_pwd);
 		free(new_pwd);
 	}

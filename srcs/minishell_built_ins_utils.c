@@ -6,32 +6,30 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/08/01 13:03:01 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:31:02 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/* Returns path working directory using getcwd instead of our environment */
-/* PWD variable to avoid failure in case that PWD is not present */
+/* Returns path of the current working directory using getcwd instead of our */
+/* environment PWD variable to avoid failure in case that PWD is not present */
+/* If getcwd result is NULL, the path is set in the root in order to avoid */
+/* issues, i.e.: the user has deleted the current working directory */
 /* Returned value must be freed by the calling function */
-char	*obtain_pwd(t_exec_data *d)
+char	*obtain_pwd(void)
 {
 	char	buf[PATH_MAX];
 	char	*pwd;
 
 	pwd = getcwd(buf, PATH_MAX);
 	if (!pwd)
-	{
-		d->int_error_code = ERROR_B_PWD;
-		ft_error_handler(NULL, d);
-		return (NULL);
-	}
+		return (ft_strdup("/"));
 	return (ft_strdup(pwd));
 }
 
 /* Used by built_in_export in order to initialize an array with the same */
-/* number of elements than the enviroment variable with numbers in */
+/* number of elements than the environment variable with numbers in */
 /* correlative order - created mainly to meet norminette */
 void	init_array(int **array, int env_l)
 {
@@ -64,7 +62,7 @@ int	longest_var(t_exec_data *d)
 	return (max_length);
 }
 
-/* Prints out error message when the enviroment variable to be */
+/* Prints out error message when the environment variable to be */
 /* added with 'export' does not meet the variable name requirements */
 void	export_var_error(t_exec_data *d, int j, int *flag)
 {

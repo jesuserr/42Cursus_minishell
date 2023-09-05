@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_readline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:18:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/04 21:20:01 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:22:28 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,16 @@ char	*ft_readcmdline2(char *line, t_global *gd)
 char	*ft_readcmdline(t_global *gd)
 {
 	char	*line;
+	char	*pwd;
 
 	line = 0;
 	while (ft_strncmp(line, "exit", 4) != 0)
 	{
 		if (line)
 			free(line);
-		line = readline(PROMPT);
+		pwd = pwd_as_prompt();
+		line = readline(pwd);
+		free (pwd);
 		if (line)
 			line = ft_readcmdline2(line, gd);
 		else if (!line)

@@ -8,7 +8,8 @@
 	(done) sprintf
 	history_length
 	history_list
-- builtin cd , error al borrar el directorio actual. 
+- (solved) builtin cd , error al borrar el directorio actual.
+- (added) se muestra la carpeta actual en el prompt
 
 
 Para compilar en linux  

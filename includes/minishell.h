@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/04 21:18:59 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/05 13:18:39 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,12 +161,13 @@ int		count_dbl_char_lines(char **env);
 void	double_free(char *str_1, char *str_2);
 /*	minishell_utils_2.c	*/
 void	swap_values(int *a, int *b);
+char	*pwd_as_prompt(void);
 /*	minishell_built_ins.c */
 int		built_in_pwd(t_exec_data *d);
 int		built_in_env(t_exec_data *d);
 int		built_in_unset(t_exec_data *d);
 /*	minishell_built_ins_utils.c */
-char	*obtain_pwd(t_exec_data *d);
+char	*obtain_pwd(void);
 void	init_array(int **array, int env_l);
 int		longest_var(t_exec_data *d);
 void	export_var_error(t_exec_data *d, int j, int *flag);
