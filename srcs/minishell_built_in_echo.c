@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/31 22:12:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 17:29:44 by jesuserr         ###   ########.fr       */
+/*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
+/*   Updated: 2023/09/06 22:17:08 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -53,9 +54,7 @@ int	verify_echo_options(char *str)
 	size_t	i;
 
 	i = 0;
-	if (!(ft_strncmp(str, "-n", 2)) && ft_strlen(str) == 2)
-		return (1);
-	if (!(ft_strncmp(str, "-n", 2)) && ft_strlen(str) > 2)
+	if (!(ft_strncmp(str, "-n", 2)) && ft_strlen(str) >= 2)
 	{
 		i = 2;
 		while (i < ft_strlen(str))

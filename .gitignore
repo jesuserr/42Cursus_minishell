@@ -5,3 +5,4 @@ output
 cat
 mpanic/
 .DS_Store
+.timmer
