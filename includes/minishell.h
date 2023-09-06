@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 15:25:26 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:43:08 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # define PROMPT "💾:>"
 # define STARTMSG "Minishell Project by Jesus Serrano & Carlos Escañuela\n"
 
-# define ERROR_XXX			0
 # define ERROR_CMDNOT		1
 # define ERROR_NOFILE		2
 # define ERROR_NOPERM		13
@@ -37,6 +36,8 @@
 # define ERROR_B_EXPORT		203
 # define ERROR_B_TOKEN_D	204
 # define ERROR_B_TOKEN_S	205
+# define ERROR_NOPERM_CD	251
+# define ERROR_TOOLONG		252
 # define ERROR_DUP			253
 # define ERROR_MALLOC		254
 # define ERROR_FORK			255

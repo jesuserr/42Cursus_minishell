@@ -6,10 +6,9 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/06 22:17:08 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 00:34:45 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/minishell.h"
 

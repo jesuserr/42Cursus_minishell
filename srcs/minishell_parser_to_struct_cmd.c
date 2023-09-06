@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_to_struct_cmd.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 21:38:56 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/07 01:07:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	p_t_s_cmd_trim_redi2(char **cmd, char **tmp)
 			(*cmd)++;
 			while (**cmd && **cmd != typeq)
 				(*cmd)++;
-		}	
+		}
 		while (**cmd && **cmd != ' ' && **cmd != '|'
 			&& **cmd != ';' && **cmd != '&')
 			(*cmd)++;

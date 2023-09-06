@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_error.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 21:47:11 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 23:20:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	ft_error_handler2(char *str, t_exec_data *d)
 		ft_printf(2, "minishell: malloc: Cannot allocate memory\n");
 	else if (d->int_error_code == ERROR_DUP)
 		ft_printf(2, "minishell: dup: Cannot duplicate file descriptor\n");
+	else if (d->int_error_code == ERROR_NOPERM_CD)
+		ft_printf(2, "minishell: %s: Permission denied\n", str);
+	else if (d->int_error_code == ERROR_TOOLONG)
+		ft_printf(2, "minishell: %s: File name too long\n", str);
 	return ;
 }
 
