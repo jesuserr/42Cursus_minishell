@@ -6,11 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 22:12:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/31 22:39:10 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:29:44 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	verify_echo_options(char *str);
 
 /* Prints out the list of arguments provided, if first argument is -n */
 /* no newline is sent to terminal at the end of the printing */
@@ -27,8 +29,7 @@ int	built_in_echo(t_exec_data *d)
 	}
 	i = 1;
 	flag = 0;
-	if (!(ft_strncmp(d->exec_args[1], "-n", 2)) && \
-	ft_strlen(d->exec_args[1]) == 2)
+	while (verify_echo_options(d->exec_args[i]))
 	{
 		flag = 1;
 		i++;
@@ -41,6 +42,30 @@ int	built_in_echo(t_exec_data *d)
 	}
 	if (!flag)
 		ft_printf(STDOUT_FILENO, "\n");
+	return (0);
+}
+
+/* Verifies the existence and format of the '-n' option in order */
+/* to proccess the multiple cases required by external testers. */
+/* If valid '-n' is provided returns 1 otherwise returns 0 */
+int	verify_echo_options(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!(ft_strncmp(str, "-n", 2)) && ft_strlen(str) == 2)
+		return (1);
+	if (!(ft_strncmp(str, "-n", 2)) && ft_strlen(str) > 2)
+	{
+		i = 2;
+		while (i < ft_strlen(str))
+		{
+			if (str[i] != 'n')
+				return (0);
+			i++;
+		}
+		return (1);
+	}
 	return (0);
 }
 
