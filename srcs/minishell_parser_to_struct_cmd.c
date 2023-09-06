@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 17:17:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 21:38:56 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,28 @@ void	p_t_s_cmd_trim_redi1(char **cmd, char **tmp)
 			(*cmd)++;
 		}
 	}
-	else if ((**cmd == '0' || **cmd == '1' || **cmd == '2' || **cmd == '&')
+	else if ((ft_isdigit(**cmd) || **cmd == '&')
 		&& (**(cmd + 1) == '<' || **(cmd + 1) == '>'))
 		(*cmd)++;
 }
 
 void	p_t_s_cmd_trim_redi2(char **cmd, char **tmp)
 {
+	char	typeq;
+
 	if (**cmd == '<' || **cmd == '>')
 	{
 		while (**cmd == '<' || **cmd == '>')
 			(*cmd)++;
 		while (**cmd == ' ')
 			(*cmd)++;
+		while (**cmd == '\'' || **cmd == '\"')
+		{
+			typeq = **cmd;
+			(*cmd)++;
+			while (**cmd && **cmd != typeq)
+				(*cmd)++;
+		}	
 		while (**cmd && **cmd != ' ' && **cmd != '|'
 			&& **cmd != ';' && **cmd != '&')
 			(*cmd)++;
