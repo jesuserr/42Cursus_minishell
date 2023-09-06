@@ -6,73 +6,74 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 18:06:33 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/04 18:35:51 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:17:31 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	p_t_s_cmd_count2(char *block, int *count)
+void	p_t_s_cmd_trim_redi1(char **cmd, char **tmp)
 {
-	char	deli;
+	char	typeq;
 
-	while (*(block) && *block != '|' && *block != ';'
-		&& *block != '&' && *block != '<' && *block != '>')
+	if (**cmd == '\'' || **cmd == '\"')
 	{
-		deli = *block;
-		if (*block == '"' || *block == '\'')
+		typeq = **cmd;
+		**tmp = **cmd;
+		(*tmp)++;
+		(*cmd)++;
+		while (**cmd && **cmd != typeq)
 		{
-			while (*(block++) && *block != deli)
-				(*count)++;
-			(*count)++;
-			block++;
+			**tmp = **cmd;
+			(*tmp)++;
+			(*cmd)++;
 		}
-		else
-		{
-			block++;
-			(*count)++;
-		}
+	}
+	else if ((**cmd == '0' || **cmd == '1' || **cmd == '2' || **cmd == '&')
+		&& (**(cmd + 1) == '<' || **(cmd + 1) == '>'))
+		(*cmd)++;
+}
+
+void	p_t_s_cmd_trim_redi2(char **cmd, char **tmp)
+{
+	if (**cmd == '<' || **cmd == '>')
+	{
+		while (**cmd == '<' || **cmd == '>')
+			(*cmd)++;
+		while (**cmd == ' ')
+			(*cmd)++;
+		while (**cmd && **cmd != ' ' && **cmd != '|'
+			&& **cmd != ';' && **cmd != '&')
+			(*cmd)++;
+	}
+	else
+	{
+		**tmp = **cmd;
+		(*tmp)++;
+		(*cmd)++;
 	}
 }
 
-int	p_t_s_cmd_count(char *block, char **blockcmd)
+char	*p_t_s_cmd_trim_redi(char *cmd)
 {
-	int	count;
+	char	*tmp;
+	char	*tmp1;
 
-	count = 0;
-	while (*block == ' ' || *block == '<' || *block == '>')
+	tmp = ft_calloc(ft_strlen(cmd) + 1, sizeof(char));
+	if (!tmp)
+		ft_error("Unable to allocate memory in p_t_s_cmd_trim_redi");
+	tmp1 = tmp;
+	while (cmd && *cmd && *cmd != '|' && *cmd != ';' && *cmd != '&')
 	{
-		while (*block == ' ')
-			block++;
-		if (*block == '<' || *block == '>')
-		{
-			while (*block == '<')
-				block++;
-			while (*block == '>')
-				block++;
-			while (*block == ' ')
-				block++;
-			while (*block && *block != ' ')
-				block++;
-		}
+		p_t_s_cmd_trim_redi1(&cmd, &tmp);
+		p_t_s_cmd_trim_redi2(&cmd, &tmp);
 	}
-	*blockcmd = block;
-	p_t_s_cmd_count2(block, &count);
-	return (count);
+	tmp = ft_strtrim(tmp1, " ");
+	free (tmp1);
+	return (tmp);
 }
 
 void	p_t_s_cmd(char *block, char **cmd)
 {
-	char	*blockcmd;
-	int		len;
-	char	*tstr;
-
-	len = p_t_s_cmd_count(block, &blockcmd) + 1;
-	*cmd = ft_calloc(len, sizeof(char));
-	if (!*cmd)
-		ft_error("Unable to allocate memory in p_t_s_cmd");
-	ft_strlcpy(*cmd, blockcmd, len);
-	tstr = ft_strtrim(*cmd, " ");
-	free(*cmd);
-	*cmd = tstr;
+	*cmd = p_t_s_cmd_trim_redi(block);
 }

@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 20:59:17 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/04 18:24:22 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:36:36 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_executor_cmds_waitpid(t_list *lst, t_global *gd)
 	{
 		token = lst->content;
 		d = token->d;
-		if (ft_executor_check_built_in(d))
+		if (ft_executor_check_built_in(d) || d->fork_pid == 0)
 			gd->last_status = d->term_status;
 		else
 		{

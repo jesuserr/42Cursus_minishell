@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 21:58:19 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/04 21:18:31 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 08:01:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	ft_init_gd(&gd, env);
 	ft_signals_init();
-	ft_startmsg();
+	//ft_startmsg();
 	line = ft_readcmdline(&gd);
 	exitcode = ft_get_exitcode(line);
 	free_split(*gd.env, line);

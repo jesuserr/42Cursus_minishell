@@ -42,7 +42,6 @@ SRC_FILES	= minishell \
 			  minishell_executor_in \
 			  minishell_executor_out \
 			  minishell_executor_cmds \
-			  minishell_executor_check_cmds \
 			  minishell_executor_check_built_in \
 			  minishell_split_with_quotes \
 			  minishell_env_utils \
