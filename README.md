@@ -1,16 +1,15 @@
 # minishell
 
+- Notas revisiones tras aplicar tester
+
+- Echo builtin mejorado, hay que revisar que pasa que tras unas comillas se nos come el ultimo caracter. Ejemplo:
+[echo "-n -n -n" -n hi] devuelve [-n -n -n -n h]
+
 - Notas 04/09
-- (solved) Se tiene que hacer que al salir con exit, salga con el numero de error indicado en el exit, y el codigo salida si no indica nada el usuarip tiene que ser el del ultimo comando ejecutado
 - Error al introducir un comando del estilo ;s
-- (solved) echo $ tiene que mostrar $
 - Funciones no autorizadas
-	(done) sprintf
 	history_length
 	history_list
-- (solved) builtin cd , error al borrar el directorio actual.
-- (added) se muestra la carpeta actual en el prompt
-
 
 Para compilar en linux  
 LINK_FLAGS = -lreadline  

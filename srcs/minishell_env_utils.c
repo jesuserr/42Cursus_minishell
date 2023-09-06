@@ -6,13 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 11:44:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/27 18:31:54 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:33:07 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		check_existance(char **env, char *var);
+int		check_existence(char **env, char *var);
 char	**del_existing_var(char ***src, char *line);
 
 /* Simulates function getenv() but using minishell environment variable */
@@ -61,7 +61,7 @@ char	**add_var_to_env(char ***src, char *line)
 
 	if (!src || !*src || !line)
 		return (NULL);
-	if (check_existance(*src, line) == 1)
+	if (check_existence(*src, line) == 1)
 		if (!del_existing_var(src, line))
 			return (NULL);
 	lines = count_dbl_char_lines(*src);
@@ -94,7 +94,7 @@ char	**del_var_from_env(char ***src, char *var)
 	char	**dst;
 	char	*var_equ;
 
-	if ((check_existance(*src, var) == 0) || !src || !*src || !var)
+	if ((check_existence(*src, var) == 0) || !src || !*src || !var)
 		return (NULL);
 	lines = count_dbl_char_lines(*src);
 	dst = (char **)ft_calloc(sizeof(char *), lines);
@@ -119,7 +119,7 @@ char	**del_var_from_env(char ***src, char *var)
 /* Verifies if the variable 'var' already exists inside 'env' */
 /* If already exists returns (1) to inform the adding/removal functions */
 /* If 'var' is not contained on 'env' returns (0) */
-int	check_existance(char **env, char *var)
+int	check_existence(char **env, char *var)
 {
 	int		i;
 	char	*var_equal;
