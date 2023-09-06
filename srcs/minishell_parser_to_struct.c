@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 20:55:28 by cescanue          #+#    #+#             */
-/*   Updated: 2023/07/18 11:45:49 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:51:30 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,15 @@ t_token	*p_t_s(char *block)
 		ft_error("Unable to allocate memory in p_t_s");
 	token->cmdout = 1;
 	p_t_s_pattern(block, "<", &token->n_in, &token->in);
+	ft_strtrim_quotes(token->in);
 	p_t_s_pattern(block, "<<", &token->n_heredoc, &token->heredoc);
+	ft_strtrim_quotes(token->heredoc);
 	p_t_s_pattern(block, "<<<", &token->n_in_literal, &token->in_literal);
+	ft_strtrim_quotes(token->in_literal);
 	p_t_s_pattern(block, ">", &token->n_out, &token->out);
+	ft_strtrim_quotes(token->out);
 	p_t_s_pattern(block, ">>", &token->n_out_add, &token->out_add);
+	ft_strtrim_quotes(token->out_add);
 	p_t_s_cmd(block, &token->cmd);
 	p_t_s_lastinout(block, token);
 	token->type = p_t_s_type(block);

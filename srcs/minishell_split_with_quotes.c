@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 23:26:30 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/31 18:49:20 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/06 20:52:30 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ft_strtrim_quotes(char **strs)
 {
 	char	*tmp;
 
-	while (*strs)
+	while (strs && *strs)
 	{
 		tmp = ft_strtrim(*strs, " ");
 		free(*strs);
