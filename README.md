@@ -2,7 +2,7 @@
 
 - Notas revisiones tras aplicar tester
 
-- Echo builtin mejorado, hay que revisar que pasa que tras unas comillas se nos come el ultimo caracter. Ejemplo:
+- (solved) Echo builtin mejorado, hay que revisar que pasa que tras unas comillas se nos come el ultimo caracter. Ejemplo:
 [echo "-n -n -n" -n hi] devuelve [-n -n -n -n h]
 
 - Notas 04/09

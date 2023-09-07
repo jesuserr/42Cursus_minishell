@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:47:29 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 17:47:34 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:08:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,26 @@ void	ft_init_gd(t_global *gd, char **env)
 
 int	ft_get_exitcode(char *line)
 {
-	int	count;
+	int		count;
+	char	tmp[500];
 
 	count = 4;
+	line = quotes_analysis(line);
 	if (ft_strlen(line) > 4)
 	{
 		while (line[count] && (line[count] == ' ' || line[count] == '('))
 			count++;
-		return (ft_atoi(&line[count]));
+		if (!ft_atoi(&line[count]) && line[count] != '0'
+			&& line[count + 1] != '0')
+		{
+			ft_strlcpy(tmp, "exit: ", 500);
+			ft_strlcat(tmp, &line[5], 500);
+			ft_strlcat(tmp, ": numeric argument required", 500);
+			ft_error_shell(tmp);
+			return (255);
+		}
+		else
+			return (ft_atoi(&line[count]));
 	}
 	else
 		return (g_info->last_status);

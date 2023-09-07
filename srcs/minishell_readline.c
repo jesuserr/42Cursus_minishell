@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_readline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:18:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 01:10:19 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:10:55 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

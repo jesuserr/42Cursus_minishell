@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_cd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/07 01:02:53 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 16:08:45 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		built_in_cd_error(t_exec_data *d, char *pathname);
 void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
 
 /* The first two 'if' are to evaluate if empty arguments such as " ", "    " */
-/* or "" are being passed. If no argument or '~' is provided the value of */ 
+/* or "" are being passed. If no argument or '~' is provided the value of */
 /* $HOME is passed to chdir. If $HOME does not exist, error message according */
 /* bash is printed. */
 /* In any other cases the argument is passed directly to chdir function */
