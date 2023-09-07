@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:47:29 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 16:08:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/07 19:18:17 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	ft_init_gd(t_global *gd, char **env)
 	g_info = gd;
 	gd->env = ft_calloc(1, sizeof(char ***));
 	*gd->env = copy_dbl_char_pointer(env);
+	update_shell_level(gd);
 	gd->cmds = ft_calloc(1, sizeof(t_list ***));
 	*gd->cmds = 0;
 	if (!gd->env || !(*gd->env))
