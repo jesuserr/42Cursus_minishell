@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:04:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/05 13:33:48 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 17:59:49 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ char	*pwd_as_prompt(void)
 	while (split[i])
 		i++;
 	if (i > 0)
-		temp = ft_strjoin("💾 \033[0;94m/", split[i - 1]);
+		temp = ft_strjoin("💾 \001\e[00;94m\002/", split[i - 1]);
 	else
-		temp = ft_strdup("💾 \033[0;94m/");
-	pwd = ft_strjoin(temp, " \033[0;37m");
+		temp = ft_strdup("💾 \001\e[00;94m\002/");
+	pwd = ft_strjoin(temp, " \001\e[0m\002");
 	free_split(split, temp);
 	return (pwd);
 }
