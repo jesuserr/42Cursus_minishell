@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:47:29 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 19:18:17 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:03:36 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,32 @@ int	ft_get_exitcode(char *line)
 {
 	int		count;
 	char	tmp[500];
+	char	*tline;
 
 	count = 4;
-	line = quotes_analysis(line);
-	if (ft_strlen(line) > 4)
+	tline = quotes_analysis(line);
+	if (ft_strlen(tline) > 4)
 	{
-		while (line[count] && (line[count] == ' ' || line[count] == '('))
+		while (tline[count] && (tline[count] == ' ' || tline[count] == '('))
 			count++;
-		if (!ft_atoi(&line[count]) && line[count] != '0'
-			&& line[count + 1] != '0')
+		if (!ft_isnbr(&tline[count]))
 		{
 			ft_strlcpy(tmp, "exit: ", 500);
-			ft_strlcat(tmp, &line[5], 500);
+			ft_strlcat(tmp, &tline[5], 500);
 			ft_strlcat(tmp, ": numeric argument required", 500);
 			ft_error_shell(tmp);
+			free(tline);
 			return (255);
 		}
 		else
-			return (ft_atoi(&line[count]));
+		{
+			count = ft_atoi(&tline[count]);
+			free(tline);
+			return (count);
+		}
 	}
-	else
-		return (g_info->last_status);
+	free(tline);
+	return (g_info->last_status);
 }
 
 int	main(int argc, char **argv, char **env)

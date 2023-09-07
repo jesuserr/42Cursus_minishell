@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:41:44 by cescanue          #+#    #+#             */
-/*   Updated: 2023/04/12 18:39:45 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/07 21:25:56 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 void	*ft_lstfindcontent(t_list *lst, int (*find)(void *, int), int tofind);
 void	*ft_lstfindlst(t_list *lst, int (*find)(void *, int), int tofind);
+int		ft_isnbr(const char *str);
 
 #endif

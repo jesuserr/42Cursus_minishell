@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_error.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/05 12:27:28 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 22:04:10 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,27 @@ char	error_redi_pattern(char *line, char pattern)
 	return (-1);
 }
 
+int	p_common_errors4(char *line)
+{
+	char	*cmd;
+	char	*tmp;
+
+	cmd = p_t_s_cmd_trim_redi(line);
+	tmp = quotes_analysis(cmd);
+	free(cmd);
+	cmd = ft_strtrim(tmp, " ");
+	free(tmp);
+	if (!*cmd)
+	{
+		free(cmd);
+		ft_error_shell("syntax error near unexpected ");
+		g_info->last_status = 2;
+		return (1);
+	}
+	free(cmd);
+	return (0);
+}
+
 int	p_common_errors3(char *line)
 {
 	char	t_e;
@@ -53,7 +74,7 @@ int	p_common_errors3(char *line)
 		ft_error_shell(tmp);
 		return (1);
 	}
-	return (0);
+	return (p_common_errors4(line));
 }
 
 int	p_common_errors2(char *line)

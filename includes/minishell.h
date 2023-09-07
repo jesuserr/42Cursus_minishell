@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 20:04:52 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/07 20:55:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ void	ft_signals_init(void);
 char	*ft_history(char *line);
 int		ft_check_history(char *line);
 char	*ft_readcmdline(t_global *gd);
+char	*p_t_s_cmd_trim_redi(char *cmd);
 /*	minishell_exec_cmd.c	*/
 int		ft_command_exec_cmd(t_exec_data *d);
 char	*check_usr_path(t_exec_data *d);

@@ -50,6 +50,7 @@ SRC_FILES	= ft_memset \
 			  ft_lstiter \
 			  ft_lstmap \
 			  ft_lstfind \
+			  ft_isnbr \
 			  
 			  
 

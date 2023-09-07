@@ -1,41 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_isnbr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 20:31:59 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 21:41:59 by cescanue         ###   ########.fr       */
+/*   Created: 2023/09/07 21:25:10 by cescanue          #+#    #+#             */
+/*   Updated: 2023/09/07 22:03:54 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_isnbr(const char *str)
 {
-	int	count;
-	int	nbr;
-	int	neg;
+	int		count;
+	long	nbr;
 
 	nbr = 0;
 	count = 0;
-	neg = 0;
 	if (str[count] == '+' || str[count] == '-')
-	{
-		if (str[count] == '-')
-			neg = 1;
 		count++;
-	}
 	while (str[count] >= '0' && str[count] <= '9')
 	{
 		nbr *= 10;
 		nbr += str[count] - 48;
 		count++;
 	}
-	if (neg)
-		nbr = -nbr;
-	if (str[count] == 0 || str[count] == ' ')
-		return (nbr);
+	if (count && !nbr && (ft_isalpha(str[count - 1])
+			|| str[count - 1] == '+' || str[count - 1] == '-'))
+		return (0);
+	else if (str[count] == 0 || str[count] == ' ')
+		return (count);
 	return (0);
 }
