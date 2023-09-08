@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 21:25:10 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 22:03:54 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:40:40 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_isnbr(const char *str)
 	if (count && !nbr && (ft_isalpha(str[count - 1])
 			|| str[count - 1] == '+' || str[count - 1] == '-'))
 		return (0);
-	else if (str[count] == 0 || str[count] == ' ')
+	else if ((str[count] == 0 || str[count] == ' ') && (count < 20))
 		return (count);
 	return (0);
 }

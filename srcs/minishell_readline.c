@@ -6,11 +6,59 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:18:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 16:10:55 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:29:13 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_checkexitargv1(char **tline, int *args, int *args2)
+{
+	char	deli;
+
+	while (*tline && **tline)
+	{
+		if (**tline == '\'' || **tline == '\"')
+		{
+			deli = **tline;
+			(*tline)++;
+			while (**tline && **tline != deli)
+				(*tline)++;
+		}
+		if (**tline == ' ')
+		{
+			(*args)++;
+			(*args2)++;
+		}	
+		(*tline)++;
+	}
+}
+
+char	*ft_checkexitargv(char *line)
+{
+	char	*tline;
+	int		args;
+	int		args2;
+
+	tline = line;
+	args = 0;
+	args2 = 0;
+	if (!ft_strncmp(tline, "exit", 4))
+	{
+		tline += 5;
+		while (tline && *tline && *tline == ' ')
+			tline++;
+		ft_checkexitargv1(&tline, &args, &args2);
+		if (args && args2 && ft_isdigit(line[5]))
+		{
+			free(line);
+			ft_error_shell("exit: too many arguments");
+			g_info->last_status = 1;
+			return (0);
+		}
+	}
+	return (line);
+}
 
 char	*ft_readcmdline2(char *line, t_global *gd)
 {
@@ -31,6 +79,7 @@ char	*ft_readcmdline2(char *line, t_global *gd)
 			line = 0;
 		}
 	}
+	line = ft_checkexitargv(line);
 	if (line && *line && ft_strncmp(line, "exit", 4) != 0)
 	{
 		if (status_h == 1)
