@@ -6,13 +6,14 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 13:12:42 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/07 00:34:45 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/08 13:16:35 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	verify_echo_options(char *str);
+int		verify_echo_options(char *str);
+void	print_echo(t_exec_data *d, int i);
 
 /* Prints out the list of arguments provided, if first argument is -n */
 /* no newline is sent to terminal at the end of the printing */
@@ -36,13 +37,42 @@ int	built_in_echo(t_exec_data *d)
 	}
 	while (d->exec_args[i])
 	{
-		ft_printf(STDOUT_FILENO, "%s", d->exec_args[i++]);
+		print_echo(d, i);
+		i++;
 		if (d->exec_args[i])
 			ft_printf(STDOUT_FILENO, " ");
 	}
 	if (!flag)
 		ft_printf(STDOUT_FILENO, "\n");
 	return (0);
+}
+
+/* Verifies if command 'echo ~' has been passed and then search for */
+/* env var $HOME, if $HOME doesn't exist is recreated from env var $USER. */
+/* If is not possible to recreate $HOME returns to avoid seg fault. */
+/* If flag '~' is not passed the argument is printed as it is */
+void	print_echo(t_exec_data *d, int i)
+{
+	char	*home;
+	char	*home_aux;
+
+	if (!(ft_strncmp(d->exec_args[i], "~", 1)) && \
+	ft_strlen(d->exec_args[i]) == 1)
+	{
+		home = get_env_var(d, "HOME");
+		if (!home)
+		{
+			home_aux = get_env_var(d, "USER");
+			if (!home_aux)
+				return ;
+			home = ft_strjoin("/Users/", home_aux);
+			free (home_aux);
+		}
+		ft_printf(STDOUT_FILENO, "%s", home);
+		free (home);
+	}
+	else
+		ft_printf(STDOUT_FILENO, "%s", d->exec_args[i]);
 }
 
 /* Verifies the existence and format of the '-n' option in order */
