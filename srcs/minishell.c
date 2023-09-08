@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:47:29 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 22:03:36 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 09:43:53 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,21 @@ void	ft_init_gd(t_global *gd, char **env)
 	}
 }
 
+int	ft_get_exitcode_not_nbr(char *tline)
+{
+	char	tmp[500];
+
+	ft_strlcpy(tmp, "exit: ", 500);
+	ft_strlcat(tmp, &tline[5], 500);
+	ft_strlcat(tmp, ": numeric argument required", 500);
+	ft_error_shell(tmp);
+	free(tline);
+	return (255);
+}
+
 int	ft_get_exitcode(char *line)
 {
 	int		count;
-	char	tmp[500];
 	char	*tline;
 
 	count = 4;
@@ -53,14 +64,7 @@ int	ft_get_exitcode(char *line)
 		while (tline[count] && (tline[count] == ' ' || tline[count] == '('))
 			count++;
 		if (!ft_isnbr(&tline[count]))
-		{
-			ft_strlcpy(tmp, "exit: ", 500);
-			ft_strlcat(tmp, &tline[5], 500);
-			ft_strlcat(tmp, ": numeric argument required", 500);
-			ft_error_shell(tmp);
-			free(tline);
-			return (255);
-		}
+			return (ft_get_exitcode_not_nbr(tline));
 		else
 		{
 			count = ft_atoi(&tline[count]);

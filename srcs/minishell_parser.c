@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 13:57:52 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 20:51:35 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:45:13 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ t_list	***parser(char *line, t_global *gd)
 		*gd->cmds = lst_cmds;
 		return (gd->cmds);
 	}
-	else
-		return (0);
+	g_info->last_status = 2;
+	return (0);
 }

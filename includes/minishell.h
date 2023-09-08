@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 20:55:14 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 09:38:46 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ void	ft_exec_built_in_pipe_start(t_exec_data *d);
 void	ft_exec_built_in_pipe_end(t_exec_data *d);
 void	p_t_s_free_token(void *t);
 t_list	***parser(char *line, t_global *gd);
+char	error_redi_pattern(char *line, char pattern);
 int		p_common_errors(char *line);
 char	*p_identify_blocks(char *line);
 char	*p_replace_env(char	*tline, t_global *gd);

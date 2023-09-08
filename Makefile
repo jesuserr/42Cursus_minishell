@@ -17,6 +17,7 @@ SRC_FILES	= minishell \
 			  minishell_error \
 			  minishell_parser \
 			  minishell_parser_error \
+			  minishell_parser_error2 \
 			  minishell_parser_blocks \
 			  minishell_parser_to_struct \
 			  minishell_parser_to_struct_pattern \

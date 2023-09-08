@@ -6,31 +6,11 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/07 22:04:10 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 10:42:35 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-char	error_redi_pattern(char *line, char pattern)
-{
-	while (*line)
-	{
-		if (*line == pattern)
-		{
-			while (*line == pattern)
-				line++;
-			while (*line == ' ')
-				line++;
-			if (*line == '|' || *line == ';' || *line == '&'
-				|| *line == '>' || *line == '<' || !*line)
-				return (*line);
-		}
-		else
-			line++;
-	}
-	return (-1);
-}
 
 int	p_common_errors4(char *line)
 {
@@ -42,7 +22,7 @@ int	p_common_errors4(char *line)
 	free(cmd);
 	cmd = ft_strtrim(tmp, " ");
 	free(tmp);
-	if (!*cmd)
+	if (!*cmd && ft_strnstr(line, "|", ft_strlen(line)))
 	{
 		free(cmd);
 		ft_error_shell("syntax error near unexpected ");
@@ -55,21 +35,23 @@ int	p_common_errors4(char *line)
 
 int	p_common_errors3(char *line)
 {
-	char	t_e;
+	char	t_e[2];
 	char	tmp[500];
 
-	t_e = error_redi_pattern(line, '>');
-	if (t_e > -1)
+	t_e[0] = error_redi_pattern(line, '>');
+	t_e[1] = 0;
+	if (t_e[0] > -1)
 	{
-		if (!t_e)
+		g_info->last_status = 2;
+		if (!t_e[0])
 		{
 			ft_strlcpy(tmp, "syntax error near unexpected token", 500);
-			ft_strlcat(tmp, " `newline'", 500);
+			ft_strlcat(tmp, " 'newline'", 500);
 		}
 		else
 		{
 			ft_strlcpy(tmp, "syntax error near unexpected token ", 500);
-			ft_strlcat(tmp, &t_e, 500);
+			ft_strlcat(tmp, t_e, 500);
 		}
 		ft_error_shell(tmp);
 		return (1);
@@ -79,18 +61,20 @@ int	p_common_errors3(char *line)
 
 int	p_common_errors2(char *line)
 {
-	char	t_e;
+	char	t_e[2];
 	char	tmp[500];
 
-	t_e = error_redi_pattern(line, '<');
-	if (t_e > -1)
+	t_e[0] = error_redi_pattern(line, '<');
+	t_e[1] = 0;
+	if (t_e[0] > -1)
 	{
-		if (!t_e)
+		g_info->last_status = 2;
+		if (!t_e[0])
 			ft_strlcpy(tmp, "syntax error near unexpected token EOF", 500);
 		else
 		{
 			ft_strlcpy(tmp, "syntax error near unexpected token ", 500);
-			ft_strlcat(tmp, &t_e, 500);
+			ft_strlcat(tmp, t_e, 500);
 		}
 		ft_error_shell(tmp);
 		return (1);
