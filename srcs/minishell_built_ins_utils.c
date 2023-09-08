@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 13:09:27 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/05 13:31:02 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:42:27 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,12 @@ void	export_var_error(t_exec_data *d, int j, int *flag)
 	d->term_status = 1;
 	ft_error_handler(d->exec_args[j], d);
 	*flag = 1;
+}
+
+/* Prints out error message if export arguments are '=' or "" or '' */
+void	export_equal_error(t_exec_data *d)
+{
+	d->int_error_code = ERROR_B_EXPORT;
+	d->term_status = 1;
+	ft_error_handler(d->exec_args[1], d);
 }
