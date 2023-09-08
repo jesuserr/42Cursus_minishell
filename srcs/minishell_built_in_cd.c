@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_built_in_cd.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 19:55:16 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/07 16:08:45 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 11:43:02 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int		execute_cd(t_exec_data *d, char *new_pwd);
 int		built_in_cd_error(t_exec_data *d, char *pathname);
 void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path);
+int		cd_hyphen_minus(t_exec_data *d);
 
 /* The first two 'if' are to evaluate if empty arguments such as " ", "    " */
 /* or "" are being passed. If no argument or '~' is provided the value of */
@@ -51,7 +52,8 @@ int	built_in_cd(t_exec_data *d)
 		return (execute_cd(d, d->exec_args[1]));
 }
 
-/* First of all checks if the directory name is longer than 255 characters. */
+/* First of all checks if the directory name is longer than 255 characters or */
+/* if the operand '-' has been introduced (cd - -> cd "$OLDPWD" && pwd). */
 /* Stores the value of the current PWD, executes chdir command and stores */
 /* also the value of the new PWD, and then updates the environment variables */
 /* PWD & OLDPWD */
@@ -65,6 +67,9 @@ int	execute_cd(t_exec_data *d, char *tmp_pwd)
 		errno = 36;
 		return (built_in_cd_error(d, tmp_pwd));
 	}
+	if (!(ft_strncmp(d->exec_args[1], "-", 1)) && \
+	ft_strlen(d->exec_args[1]) == 1)
+		return (cd_hyphen_minus(d));
 	old_pwd = obtain_pwd();
 	if (chdir(tmp_pwd) == -1)
 		built_in_cd_error(d, tmp_pwd);
@@ -118,4 +123,23 @@ void	update_env_pwd(t_exec_data *d, char *new_path, char *old_path)
 	free (new_pwd);
 	free (old_pwd);
 	return ;
+}
+
+/* Simulates command 'cd -' which is equivalent to 'cd "$OLDPWD" && pwd' */
+int	cd_hyphen_minus(t_exec_data *d)
+{
+	char	*new_pwd;
+	char	*old_pwd;
+
+	old_pwd = obtain_pwd();
+	new_pwd = get_env_var(d, "OLDPWD");
+	if (chdir(new_pwd) == -1)
+		built_in_cd_error(d, new_pwd);
+	else
+	{
+		update_env_pwd(d, new_pwd, old_pwd);
+		ft_printf(0, "%s\n", new_pwd);
+	}
+	double_free(old_pwd, new_pwd);
+	return (0);
 }
