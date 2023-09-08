@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 09:38:46 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:13:04 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ char	*obtain_pwd(void);
 void	init_array(int **array, int env_l);
 int		longest_var(t_exec_data *d);
 void	export_var_error(t_exec_data *d, int j, int *flag);
+void	export_equal_error(t_exec_data *d);
 /*	minishell_built_in_cd.c	*/
 int		built_in_cd(t_exec_data *d);
 /*	minishell_built_in_export	*/

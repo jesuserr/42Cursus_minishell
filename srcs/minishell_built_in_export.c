@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/28 12:09:57 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/08/01 13:19:30 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/08 14:43:01 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,11 @@ void	insert_var(t_exec_data *d, size_t index);
 /* If no arguments are provided prints all the environment variables */
 /* sorted alphabetically, adding "declare -x" at the beginning of each line */
 /* If arguments are provided calls 'export_var' function */
-/* The real export built-in can add multiple variables in one commnad line */
+/* The real export built-in can add multiple variables in one command line */
 /* i.e. "export V1="A" V2="B" V3="C"", behaviour implemented */
 /* No STDIN for this kind of built-in */
+/* If export arguments are '=' or "" or '', it returns with error message, */
+/* before this check there was a seg fault */
 int	built_in_export(t_exec_data *d)
 {
 	int		*order;
@@ -35,14 +37,19 @@ int	built_in_export(t_exec_data *d)
 			return (-1);
 		i = 0;
 		while ((*d->env)[i])
-		{
-			format_export_output(d, order, i);
-			i++;
-		}
+			format_export_output(d, order, i++);
 		free(order);
 	}
 	else
+	{
+		if (!(ft_strncmp(d->exec_args[1], "=", 1)) || \
+		(check_empty_string(d->exec_args[1]) && d->exec_args[1]))
+		{
+			export_equal_error(d);
+			return (0);
+		}
 		export_var(d);
+	}
 	return (0);
 }
 
