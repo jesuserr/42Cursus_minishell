@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 09:37:25 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 09:37:53 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:20:36 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 char	error_redi_pattern(char *line, char pattern)
 {
+	char	deli;
+
 	while (*line)
 	{
+		if (*line == '\'' || *line == '\"')
+		{
+			deli = *line;
+			line++;
+			while (*line && *line != deli)
+				line++;
+			line++;
+		}
 		if (*line == pattern)
 		{
 			while (*line == pattern)
@@ -26,8 +36,7 @@ char	error_redi_pattern(char *line, char pattern)
 				|| *line == '>' || *line == '<' || !*line)
 				return (*line);
 		}
-		else
-			line++;
+		line++;
 	}
 	return (-1);
 }

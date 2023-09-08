@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:18:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 15:29:13 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 15:56:06 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ char	*ft_readcmdline(t_global *gd)
 			free(line);
 		pwd = pwd_as_prompt();
 		line = readline(pwd);
-		//line = readline(" ");
 		free (pwd);
 		if (line)
 			line = ft_readcmdline2(line, gd);

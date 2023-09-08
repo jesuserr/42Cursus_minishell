@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 19:24:01 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 10:42:35 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:09:14 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	p_common_errors3(char *line)
 		}
 		else
 		{
-			ft_strlcpy(tmp, "syntax error near unexpected token ", 500);
+			ft_strlcpy(tmp, "syntax error near unexpected token1 ", 500);
 			ft_strlcat(tmp, t_e, 500);
 		}
 		ft_error_shell(tmp);
