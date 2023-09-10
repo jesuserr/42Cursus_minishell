@@ -6,7 +6,7 @@
 /*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 20:21:40 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 22:07:21 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/10 21:00:08 by cescanue         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*p_get_first_env(char *tline)
 			count++;
 	}
 	else
-		while (tmp[count] && (tmp[count] >= '?'
+		while (tmp[count] && (tmp[count] == '?'
 				|| (tmp[count] >= 'A' && tmp[count] <= 'Z')))
 			count++;
 	tmp1 = ft_calloc(count + 2, sizeof(char));
