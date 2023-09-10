@@ -6,11 +6,13 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 18:04:11 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/09/07 17:59:49 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/10 16:35:32 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	pwd_as_prompt_aux(char *pwd);
 
 /* Swaps the values of two variables */
 void	swap_values(int *a, int *b)
@@ -42,7 +44,7 @@ char	*pwd_as_prompt(void)
 	{
 		pwd = ft_strdup("/");
 		split = ft_split(pwd, '/');
-		free (pwd);
+		pwd_as_prompt_aux(pwd);
 	}
 	else
 		split = ft_split(pwd, '/');
@@ -56,4 +58,10 @@ char	*pwd_as_prompt(void)
 	pwd = ft_strjoin(temp, " \001\e[0m\002");
 	free_split(split, temp);
 	return (pwd);
+}
+
+void	pwd_as_prompt_aux(char *pwd)
+{
+	chdir (pwd);
+	free (pwd);
 }

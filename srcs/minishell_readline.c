@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_readline.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 21:18:02 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 21:25:20 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/10 16:48:13 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_checkexitargv1(char **tline, int *args, int *args2)
 		{
 			(*args)++;
 			(*args2)++;
-		}	
+		}
 		(*tline)++;
 	}
 }

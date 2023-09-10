@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/06 17:47:29 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 21:03:34 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/10 17:01:16 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	main(int argc, char **argv, char **env)
 	(void) argc;
 	ft_init_gd(&gd, env);
 	ft_signals_init();
-	//ft_startmsg();
+	ft_startmsg();
 	line = ft_readcmdline(&gd);
 	exitcode = ft_get_exitcode(line);
 	free_split(*gd.env, line);

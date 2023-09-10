@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_parser_to_struct_utils.c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 15:01:25 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 21:59:03 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/10 16:48:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*p_strnstr(const char *haystack, const char *needle, size_t len)
 	while (haystack[count] && count < len)
 	{
 		if (haystack[count] == '\"')
-		dq++;
+			dq++;
 		if (haystack[count] == '\'' && !(dq % 2))
 			while (haystack[++count] && haystack[++count] != '\'')
 				;
