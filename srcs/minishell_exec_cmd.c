@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_exec_cmd.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cescanue <cescanue@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/07 20:15:10 by jesuserr          #+#    #+#             */
-/*   Updated: 2023/07/31 21:59:52 by cescanue         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:28:25 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /* Checks if input contains '/' what means that path has been provided by */
-/* user, othervise returns NULL to search path with 'obtain_path'. */
+/* user, otherwise returns NULL to search path with 'obtain_path'. */
 /* Checks the existence and also the execution rights for the command, */
 /* if everything is correct returns same path otherwise returns NULL and */
 /* error information */
@@ -73,7 +73,7 @@ char	*obtain_path(t_exec_data *d)
 	while ((*d->env)[i] && ft_strnstr((*d->env)[i], "PATH=", 5) == NULL)
 		i++;
 	if (!(*d->env)[i])
-		return (0);
+		return (no_path_error(d));
 	all_paths = ft_split((*d->env)[i] + 5, ':');
 	i = 0;
 	while (all_paths[i])
@@ -127,7 +127,7 @@ int	ft_command_exec_cmd(t_exec_data *d)
 		d->exec_path = obtain_path(d);
 	if (!d->exec_path)
 	{
-		ft_error_handler(NULL, d);
+		ft_error_handler(d->exec_args[0], d);
 		return (-1);
 	}
 	return (exec_fork(d));

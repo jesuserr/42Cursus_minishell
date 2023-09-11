@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 12:46:21 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/06 23:20:25 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:27:31 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,11 @@ void	ft_error_handler(char *str, t_exec_data *d)
 	else
 		ft_error_handler2(str, d);
 	return ;
+}
+
+char	*no_path_error(t_exec_data *d)
+{
+	d->int_error_code = ERROR_NOFILE;
+	d->term_status = 127;
+	return (0);
 }

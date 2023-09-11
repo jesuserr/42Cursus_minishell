@@ -6,7 +6,7 @@
 /*   By: jesuserr <jesuserr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/01 15:22:13 by cescanue          #+#    #+#             */
-/*   Updated: 2023/09/08 14:13:04 by jesuserr         ###   ########.fr       */
+/*   Updated: 2023/09/11 20:22:29 by jesuserr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ char	*obtain_path(t_exec_data *d);
 void	ft_error(char *error);
 void	ft_error_shell(char *error);
 void	ft_error_handler(char *str, t_exec_data *d);
+char	*no_path_error(t_exec_data *d);
 /*	minishell_utils.c	*/
 char	**free_split(char **str_1, char *str_2);
 char	**copy_dbl_char_pointer(char **src);
